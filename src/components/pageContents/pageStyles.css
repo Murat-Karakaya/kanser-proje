@@ -37,3 +37,64 @@ h3 {
 @media screen and (max-width: 700px) {
 	section{row-gap: 1rem;}
 }
+
+/* Portal Page Styles */
+
+.linkLineup{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.linkLineup {
+	column-gap: 10px;
+	row-gap: 2rem;	
+}
+
+.card{
+	background-image: var(--card-backround);
+	width: 470px;
+	padding: 1em;
+	border-radius: 10px 10px 10px 0;
+	transition: width .5s calc(80ms*var(--order)), transform .3s;
+	animation: fadeIn .5s ease-in-out calc(80ms*var(--order));
+}
+
+.card:hover {
+	transform: scale(1.1);
+	z-index: 1;
+}
+.card:before {
+	position: absolute;
+	content: "";
+	background-color: var(--page-line);
+	height: 3px;
+	width: 0;
+	bottom: 0;
+	left: 0;
+	transition: all 0.3s;
+}
+.card:hover:before {
+	width: 100%;
+	transform: scaleX(.5);
+	z-index: 2;
+}
+
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateX(-5em);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@media screen and (max-width: 590px) {
+	.card {
+		width: 370px;
+	}
+}

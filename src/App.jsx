@@ -26,7 +26,7 @@ const App=()=> {
         return;
     }, [isDarkMode])
 
-    useEffect(()=>{
+    /* useEffect(()=>{
         const observer =new IntersectionObserver((entries)=>{
             entries.forEach((entry)=>{
                 if (entry.isIntersecting) {
@@ -36,7 +36,7 @@ const App=()=> {
         })
         const hiddenElements = document.querySelectorAll(".reveal")
         hiddenElements.forEach((el) => observer.observe(el))
-    },[])
+    },[]) */
 
     return(
         <Routes>
