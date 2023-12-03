@@ -1,5 +1,4 @@
 import Page from "../../pageContainer/Page";
-import "./portalStyle.css"
 
 import { useAtom } from "jotai"
 import { pageAtom } from "../../../jotai/atoms";
