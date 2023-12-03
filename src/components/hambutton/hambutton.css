@@ -1,0 +1,54 @@
+#hambutton{
+	display: none;
+	background-image: var(--nav-backround);
+	padding: 0;
+}
+
+@media screen and (max-width: 800px){
+	.end{
+		padding: 0 10px;
+		display: grid;
+		place-items: center;
+		float: right;
+		height: 100%;
+		margin-right: 40px;
+	}
+
+	#hambutton{
+		height: 4em;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+    #menu{
+		display: flex;
+		margin-left: 40px;
+		padding: 4px;
+		height: 20px;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	#menu::before{
+		content: "";
+		background-color: black;
+		height: 3px;
+		width: 25px;
+		border-radius: 2px;
+	}
+	#menu::after{
+		content: "";
+		background-color: black;
+		height: 3px;
+		width: 25px;
+		border-radius: 2px;
+	}
+
+	#line{
+		background-color: black;
+		height: 3px;
+		width: 25px;
+		border-radius: 2px;
+	}
+}
