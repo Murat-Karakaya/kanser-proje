@@ -1,5 +1,7 @@
 import Page from "../../pageContainer/Page";
 
+import { Link } from "react-router-dom";
+
 import { useAtom } from "jotai"
 import { pageAtom } from "../../../jotai/atoms";
 
@@ -9,7 +11,10 @@ export default ()=>{
 
     return(
         <Page id="0">
-            <h1>Hoşgeldin, <div className="gradient-text">Dr. Lorem Ipsum!</div></h1>
+            <div className="headFlex">
+                <h1 className="inlineBlock noMargin">Hoşgeldin, <div className="gradient-text">Lorem Ipsum!</div></h1>
+                <Link to="/"><button className="logoutBtn">Çıkış Yap</button></Link>
+            </div>
             
             <div className="linkLineup">
                 <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="card" >

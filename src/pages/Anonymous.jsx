@@ -4,10 +4,10 @@ export default () => {
     return (
         <>
         <p>
-            Nasıl devam edeceksiniz!?
+            Arayüz seçiniz...
         </p>  
-        <button><Link to="/doktor">Doktor Arayüzü</Link></button>      
-        <button><Link to="/hasta">Hasta Arayüzü</Link></button>      
+        <button><Link className="coolUnderline" style={{"--tagColor":"rgb(0, 140, 255)"}} to="/doktor">Doktor Arayüzü</Link></button>      
+        <button><Link className="coolUnderline" style={{"--tagColor":"rgb(0, 140, 255)"}} to="/hasta">Hasta Arayüzü</Link></button>      
         </>
     )
 }

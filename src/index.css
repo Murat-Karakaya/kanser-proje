@@ -25,6 +25,15 @@ body,html{
 	background-color: var(--default-block-background);
 }
 
+.inlineBlock {
+	width: fit-content;
+	display: inline-block;
+}
+
+.noMargin {
+	margin: 0;
+}
+
 :focus-visible{
 	outline: -webkit-focus-ring-color auto 1px;
 	outline: -moz-mac-focusring auto 1px;
@@ -35,29 +44,28 @@ button{
 	all: unset;
 	cursor: pointer;
 }
+
 a{
-	--aTagColor:#00d9ff;
 	text-decoration: none;
-	position: relative;
-	color: var(--aTagColor);
 }
-a::before{
+
+.coolUnderline {
+	color: var(--tagColor);
+	position: relative;	
+}
+.coolUnderline::before{
 	position: absolute;
 	content: "";
-	background-color: var(--aTagColor);
+	background-color: var(--tagColor);
 	height: 3px;
 	width: 0;
 	bottom: 0;
 	left: 0;
 	transition: all 0.3s;
 }
-a:hover:before{
+.coolUnderline:hover:before{
 	width: 100%;
 	transform: scaleX(.5);
-}
-
-figure{
-    margin: .5em;
 }
 
 .button-x{
