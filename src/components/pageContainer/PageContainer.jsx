@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { pageAtom } from "../../jotai/atoms";
 
+import Page from "./Page";
+
 
 const PageContainer=({children})=>{
     const [pageId] = useAtom(pageAtom)
@@ -23,7 +25,15 @@ const PageContainer=({children})=>{
 
     return(
         <div id="pageContainer">
-            {children}
+            {
+                children.map((element, id) => {
+                    return (
+                        <Page id={`${id}`} key={id}>
+                            {element}
+                        </Page>
+                    )
+                })
+            }
         </div>
     )
 
