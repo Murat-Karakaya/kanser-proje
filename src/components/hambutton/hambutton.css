@@ -30,22 +30,11 @@
 		flex-direction: column;
 		justify-content: space-between;
 	}
-	#menu::before{
+	#menu::before, #menu::after{
 		content: "";
-		background-color: black;
-		height: 3px;
-		width: 25px;
-		border-radius: 2px;
-	}
-	#menu::after{
-		content: "";
-		background-color: black;
-		height: 3px;
-		width: 25px;
-		border-radius: 2px;
 	}
 
-	#line{
+	#line, #menu::after, #menu::before{
 		background-color: black;
 		height: 3px;
 		width: 25px;
