@@ -28,14 +28,18 @@ h3 {
 
 .gradient-text {
 	display: inline-block;
-	background: linear-gradient(120deg ,#002aff, #aa00ff);
+	/* background: linear-gradient(120deg ,#002aff, #aa00ff); */
+	background: linear-gradient(120deg ,#002aff, #009dff);
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
-@media screen and (max-width: 700px) {
-	section{row-gap: 1rem;}
+.info {
+	border-radius: 10px;
+	background-color: #39b2fd;
+	width: fit-content;
+	padding: 5px;
 }
 
 /* Portal Page Styles */
@@ -121,4 +125,31 @@ h3 {
 	.headFlex {
 		flex-direction: column;
 	}
+}
+
+/* KanserTeshisi Page Styles */
+
+.cancer-select {
+	border: 0;
+	padding: 15px 20px;
+	border-radius: 10px;
+	background-color: #22afab;
+}
+
+.file-upload {
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    border-radius: 12px;
+  }
+
+.file-upload:hover {
+	background-color: #45a049;
 }

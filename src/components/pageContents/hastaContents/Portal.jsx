@@ -16,16 +16,16 @@ export default ()=>{
             
             
             <div className="linkLineup">
-                <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="reveal card" >
+                <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="card" >
                     <h3>Sonuçlarım</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
-                <button onClick={() => setPageId(2)} style={{"--order":"2"}} className="reveal card" >
+                <button onClick={() => setPageId(2)} style={{"--order":"2"}} className="card" >
                     <h3>Dijitalleşmiş Veriler</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
-                <button onClick={() => setPageId(3)} style={{"--order":"3"}} className="reveal card" >
-                    <h3>Yapay Zeka Uygulamaları</h3>
+                <button onClick={() => setPageId(3)} style={{"--order":"3"}} className="card" >
+                    <h3>Kanser Teşhis Uygulamaları</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
             </div>
