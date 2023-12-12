@@ -35,13 +35,6 @@ h3 {
 	-webkit-text-fill-color: transparent;
 }
 
-.info {
-	border-radius: 10px;
-	background-color: #39b2fd;
-	width: fit-content;
-	padding: 5px;
-}
-
 /* Portal Page Styles */
 
 .headFlex {
@@ -129,27 +122,47 @@ h3 {
 
 /* KanserTeshisi Page Styles */
 
-.cancer-select {
-	border: 0;
-	padding: 15px 20px;
+fieldset {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	row-gap: 25px;
+	align-items: center;
+}
+
+.info {
 	border-radius: 10px;
-	background-color: #22afab;
+	background-color: #60b8db;
+	width: fit-content;
+	padding: 5px;
+}
+
+.file-upload, .cancer-select, .form-submit {
+	transition: filter 0.3s;
+	border-radius: 10px;
+	cursor: pointer;
+	border: 0;
+}
+.file-upload:hover, .cancer-select:hover, .form-submit:hover {
+	filter: brightness(.8);
+}
+
+.file-upload, .form-submit {
+    padding: 6px 12px;
+    text-align: center;
+	display: block;
+    margin: 4px 2px;
+	background-color: #39b2fd;
 }
 
 .file-upload {
-    padding: 6px 12px;
-    cursor: pointer;
-    background-color: #4CAF50; /* Green */
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    border-radius: 12px;
-  }
+	width: 300px;
+}
+.form-submit {
+	width: 275px;
+}
 
-.file-upload:hover {
-	background-color: #45a049;
+.cancer-select {
+	padding: 15px 20px;
+	background-color: #60b8db;
 }

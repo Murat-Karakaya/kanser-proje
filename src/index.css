@@ -23,7 +23,7 @@ body,html{
 	font-size: 18px;
 	transition: color .2s, background-color .2s;
 }
-*:not(h1, h2, h3, p, a, img) {
+*:not(h1, h2, h3, p, a, img, label) {
 	background-color: var(--default-block-background);
 }
 
