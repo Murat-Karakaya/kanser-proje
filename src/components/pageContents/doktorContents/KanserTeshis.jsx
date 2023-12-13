@@ -1,7 +1,8 @@
 import { useState } from "react"
 
 export default ()=>{
-    const [preview, setPreview] = useState()
+    const [preview, setPreview] = useState("")
+    const [jpgCode, setJpgCode] = useState("")
 
     const handleFileChange = ({files}) => {
         const file = files[0];
@@ -28,7 +29,6 @@ export default ()=>{
                     <option value="akciğer kanseri">Tür: Lenf Nodu Kanseri</option>
                 </select>
                 <div className="info">Görüntünün JPEG formantında olması gerekmektedir.</div>
-                {/* <input type="file" name="image-file-input" id="image-file-input" accept="image/jpeg"/> */}
                 <div>
                     <label
                      tabIndex="0"
@@ -47,7 +47,7 @@ export default ()=>{
                      onChange={event => {handleFileChange(event.target)}}/>
                 </div>
                 <button className="form-submit">Devam</button>
-                {preview && <img src={preview} height={100} width={"auto"} alt="yüklenen görüntü" /> }
+                {preview && <img src={preview} height={200} width={"auto"} alt="yüklenen görüntü" /> }
             </fieldset>
         </>
     )
