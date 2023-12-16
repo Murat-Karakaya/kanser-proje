@@ -16,15 +16,15 @@ export default ()=>{
             
             
             <div className="linkLineup">
-                <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="card" >
+                <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="ordered card" >
                     <h3>Sonuçlarım</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
-                <button onClick={() => setPageId(2)} style={{"--order":"2"}} className="card" >
+                <button onClick={() => setPageId(2)} style={{"--order":"1"}} className="ordered card" >
                     <h3>Dijitalleşmiş Veriler</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
-                <button onClick={() => setPageId(3)} style={{"--order":"2"}} className="card" >
+                <button onClick={() => setPageId(3)} style={{"--order":"2"}} className="ordered card" >
                     <h3>Form Doldurma</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>

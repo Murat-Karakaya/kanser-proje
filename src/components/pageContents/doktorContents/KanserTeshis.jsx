@@ -36,7 +36,7 @@ export default ()=>{
             <h1>Kanser Teşhisi</h1>
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
-                <select className="cancer-select" /* name="cancer-select" */>
+                <select className="form-input"/* className="cancer-select" */>
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="akciğer kanseri">Tür: Akciğer Kanseri</option>
                     <option value="meme kanseri">Tür: Göğüs Kanseri</option>
@@ -44,26 +44,26 @@ export default ()=>{
                     <option value="akciğer kanseri">Tür: Lenf Nodu Kanseri</option>
                 </select>
                 <div className="info">Görüntünün JPEG formantında olması gerekmektedir.</div>
-                <div>
-                    <label
-                     tabIndex="0"
-                     role="button" 
-                     htmlFor="image-file-input" 
-                     className="file-upload">
-                        Görüntü Seç
-                    </label>
-                    
-                    <input
-                     type="file" 
-                     name="image-file-input" 
-                     id="image-file-input" 
-                     accept="image/jpeg" 
-                     style={{display: "none"}}
-                     onChange={event => {
-                        /* createImageCode(event.target) */
-                        createImageUrl(event.target)
-                    }}/>
-                </div>
+                
+                <label
+                    tabIndex="0"
+                    role="button"
+                    htmlFor="image-file-input"
+                    className="file-upload">
+                    Görüntü Seç
+                </label>
+                
+                <input
+                    type="file" 
+                    name="image-file-input" 
+                    id="image-file-input" 
+                    accept="image/jpeg" 
+                    style={{display: "none"}}
+                    onChange={event => {
+                    /* createImageCode(event.target) */
+                    createImageUrl(event.target)
+                }}/>
+
                 <button className="form-submit">Devam</button>
                 {preview && <img src={preview} height={200} width={"auto"} alt="yüklenen görüntü" /> }
                 <p>{false && jpgCode}</p>

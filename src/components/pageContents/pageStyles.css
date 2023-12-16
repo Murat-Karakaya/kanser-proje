@@ -120,9 +120,12 @@ h3 {
 	}
 }
 
-/* KanserTeshisi Page Styles */
+/* KanserTeshisi and Form Page Styles */
 
 fieldset {
+	--fieldset-border: 3px solid #009dff;
+	border-radius: 5px;
+	border: var(--fieldset-border);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -130,39 +133,47 @@ fieldset {
 	align-items: center;
 }
 
-.info {
-	border-radius: 10px;
-	background-color: #60b8db;
-	width: fit-content;
-	padding: 5px;
+
+legend {
+	padding: 4px 7px;
+	border: var(--fieldset-border);
+	border-radius: 5px;
 }
 
-.file-upload, .cancer-select, .form-submit {
-	transition: filter 0.3s;
-	border-radius: 10px;
-	cursor: pointer;
-	border: 0;
+.form-input {
+	padding: 5px;
+	outline-offset: 3px;
+	border: var(--fieldset-border);
+	border-radius: 5px;
 }
-.file-upload:hover, .cancer-select:hover, .form-submit:hover {
+
+.file-upload, .form-input, .form-submit {
+	transition: filter 0.3s, background-color .2s;
+}
+.file-upload:hover, .form-input:hover, .form-submit:hover {
 	filter: brightness(.8);
 }
 
 .file-upload, .form-submit {
+	border-radius: 5px;
     padding: 6px 12px;
     text-align: center;
 	display: block;
     margin: 4px 2px;
-	background-color: #39b2fd;
+	background: var(--card-backround);
 }
 
-.file-upload {
-	width: 300px;
+.file-upload, .form-input {
+	width: clamp(200px, 50%, 300px);
 }
+
 .form-submit {
-	width: 275px;
+	width: clamp(175px, calc(50% - 25px), 275px);
 }
 
-.cancer-select {
-	padding: 15px 20px;
-	background-color: #60b8db;
+.info {
+	border-radius: 5px;
+	background-color: #008ec6;
+	width: fit-content;
+	padding: 5px;
 }

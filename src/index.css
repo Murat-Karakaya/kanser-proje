@@ -10,8 +10,7 @@ body,html{
 	--default-block-background: white;
 	/* --nav-backround: linear-gradient(to right,#5874ff, #cc65ff); */
 	--nav-backround: linear-gradient(to right,#58a0ff, #4952ff);
-	/* --card-backround: linear-gradient(120deg, #6c84ff, #cc65ff, #0084ff); */
-	--card-backround: linear-gradient(120deg, #6c84ff, #65d3ff, #0084ff);
+	--card-backround: linear-gradient(120deg, #305ccd, #00bbff, #1b5bd3);
 	--page-line: black;
 	--nav-button-color: linear-gradient(to right,#00ffc4, #03cefc);
 }
@@ -40,6 +39,10 @@ body,html{
 	outline: -webkit-focus-ring-color auto 1px;
 	outline: -moz-mac-focusring auto 1px;
 	outline: -ms-focusring auto 1px;
+}
+
+select {
+	cursor: pointer;
 }
 
 button{

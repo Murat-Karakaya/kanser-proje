@@ -1,5 +1,15 @@
-export default ()=>{
+import { useState } from "react"
 
+export default ()=>{
+    const [age, setAge] = useState("")
+    function isNumberKey(evt) {
+        const charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            evt.preventDefault();
+            return false;
+        }
+        return true;
+    }
     return(
         <>
             <h1>Form Doldurma</h1>
@@ -7,10 +17,18 @@ export default ()=>{
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="age-input">Yaşınız:</label>
-                <input id="age-input" type="number" />
+                <input
+                 className="form-input ordered" 
+                 style={{"--order":"0"}}
+                 id="age-input" 
+                 type="text" 
+                 onKeyDown={isNumberKey}
+                 onChange={(evt) => setAge(evt.target.value)} 
+                 value={age} 
+                />
 
                 <label htmlFor="menstruation-age">İlk adet görme yaşı:</label>
-                <select id="menstruation-age">
+                <select className="form-input ordered" style={{"--order":"0"}} id="menstruation-age">
                     <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="x<12">12'den küçük</option>
                     <option value="12<x<13">12 ile 13 yaş aralığında</option>
@@ -18,7 +36,7 @@ export default ()=>{
                 </select>
 
                 <label htmlFor="first-birth-age">İlk doğum gerçekleştirme yaşı:</label>
-                <select id="first-birth-age">
+                <select className="form-input ordered" style={{"--order":"0"}} id="first-birth-age">
                     <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="no-birth">Doğum gerçekleşmedi</option>
                     <option value="x<20">20 yaş altı</option>
@@ -27,8 +45,8 @@ export default ()=>{
                     <option value="30<x">25 ile 29 yaş aralığında</option>
                 </select>
 
-                <label htmlFor="first-degree-relatives">Göğüs kanseri geçirmiş 1. dereceden akraba sayısı:</label>
-                <select id="first-degree-relatives">
+                <label htmlFor="first-degree-relatives">Göğüs kanseri görmüş 1. dereceden akraba sayısı:</label>
+                <select className="form-input ordered" style={{"--order":"0"}} id="first-degree-relatives">
                     <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="0">0 kişi</option>
                     <option value="1">1 kişi</option>
@@ -36,12 +54,13 @@ export default ()=>{
                 </select>
 
                 <label htmlFor="menstruation-age">İlk adet görme yaşı:</label>
-                <select id="menstruation-age">
+                <select className="form-input ordered" style={{"--order":"0"}} id="menstruation-age">
+                    <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="x<12">12'den küçük</option>
                     <option value="12<x<13">12 ile 13 yaş aralığında</option>
                     <option value="13<x">13'den büyük</option>
-                    <option defaultValue="unknown">Bilinmiyor</option>
                 </select>
+                <button className="form-submit">Devam</button>
             </fieldset>
         </>
     )
