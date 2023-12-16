@@ -24,6 +24,10 @@ export default ()=>{
                     <h3>Dijitalleşmiş Veriler</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
+                <button onClick={() => setPageId(3)} style={{"--order":"2"}} className="card" >
+                    <h3>Form Doldurma</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
+                </button>
             </div>
             <br />
         </>

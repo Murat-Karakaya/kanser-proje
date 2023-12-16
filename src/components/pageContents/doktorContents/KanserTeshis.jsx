@@ -4,17 +4,32 @@ export default ()=>{
     const [preview, setPreview] = useState("")
     const [jpgCode, setJpgCode] = useState("")
 
-    const handleFileChange = ({files}) => {
+    const createImageUrl = ({files}) => {
         const file = files[0];
         const reader = new FileReader();
 
-        reader.onloadend = () => {
-            setPreview(reader.result);
-        }
+        reader.onloadend = () => setPreview(reader.result)
 
         if (file) return reader.readAsDataURL(file)
-
         setPreview(null)
+    }
+
+    const createImageCode = ({files}) => {
+        const file = files[0];
+        const reader = new FileReader();
+     
+        reader.onloadend = () => {
+            const buffer = new Uint8Array(reader.result);
+            let binaryString = '';
+            for (let i = 0; i < buffer.length; i++) {
+                binaryString += buffer[i].toString(2).padStart(8, '0');
+            }
+            setJpgCode(binaryString);
+        }
+     
+        if (file) return reader.readAsArrayBuffer(file)
+     
+        setJpgCode(null)
     }
     return(
         <>
@@ -44,10 +59,14 @@ export default ()=>{
                      id="image-file-input" 
                      accept="image/jpeg" 
                      style={{display: "none"}}
-                     onChange={event => {handleFileChange(event.target)}}/>
+                     onChange={event => {
+                        /* createImageCode(event.target) */
+                        createImageUrl(event.target)
+                    }}/>
                 </div>
                 <button className="form-submit">Devam</button>
                 {preview && <img src={preview} height={200} width={"auto"} alt="yüklenen görüntü" /> }
+                <p>{false && jpgCode}</p>
             </fieldset>
         </>
     )
