@@ -1,0 +1,30 @@
+#anonymous-page-container {
+    background-image: url("/anonymous-page.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+}
+#anonymous-page {
+    background: none;
+    height: 300px;
+    width: clamp(280px, 50%, 680px);
+    display: grid;
+    place-items: center;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+#first-paragraph {
+    grid-column: 1 / span 2;
+}
+
+.button-like-component {
+    padding: 5px 10px;
+    border: 3px solid var(--page-line);
+    background: var(--nav-backround);
+    border-radius: 5px;
+}

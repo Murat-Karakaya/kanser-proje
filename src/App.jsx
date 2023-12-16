@@ -1,6 +1,6 @@
 import Doktor from "./pages/Doktor";
 import Hasta from "./pages/Hasta";
-import Anonymous from "./pages/Anonymous";
+import Anonymous from "./pages/Anonymous/Anonymous";
 
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
