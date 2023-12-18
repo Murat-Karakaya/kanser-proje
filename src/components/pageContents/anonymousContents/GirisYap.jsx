@@ -50,19 +50,19 @@ export default () => {
         <div id="grid-centered">
         <fieldset className="dynamic-width-form">
             <legend>Hesap Aç</legend>
-            <label htmlFor="">Adınız: </label>
+            <label htmlFor="nameInput">Adınız: </label>
             <input
              onChange={(e) => setCredentials({...credentials, name: e.target.value})} 
              type="text" 
-             id="name-input"
+             id="nameInput"
              className="form-input" 
             />
 
-            <p>Şifreniz: </p>
+            <label htmlFor="passwordInput">Şifreniz:</label>
             <input
              onChange={(e) => setCredentials({...credentials, password: e.target.value})}
              type="password" 
-             id="password-input"
+             id="passwordInput"
              className="form-input" 
             />
 
