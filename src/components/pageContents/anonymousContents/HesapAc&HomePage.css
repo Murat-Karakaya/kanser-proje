@@ -1,0 +1,3 @@
+.dynamic-width-form {
+    width: clamp(260px, 50%, 500px);
+}

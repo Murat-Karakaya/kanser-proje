@@ -60,13 +60,13 @@ export default ()=>{
                     accept="image/jpeg" 
                     style={{display: "none"}}
                     onChange={event => {
-                    /* createImageCode(event.target) */
+                    createImageCode(event.target)
                     createImageUrl(event.target)
                 }}/>
 
                 <button className="form-submit">Devam</button>
                 {preview && <img src={preview} height={200} width={"auto"} alt="yüklenen görüntü" /> }
-                <p>{false && jpgCode}</p>
+                <p>{jpgCode && jpgCode}</p>
             </fieldset>
         </>
     )
