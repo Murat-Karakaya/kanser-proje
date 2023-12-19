@@ -2,57 +2,61 @@ import { useState } from "react"
 
 export default ()=>{
     const [preview, setPreview] = useState("")
-    const [jpgCode, setJpgCode] = useState("")
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [file, setFile] = useState(null);
 
-    const createImageUrl = ({files}) => {
-        const file = files[0];
+    const createImageUrl = file => {
         const reader = new FileReader();
-
         reader.onloadend = () => setPreview(reader.result)
 
         if (file) return reader.readAsDataURL(file)
         setPreview(null)
     }
 
-    const createImageCode = ({files}) => {
-        const file = files[0];
-        const reader = new FileReader();
-     
-        reader.onloadend = () => {
-            const buffer = new Uint8Array(reader.result);
-            let binaryString = '';
-            for (let i = 0; i < buffer.length; i++) {
-                binaryString += buffer[i].toString(2).padStart(8, '0');
-            }
-            setJpgCode(binaryString);
+    const handleUpload = async () => {
+        if (!file) return console.log("Dosya yüklenemedi");
+  
+        const formData = new FormData()
+        console.log(selectedCategory)
+        formData.append('file', file);
+        formData.append('category', selectedCategory);
+  
+        try {
+            /* const response = await fetch("http://localhost:80/", {
+                method: 'POST',
+                headers,
+                body: formData,
+            })
+            const data = await response.json();
+            console.log(data);
+            console.log('File uploaded successfully!'); */
+        } catch (error) {
+            console.error(error);
         }
-     
-        if (file) return reader.readAsArrayBuffer(file)
-     
-        setJpgCode(null)
     }
+
     return(
         <>
             <h1>Kanser Teşhisi</h1>
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
-                <select className="form-input"/* className="cancer-select" */>
+                <select className="form-input"  onChange={event => setSelectedCategory(event.target.value)} >
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
-                    <option value="akciğer kanseri">Tür: Akciğer Kanseri</option>
-                    <option value="meme kanseri">Tür: Göğüs Kanseri</option>
-                    <option value="deri kanseri">Tür: Deri Kanseri</option>
-                    <option value="akciğer kanseri">Tür: Lenf Nodu Kanseri</option>
+                    <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
+                    <option value="Meme Kanseri">Tür: Göğüs Kanseri</option>
+                    <option value="Deri Kanseri">Tür: Deri Kanseri</option>
+                    <option value="Lenf Nodu Kanseri">Tür: Lenf Nodu Kanseri</option>
                 </select>
-                <div className="info">Görüntünün JPEG formantında olması gerekmektedir.</div>
+                <div className="info">Görüntünün JPEG formatında olması gerekmektedir.</div>
                 
                 <label
                     tabIndex="0"
                     role="button"
                     htmlFor="image-file-input"
-                    className="file-upload">
+                    className="file-upload"
+                >
                     Görüntü Seç
                 </label>
-                
                 <input
                     type="file" 
                     name="image-file-input" 
@@ -60,13 +64,25 @@ export default ()=>{
                     accept="image/jpeg" 
                     style={{display: "none"}}
                     onChange={event => {
-                    createImageCode(event.target)
-                    createImageUrl(event.target)
-                }}/>
+                        setFile(event.target.files[0])
+                        createImageUrl(event.target.files[0])
+                    }}
+                />
 
-                <button className="form-submit">Devam</button>
-                {preview && <img src={preview} height={200} width={"auto"} alt="yüklenen görüntü" /> }
-                <p>{jpgCode && jpgCode}</p>
+                <button
+                 className="form-submit" 
+                 onClick={handleUpload}
+                >
+                    Devam
+                </button>
+                {
+                    preview && <img
+                     src={preview} 
+                     height={200} 
+                     width={"auto"} 
+                     alt="yüklenen görüntü" 
+                    /> 
+                }
             </fieldset>
         </>
     )
