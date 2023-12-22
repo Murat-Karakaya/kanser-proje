@@ -1,15 +1,61 @@
 import { useState } from "react"
 
+import BreastCancerInfo from "./BreastCancerInfo"
+
 export default ()=>{
     const [age, setAge] = useState("")
-    function isNumberKey(evt) {
+    const [ageMenarche, setAgeMenarche] = useState("")
+    const [firstBirthAge, setFirtBirthAge] = useState("")
+    const [biopsyNumber, setBiopsyNumber] = useState("")
+    const [relativesNumber, setRelativesNumber] = useState("")
+    const [ethnicities, setEthnicities] = useState("")
+    
+    const [message, setMessage] = useState("")
+
+    const isWholeNumberKey = (evt) => {
         const charCode = (evt.which) ? evt.which : evt.keyCode
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
             evt.preventDefault();
             return false;
         }
-        return true;
+        return;
     }
+
+    const getResults = async () => {
+        if (Number(age) < Number(ageMenarche)) return setMessage("age < ageMenarche")
+        if (Number(age) < Number(firstBirthAge)) return setMessage("age < firstBirthAge")
+
+        if (relativesNumber && biopsyNumber && firstBirthAge && ageMenarche && age) {
+            
+            const method = "POST"
+            const headers = {
+                "Content-Type": "application/json"
+            }
+            const body = {
+                numRelative: relativesNumber,
+                firstLiveBirth: firstBirthAge,
+                menarcheAge: ageMenarche,
+                numBiopsy: biopsyNumber,
+                age: age,
+                race: ethnicities,
+            }
+
+            try { // fetch logic
+                const response = await fetch("http://localhost:80/", {method, headers, body})
+                const data = await response.json()
+                console.log(data)
+                if (Number(data.risk) > 1.7) {// Riskin "risk" kısmında yazacağını varsaydım
+                    return setMessage("malign")
+                }
+                return setMessage("benign")
+            } catch (error) {
+                console.error(error)
+                return setMessage("error")  
+            }
+        }
+        return setMessage("empty form")
+    }
+
     return(
         <>
             <p>Aşağıdaki formu doldurarak göğüs kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
@@ -20,37 +66,64 @@ export default ()=>{
                  className="form-input"
                  id="age-input" 
                  type="text" 
-                 onKeyDown={isNumberKey}
+                 onKeyDown={isWholeNumberKey}
                  onChange={(evt) => setAge(evt.target.value)} 
                  value={age} 
                 />
 
-                <label htmlFor="menstruation-age">İlk adet görme yaşı:</label>
-                <select className="form-input" id="menstruation-age">
-                    <option defaultValue="unknown">Bilinmiyor</option>
-                    <option value="x<12">12'den küçük</option>
-                    <option value="12<x<13">12 ile 13 yaş aralığında</option>
-                    <option value="13<x">13'den büyük</option>
-                </select>
+                <label htmlFor="menarche-age">İlk adet görme yaşı:</label>
+                <input
+                 className="form-input"
+                 id="menarche-age" 
+                 type="text" 
+                 onKeyDown={isWholeNumberKey}
+                 onChange={(evt) => setAgeMenarche(evt.target.value)} 
+                 value={ageMenarche} 
+                />
 
                 <label htmlFor="first-birth-age">İlk doğum gerçekleştirme yaşı:</label>
-                <select className="form-input" id="first-birth-age">
-                    <option defaultValue="unknown">Bilinmiyor</option>
-                    <option value="no-birth">Doğum gerçekleşmedi</option>
-                    <option value="x<20">20 yaş altı</option>
-                    <option value="20<x<24">20 ile 24 yaş aralığında</option>
-                    <option value="25<x<29">25 ile 29 yaş aralığında</option>
-                    <option value="30<x">25 ile 29 yaş aralığında</option>
-                </select>
+                <input
+                 className="form-input"
+                 id="first-birth-age" 
+                 type="text" 
+                 onKeyDown={isWholeNumberKey}
+                 onChange={(evt) => setFirtBirthAge(evt.target.value)} 
+                 value={firstBirthAge} 
+                />
+
+                <label htmlFor="biopsy-input">Toplam biyopsi sayısı:</label>
+                <input
+                 className="form-input"
+                 id="biopsy-input" 
+                 type="text" 
+                 onKeyDown={isWholeNumberKey}
+                 onChange={(evt) => setBiopsyNumber(evt.target.value)} 
+                 value={biopsyNumber} 
+                />
 
                 <label htmlFor="first-degree-relatives">Göğüs kanseri görmüş 1. dereceden akraba sayısı:</label>
-                <select className="form-input" id="first-degree-relatives">
-                    <option defaultValue="unknown">Bilinmiyor</option>
-                    <option value="0">0 kişi</option>
-                    <option value="1">1 kişi</option>
-                    <option value="2<=x">2 veya 2'den fazla</option>
+                <input
+                 className="form-input"
+                 id="first-degree-relatives" 
+                 type="text" 
+                 onKeyDown={isWholeNumberKey}
+                 onChange={(evt) => setRelativesNumber(evt.target.value)} 
+                 value={relativesNumber}
+                />
+
+                <label htmlFor="ethnicities-input">Etnik köken / Irk:</label>
+                <select className="form-input" id="ethnicities-input" onChange={event => setEthnicities(event.target.value)} >
+                    <option value={"white"}>Beyaz</option>                    
+                    <option value={"black"}>Siyahi</option>
+                    <option value={"chinese"}>Çinli</option>
+                    <option value={"japanese"}>Japon</option>
+                    <option value={"filipino"}>Filipinli</option>
+                    <option value={"hawaiian"}>Hawaiili</option>
+                    <option value={"pacific"}>Avrupalı</option>
+                    <option value={"asian"}>Asyalı</option>
                 </select>
-                <button className="form-submit">Devam</button>
+                <button onClick={getResults} className="form-submit">Devam</button>
+                <BreastCancerInfo message={message}/>
             </fieldset>
         </>
     )

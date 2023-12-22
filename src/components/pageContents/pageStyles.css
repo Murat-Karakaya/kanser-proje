@@ -15,7 +15,7 @@
 	height: 100%;
 	flex-shrink: 0;
 	perspective: 25px;
-	padding: 0;
+	padding: 1rem;
 }
 
 h1, h1 > *{
@@ -133,16 +133,25 @@ h3 {
 
 fieldset {
 	--fieldset-border: 3px solid #009dff;
-	margin: 0 1rem;
+	margin: 1rem;
 	border-radius: 5px;
 	border: var(--fieldset-border);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(1fr, var(--input-rows-number));
 	row-gap: 25px;
-	align-items: center;
 }
 
+@media screen and (max-width: 540px){
+	fieldset {
+		--fieldset-border: 3px solid #009dff;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		row-gap: 15px;
+		align-items: center;
+	}
+}
 
 legend {
 	padding: 4px 7px;
@@ -150,7 +159,14 @@ legend {
 	border-radius: 5px;
 }
 
+.span-entire-row {
+	align-self: center;
+	justify-self: center;
+	grid-column: 1 / -1;
+}
+
 .form-input {
+	align-self: center;
 	padding: 5px;
 	outline-offset: 3px;
 	border: var(--fieldset-border);
@@ -178,6 +194,9 @@ legend {
 }
 
 .form-submit {
+	grid-column: 1 / -1;
+	align-self: center;
+	justify-self: center;
 	width: clamp(175px, calc(50% - 25px), 275px);
 }
 
