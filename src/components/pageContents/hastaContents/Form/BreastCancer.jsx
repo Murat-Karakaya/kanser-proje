@@ -12,14 +12,12 @@ export default ()=>{
     }
     return(
         <>
-            <h1>Form Doldurma</h1>
             <p>Aşağıdaki formu doldurarak göğüs kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="age-input">Yaşınız:</label>
                 <input
-                 className="form-input ordered" 
-                 style={{"--order":"0"}}
+                 className="form-input"
                  id="age-input" 
                  type="text" 
                  onKeyDown={isNumberKey}
@@ -28,7 +26,7 @@ export default ()=>{
                 />
 
                 <label htmlFor="menstruation-age">İlk adet görme yaşı:</label>
-                <select className="form-input ordered" style={{"--order":"0"}} id="menstruation-age">
+                <select className="form-input" id="menstruation-age">
                     <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="x<12">12'den küçük</option>
                     <option value="12<x<13">12 ile 13 yaş aralığında</option>
@@ -36,7 +34,7 @@ export default ()=>{
                 </select>
 
                 <label htmlFor="first-birth-age">İlk doğum gerçekleştirme yaşı:</label>
-                <select className="form-input ordered" style={{"--order":"0"}} id="first-birth-age">
+                <select className="form-input" id="first-birth-age">
                     <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="no-birth">Doğum gerçekleşmedi</option>
                     <option value="x<20">20 yaş altı</option>
@@ -46,19 +44,11 @@ export default ()=>{
                 </select>
 
                 <label htmlFor="first-degree-relatives">Göğüs kanseri görmüş 1. dereceden akraba sayısı:</label>
-                <select className="form-input ordered" style={{"--order":"0"}} id="first-degree-relatives">
+                <select className="form-input" id="first-degree-relatives">
                     <option defaultValue="unknown">Bilinmiyor</option>
                     <option value="0">0 kişi</option>
                     <option value="1">1 kişi</option>
                     <option value="2<=x">2 veya 2'den fazla</option>
-                </select>
-
-                <label htmlFor="menstruation-age">İlk adet görme yaşı:</label>
-                <select className="form-input ordered" style={{"--order":"0"}} id="menstruation-age">
-                    <option defaultValue="unknown">Bilinmiyor</option>
-                    <option value="x<12">12'den küçük</option>
-                    <option value="12<x<13">12 ile 13 yaş aralığında</option>
-                    <option value="13<x">13'den büyük</option>
                 </select>
                 <button className="form-submit">Devam</button>
             </fieldset>

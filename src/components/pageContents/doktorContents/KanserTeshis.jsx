@@ -40,7 +40,7 @@ export default ()=>{
             <h1>Kanser Teşhisi</h1>
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
-                <select className="form-input"  onChange={event => setSelectedCategory(event.target.value)} >
+                <select className="form-input" onChange={event => setSelectedCategory(event.target.value)} >
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
                     <option value="Meme Kanseri">Tür: Göğüs Kanseri</option>
