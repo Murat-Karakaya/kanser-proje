@@ -5,7 +5,7 @@ export default () => {
     return (
     <div id="grid-centered">
         <div id="anonymous-page">
-            <p id="first-paragraph">
+            <p className="span-entire-row">
                 Arayüz seçiniz...
             </p>
             

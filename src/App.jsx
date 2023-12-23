@@ -13,16 +13,19 @@ const App=()=> {
 
     useEffect(() => {
         const rootElement = document.getElementById('root')
+        const setRootProperty = (property, value) => rootElement.style.setProperty(property, value);
         
         if (isDarkMode) {
-            rootElement.style.setProperty('--default-color', 'white');
-            rootElement.style.setProperty('--page-line', 'white');
-            rootElement.style.setProperty('--default-block-background', 'rgb(19, 19, 19)');
+            setRootProperty('--default-color', 'white');
+            setRootProperty('--page-line', 'white');
+            setRootProperty('--default-block-background', 'rgb(19, 19, 19)');
+            setRootProperty("--custom-blue", "rgb(0, 85, 255)")
             return;
         }
-        rootElement.style.setProperty('--default-color', 'rgb(19, 19, 19)');
-        rootElement.style.setProperty('--default-block-background', 'white');
-        rootElement.style.setProperty('--page-line', 'black');
+        setRootProperty('--default-color', 'rgb(19, 19, 19)');
+        setRootProperty('--default-block-background', 'white');
+        setRootProperty('--page-line', 'black');
+        setRootProperty("--custom-blue", "rgb(29, 153, 255)")
         return;
     }, [isDarkMode])
 

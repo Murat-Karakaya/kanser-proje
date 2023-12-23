@@ -15,7 +15,8 @@
     place-items: center;
 }
 #anonymous-page {
-    background: none;
+    border: 4px solid var(--custom-blue);
+    border-radius: 5px;
     height: 300px;
     width: clamp(280px, 50%, 680px);
     display: grid;
@@ -24,13 +25,16 @@
     grid-template-columns: 1fr 1fr;
 }
 
-#first-paragraph {
-    grid-column: 1 / span 2;
+.button-like-component {
+    width: 161px;
+    padding: 5px 10px;
+    background-color: var(--custom-blue);
+    border-radius: 5px;
+    text-align: center;
 }
 
-.button-like-component {
-    padding: 5px 10px;
-    border: 3px solid var(--page-line);
-    background: var(--nav-backround);
-    border-radius: 5px;
+@media screen and (max-width: 710px){
+    .button-like-component {
+        width: 120px;
+    }
 }

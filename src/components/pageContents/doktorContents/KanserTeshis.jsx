@@ -40,20 +40,21 @@ export default ()=>{
             <h1>Kanser Teşhisi</h1>
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
-                <select className="form-input" onChange={event => setSelectedCategory(event.target.value)} >
+                <select className="form-input span-entire-row" onChange={event => setSelectedCategory(event.target.value)} >
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
                     <option value="Meme Kanseri">Tür: Göğüs Kanseri</option>
                     <option value="Deri Kanseri">Tür: Deri Kanseri</option>
                     <option value="Lenf Nodu Kanseri">Tür: Lenf Nodu Kanseri</option>
                 </select>
-                <div className="info">Görüntünün JPEG formatında olması gerekmektedir.</div>
+
+                <div className="info span-entire-row">Görüntünün JPEG formatında olması gerekmektedir.</div>
                 
                 <label
                     tabIndex="0"
                     role="button"
                     htmlFor="image-file-input"
-                    className="file-upload"
+                    className="file-upload span-entire-row"
                 >
                     Görüntü Seç
                 </label>
@@ -70,13 +71,14 @@ export default ()=>{
                 />
 
                 <button
-                 className="form-submit" 
+                 className="form-submit span-entire-row" 
                  onClick={handleUpload}
                 >
                     Devam
                 </button>
                 {
                     preview && <img
+                     className="span-entire-row"
                      src={preview} 
                      height={200} 
                      width={"auto"} 
