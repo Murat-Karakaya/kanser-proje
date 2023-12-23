@@ -1,7 +1,7 @@
 import { useState } from "react"
-import BreastCancer from "./BreastCancer"
-import ProstateCancer from "./ProstateCancer"
-import LungCancer from "./LungCancer"
+import BreastCancer from "./Forms/BreastCancer"
+import ProstateCancer from "./Forms/ProstateCancer"
+import LungCancer from "./Forms/LungCancer"
 
 export default ()=>{
     const [form, setForm] = useState("")
