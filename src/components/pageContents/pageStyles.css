@@ -6,6 +6,10 @@
 	height: 100%;
 }
 
+[aria-hidden="true"] * {
+	pointer-events: none;
+}
+
 /*Page Basic Styles*/
 .page{
 	background: none;
@@ -156,6 +160,9 @@ legend {
 	border-radius: 5px;
 }
 
+label {
+	place-self: center;
+}
 .span-entire-row {
 	align-self: center;
 	justify-self: center;

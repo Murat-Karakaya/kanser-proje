@@ -21,20 +21,37 @@
     width: clamp(280px, 50%, 680px);
     display: grid;
     place-items: center;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
 }
 
-.button-like-component {
+.gradient-button-component {
+	transform: translateX(-5em);
+	background-image: var(--card-backround);
+	opacity: 0;
     width: 161px;
     padding: 5px 10px;
-    background-color: var(--custom-blue);
-    border-radius: 5px;
+    border-radius: 5px 5px 5px 0;
+    transition: width .5s calc(80ms*var(--order)), transform .3s;
+	animation: fadeIn .5s ease-in-out calc(80ms*var(--order));
+    /* fadeIn animation is in the PageStyles.css file */
+	
+    animation-fill-mode: forwards;
     text-align: center;
 }
 
-@media screen and (max-width: 710px){
-    .button-like-component {
-        width: 120px;
-    }
+.linkLineup{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.linkLineup {
+	column-gap: 10px;
+	row-gap: 2rem;	
+}
+
+@media screen and (max-width: 590px) {
+	.gradient-button-component {
+		width: 120px;
+	}
 }

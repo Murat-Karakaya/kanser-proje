@@ -1,60 +1,59 @@
+import { useAtom } from "jotai";
 import { useState } from "react";
-import "./HesapAc&HomePage.css"
+import { useNavigate } from "react-router-dom";
+import { pageAtom } from "../../../jotai/atoms";
 
 export default () => {
-    const [userInfo, setUserInfo] = useState({})
-    const [credentials, setCredentials] = useState({name: "",  password: ""})
-    const [information, setInformation] = useState({message: "", color: "black"})
-    let [loading, setLoading] = useState(false);
+    const [,setPage] = useAtom(pageAtom)
+    const navigate = useNavigate()
+    const [, setUserInfo] = useState({})
+    const [credentials, setCredentials] = useState({email: "",  password: ""})
+    const [information, setInformation] = useState("")
+    const [loading, setLoading] = useState(false);
 
-    const setUser = ({name, password}) => {
-        if (!name || !password) {
-            setInformation({message: "Username and password are required", color: "rgb(130, 0, 0)"})
-            return;
-        }
-        if (name.length > 30) {
-            setInformation({message: "Keep the username under 30 characters", color: "rgb(130, 0, 0)"})
-            return;
-        }
+    
+
+    const setUser = async ({email, password}) => {
+        if (!email || !password) return setInformation("Email ve şifre zorunludur.")
         setLoading(true)
-        setInformation({message: "Processing, please wait", color: "black"})
+        setInformation("Yükleniyor, lütfen bekleyiniz...")
 
-        /* Stuff like this will be written when making the server.
-        fetch("https://global-chat-api.onrender.com/register", {
-            method: "post",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({name, password})
-        })
-        .then(response => response.json())
-        .then({name, id} => {
-            if (id) {
-                setUserInfo({username: name, id: id})
-                setLoading(false);
-                setInformation({message: "", color: "black"})
+        try {
+            const response = await fetch("http://localhost:1234/signin", {
+                method: "post",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({email, password})
+            })
+
+            const data = await response.json()
+
+            if (data.id) {
+                setUserInfo(data)
+                setLoading(false)
+                setInformation("")
+                setPage(0)
+                data.isdoctor ? navigate("/doktor") : navigate("/hasta")
                 return;
             }
             setLoading(false);
-            setInformation({message: "That username allready exists", color: "rgb(130, 0, 0)"})
-        })
-        .catch(err => {
+            setInformation("Yanlış email veya şifre.")
+        } catch (error) {
+            console.log(error)
             setLoading(false);
-            setInformation({message: "That username allready exists", color: "rgb(130, 0, 0)"})
-        }) */
-
-        setUserInfo({username: name, id: "test-id"})
-        setTimeout(() => setLoading(false), 500)
-        setInformation({message: name, color: "var(--default-color)"})
+            setInformation("Yanlış email veya şifre.")
+        }
     }
 
     return(
         <div id="grid-centered">
-        <fieldset className="dynamic-width-form">
-            <legend>Hesap Aç</legend>
-            <label htmlFor="nameInput">Adınız: </label>
+        <fieldset className="dynamic-form-width">
+            <legend>Giriş Yap</legend>
+
+            <label htmlFor="emailInput">Emailiniz: </label>
             <input
-             onChange={(e) => setCredentials({...credentials, name: e.target.value})} 
-             type="text" 
-             id="nameInput"
+             onChange={(e) => setCredentials({...credentials, email: e.target.value})} 
+             type="email" 
+             id="emailInput"
              className="form-input" 
             />
 
@@ -69,10 +68,11 @@ export default () => {
             <button
              onClick={() => setUser(credentials)}
              className="form-submit"
-            >Register</button>
-            <div style={{display: "flex", justifyContent: "center", marginTop: "15px"}}>
+            >Giriş Yap</button>
+
+            <div style={{display: loading ? "flex" : "none"}} className="span-entire-row flex-centered">
                 <div style={{display: loading ? "block" : "none"}} className="loading-blue"></div>
-                <p style={{color: information.color, marginTop: 0}}>{information.message}</p>
+                <p className="form-information">{information}</p>
             </div>
         </fieldset>
         </div>

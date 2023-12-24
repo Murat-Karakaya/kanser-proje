@@ -1,61 +1,70 @@
-import { useState } from "react";
-import "./HesapAc&HomePage.css"
+import { useState } from "react"
+import { userInfoAtom } from "../../../jotai/atoms"
+import { useAtom } from "jotai"
+
+import "./HesapAc&GirisYap.css"
+import { useNavigate } from "react-router-dom"
 
 export default () => {
-    const [userInfo, setUserInfo] = useState({})
-    const [credentials, setCredentials] = useState({name: "",  password: ""})
-    const [information, setInformation] = useState({message: "", color: "black"})
-    let [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
+    const [, setUserInfo] = useAtom(userInfoAtom)
+    const [credentials, setCredentials] = useState({email: "",  password: "", name: "", isdoctor: null})
+    const [information, setInformation] = useState("")
+    const [loading, setLoading] = useState(false)
 
-    const setUser = ({name, password}) => {
-        if (!name || !password) {
-            setInformation({message: "Username and password are required", color: "rgb(130, 0, 0)"})
-            return;
+    const setUser = async ({name, email, password, isdoctor}) => {
+        if (!name || !email || !password || (isdoctor !== "false" && isdoctor !== "true")) {
+            setInformation("Kullanıcı adı, email, şifre ve kullanıcı tipi zorunludur. " + isdoctor)
+            return
         }
         if (name.length > 30) {
-            setInformation({message: "Keep the username under 30 characters", color: "rgb(130, 0, 0)"})
-            return;
+            setInformation("Kullanıcı adınızı 30 karakterden kısa tutunuz.")
+            return
         }
         setLoading(true)
-        setInformation({message: "Processing, please wait", color: "var(--default-color)"})
+        setInformation("Yükleniyor, lütfen bekleyiniz...")
 
-        /* Stuff like this will be written when making the server.
-        fetch("https://global-chat-api.onrender.com/register", {
-            method: "post",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({name, password})
-        })
-        .then(response => response.json())
-        .then({name, id} => {
-            if (id) {
-                setUserInfo({username: name, id: id})
-                setLoading(false);
-                setInformation({message: "", color: "black"})
-                return;
+        try {
+            const response = await fetch("http://localhost:1234/register", {
+                method: "post",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({name, email, password, isdoctor: isdoctor === "true" ? true : false})
+            })
+            const data = await response.json()
+            if (data.id) {
+                setUserInfo(data)
+                setLoading(false)
+                setInformation("")
+                data.isdoctor ? navigate("/doktor") : navigate("/hasta")
+                return
             }
-            setLoading(false);
-            setInformation({message: "That username allready exists", color: "rgb(130, 0, 0)"})
-        })
-        .catch(err => {
-            setLoading(false);
-            setInformation({message: "That username allready exists", color: "rgb(130, 0, 0)"})
-        }) */
-
-        setUserInfo({username: name, id: "test-id"})
-        setTimeout(() => setLoading(false), 500)
-        setInformation({message: name, color: "black"})
+            setLoading(false)
+            setInformation("O email zaten kullanılıyor.")
+        } catch (error) {
+            console.error(error)
+            setLoading(false)
+            setInformation("Bir sorun oluştu.")
+        }
     }
 
     return(
         <div id="grid-centered">
-        <fieldset className="dynamic-width-form">
+        <fieldset className="dynamic-form-width">
             <legend>Hesap Aç</legend>
-            <label htmlFor="name-input">Adınız: </label>
+            <label htmlFor="name-input">Kullanıcı adınız: </label>
             <input
-             onChange={(e) => setCredentials({...credentials, name: e.target.value})} 
-             type="text" 
+             onChange={(e) => setCredentials({...credentials, name: e.target.value})}
+             type="text"
              id="name-input"
              className="form-input" 
+            />
+
+            <label htmlFor="email-input">Emailiniz: </label>
+            <input
+             onChange={(e) => setCredentials({...credentials, email: e.target.value})}
+             type="email"
+             id="email-input"
+             className="form-input"
             />
 
             <label htmlFor="password-input">Şifreniz:</label>
@@ -66,13 +75,24 @@ export default () => {
              className="form-input" 
             />
 
+            <label htmlFor="user-type-input">Kullanıcı tipi:</label>
+            <select
+             className="form-input" 
+             id="user-type-input" 
+             onChange={e => setCredentials({...credentials, isdoctor: e.target.value})} 
+            >
+                <option hidden value={null}></option>
+                <option value={false}>Hasta</option>    
+                <option value={true}>Doktor</option>
+            </select>
+
             <button
              onClick={() => setUser(credentials)}
              className="form-submit"
             >Register</button>
-            <div style={{display: "flex", justifyContent: "center", marginTop: "15px"}}>
+            <div style={{display: information ? "flex" : "none"}} className="span-entire-row flex-centered">
                 <div style={{display: loading ? "block" : "none"}} className="loading-blue"></div>
-                <p style={{color: information.color, marginTop: 0}}>{information.message}</p>
+                <p className="form-information">{information}</p>
             </div>
         </fieldset>
         </div>
