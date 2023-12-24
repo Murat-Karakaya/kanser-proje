@@ -3,7 +3,7 @@ import Hasta from "./pages/Hasta";
 import Anonymous from "./pages/Anonymous";
 
 import { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { useAtom } from "jotai";
 import { darkModeAtom} from "./jotai/atoms";

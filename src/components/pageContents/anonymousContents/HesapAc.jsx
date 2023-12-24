@@ -1,16 +1,28 @@
-import { useState } from "react"
-import { userInfoAtom } from "../../../jotai/atoms"
-import { useAtom } from "jotai"
+import { useState, useEffect } from "react"
 
 import "./HesapAc&GirisYap.css"
 import { useNavigate } from "react-router-dom"
 
+import { useAtom, useSetAtom } from "jotai"
+import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms"
+
 export default () => {
+    const [isDoctor, setIsDoctor] = useAtom(isDoctorAtom)
+    const setUserName = useSetAtom(userNameAtom)
+    const setUserId = useSetAtom(userIdAtom)
+
+    const setPage = useSetAtom(pageAtom)
+
     const navigate = useNavigate()
-    const [, setUserInfo] = useAtom(userInfoAtom)
     const [credentials, setCredentials] = useState({email: "",  password: "", name: "", isdoctor: null})
     const [information, setInformation] = useState("")
     const [loading, setLoading] = useState(false)
+
+
+    useEffect(() => {
+        if (isDoctor) return navigate("/doktor")
+        if (isDoctor === false) return navigate("/hasta")
+    }, [isDoctor])
 
     const setUser = async ({name, email, password, isdoctor}) => {
         if (!name || !email || !password || (isdoctor !== "false" && isdoctor !== "true")) {
@@ -32,10 +44,12 @@ export default () => {
             })
             const data = await response.json()
             if (data.id) {
-                setUserInfo(data)
                 setLoading(false)
                 setInformation("")
-                data.isdoctor ? navigate("/doktor") : navigate("/hasta")
+                setUserId(data.id)
+                setUserName(data.name)
+                setIsDoctor(data.isdoctor)
+                setPage(0)
                 return
             }
             setLoading(false)

@@ -1,10 +1,21 @@
-import { Link } from "react-router-dom"
 import "./Anonymous.css"
-import { useAtom } from "jotai"
-import { pageAtom } from "../../../jotai/atoms"
+import { useSetAtom } from "jotai"
+import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms"
+import { useEffect } from "react"
 
 export default () => {
-    const [, setPageId] = useAtom(pageAtom)
+    const setPageId = useSetAtom(pageAtom)
+    const setUserName = useSetAtom(userNameAtom)
+    const setUserId = useSetAtom(userIdAtom)
+    const setIsDoctor = useSetAtom(isDoctorAtom)
+
+    useEffect(() => {
+        setIsDoctor(null)
+        setPageId(0)
+        setUserId("")
+        setUserName("")
+    },[])
+    
     return (
     <div id="grid-centered">
         <div id="anonymous-page">

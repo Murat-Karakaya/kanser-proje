@@ -1,17 +1,24 @@
-import { useAtom } from "jotai";
-import { useState } from "react";
+import { useAtom, useSetAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { pageAtom } from "../../../jotai/atoms";
+import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms";
 
 export default () => {
-    const [,setPage] = useAtom(pageAtom)
+    const setPage = useSetAtom(pageAtom)
     const navigate = useNavigate()
-    const [, setUserInfo] = useState({})
+
+    const setUserName = useSetAtom(userNameAtom)
+    const setUserId = useSetAtom(userIdAtom)
+    const [isDoctor, setIsDoctor] = useAtom(isDoctorAtom)
+
     const [credentials, setCredentials] = useState({email: "",  password: ""})
     const [information, setInformation] = useState("")
     const [loading, setLoading] = useState(false);
 
-    
+    useEffect(() => {
+        if (isDoctor) return navigate("/doktor")
+        if (isDoctor === false) return navigate("/hasta")
+    }, [isDoctor])
 
     const setUser = async ({email, password}) => {
         if (!email || !password) return setInformation("Email ve şifre zorunludur.")
@@ -28,11 +35,12 @@ export default () => {
             const data = await response.json()
 
             if (data.id) {
-                setUserInfo(data)
                 setLoading(false)
                 setInformation("")
+                setUserId(data.id)
+                setUserName(data.name)
+                setIsDoctor(data.isdoctor)
                 setPage(0)
-                data.isdoctor ? navigate("/doktor") : navigate("/hasta")
                 return;
             }
             setLoading(false);

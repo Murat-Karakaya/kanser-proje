@@ -1,17 +1,30 @@
 import { Link } from "react-router-dom";
 
-import { useAtom } from "jotai"
-import { pageAtom } from "../../../jotai/atoms";
+import { useSetAtom } from "jotai"
+import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms";
 
 
 export default ()=>{
-    const [, setPageId] = useAtom(pageAtom)
+    const setUserName = useSetAtom(userNameAtom)
+    const setUserId = useSetAtom(userIdAtom)
+    const setIsDoctor = useSetAtom(isDoctorAtom)
+    const setPageId = useSetAtom(pageAtom)
 
     return(
         <>
             <div className="headFlex">
                 <h1 className="inlineBlock noMargin">Hoşgeldin, <div className="gradient-text">Lorem Ipsum!</div></h1>
-                <Link to="/"><button className="logoutBtn">Çıkış Yap</button></Link>
+                <Link
+                 onClick={() => {
+                    setIsDoctor(null)
+                    setUserId("")
+                    setUserName("")
+                 }} 
+                 to="/"
+                 className="logoutBtn"
+                 >
+                    Çıkış Yap
+                </Link>
             </div>
             
             

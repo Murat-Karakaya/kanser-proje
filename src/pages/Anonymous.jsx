@@ -1,8 +1,8 @@
 import Nav from "../components/nav/nav"
 import PageContainer from "../components/pageContainer/pageContainer"
 
-import { useAtom } from "jotai"
-import { darkModeAtom, pageAtom, userInfoAtom } from "../jotai/atoms"
+import { useAtom, useSetAtom } from "jotai"
+import { darkModeAtom, pageAtom } from "../jotai/atoms"
 
 import HomePage from "../components/pageContents/anonymousContents/HomePage"
 import GirisYap from "../components/pageContents/anonymousContents/GirisYap"
@@ -10,11 +10,10 @@ import HesapAc from "../components/pageContents/anonymousContents/HesapAc"
 import { useEffect } from "react"
 
 export default () => {
-    const [userInfo] = useAtom(userInfoAtom)
-    const [, setPage] = useAtom(pageAtom)
+    const setPage = useSetAtom(pageAtom)
     const [isDarkMode] = useAtom(darkModeAtom)
 
-    useEffect(() => setPage(0), [userInfo])
+    useEffect(() => setPage(0), [])
 
     return (
         <>
