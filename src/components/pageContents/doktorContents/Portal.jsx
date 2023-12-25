@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 
 import { useSetAtom } from "jotai"
-import { pageAtom } from "../../../jotai/atoms";
+import { pageAtom, userNameAtom } from "../../../jotai/atoms";
 
 
 export default ()=>{
     const setPageId = useSetAtom(pageAtom)
+    const [name] = useSetAtom(userNameAtom)
 
     return(
         <>
             <div className="headFlex">
-                <h1 className="inlineBlock noMargin">Hoşgeldin, <div className="gradient-text">Lorem Ipsum!</div></h1>
+                <h1 className="inlineBlock noMargin">Hoşgeldin, <div className="gradient-text">{name}!</div></h1>
                 <Link to="/" className="logoutBtn">Çıkış Yap</Link>
             </div>
             

@@ -4,12 +4,13 @@ import "./HesapAc&GirisYap.css"
 import { useNavigate } from "react-router-dom"
 
 import { useAtom, useSetAtom } from "jotai"
-import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms"
+import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom , userEmailAtom} from "../../../jotai/atoms"
 
 export default () => {
     const [isDoctor, setIsDoctor] = useAtom(isDoctorAtom)
     const setUserName = useSetAtom(userNameAtom)
     const setUserId = useSetAtom(userIdAtom)
+    const setUserEmail = useSetAtom(userEmailAtom)
 
     const setPage = useSetAtom(pageAtom)
 
@@ -48,6 +49,7 @@ export default () => {
                 setInformation("")
                 setUserId(data.id)
                 setUserName(data.name)
+                setUserEmail(data.email)
                 setIsDoctor(data.isdoctor)
                 setPage(0)
                 return

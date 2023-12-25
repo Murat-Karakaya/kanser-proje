@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms";
+import { isDoctorAtom, pageAtom, userIdAtom, userEmailAtom, userNameAtom } from "../../../jotai/atoms";
 
 export default () => {
     const setPage = useSetAtom(pageAtom)
@@ -9,6 +9,7 @@ export default () => {
 
     const setUserName = useSetAtom(userNameAtom)
     const setUserId = useSetAtom(userIdAtom)
+    const setUserEmail = useSetAtom(userEmailAtom)
     const [isDoctor, setIsDoctor] = useAtom(isDoctorAtom)
 
     const [credentials, setCredentials] = useState({email: "",  password: ""})
@@ -38,6 +39,7 @@ export default () => {
                 setLoading(false)
                 setInformation("")
                 setUserId(data.id)
+                setUserEmail(data.email)
                 setUserName(data.name)
                 setIsDoctor(data.isdoctor)
                 setPage(0)

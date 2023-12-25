@@ -1,18 +1,20 @@
 import "./Anonymous.css"
 import { useSetAtom } from "jotai"
-import { isDoctorAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms"
+import { isDoctorAtom, userEmailAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms"
 import { useEffect } from "react"
 
 export default () => {
     const setPageId = useSetAtom(pageAtom)
     const setUserName = useSetAtom(userNameAtom)
     const setUserId = useSetAtom(userIdAtom)
+    const setUserEmail = useSetAtom(userEmailAtom)
     const setIsDoctor = useSetAtom(isDoctorAtom)
 
     useEffect(() => {
         setIsDoctor(null)
         setPageId(0)
         setUserId("")
+        setUserEmail("")
         setUserName("")
     },[])
     
