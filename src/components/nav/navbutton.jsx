@@ -7,7 +7,7 @@ const Navbutton=({children, id})=>{
         switchPage(id)
     }
     return(
-        <button onClick={whenclicked} id={pageId==id ? "place":""} className="link">
+        <button onClick={whenclicked} tabIndex={pageId===id ? -1 : 0} id={pageId==id ? "place":""} className="link">
             {children}
         </button>
     )

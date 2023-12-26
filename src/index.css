@@ -6,13 +6,8 @@ body,html{
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
-	--default-color: rgb(19, 19, 19);
-	--default-block-background: white;
-	/* --nav-backround: linear-gradient(to right,#5874ff, #cc65ff); */
 	--nav-backround: linear-gradient(to right,#58a0ff, #4952ff);
 	--card-backround: linear-gradient(120deg, #006effd1, #0091ffa7, #006effc7);
-	--custom-blue: rgb(29, 153, 255);
-	--page-line: black;
 	--nav-button-color: linear-gradient(to right,#00ffc4, #03cefc);
 }
 

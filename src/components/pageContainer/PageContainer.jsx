@@ -17,9 +17,9 @@ const PageContainer=({children})=>{
 
         const setAriaHiddenDescendents = (parent, value) => {
             for (const element of parent) {
-                let focusables = element.querySelectorAll('button, input, select, textarea, a, [tabindex]:not([tabindex="-1"])')
+                let focusables = element.querySelectorAll('button, input, select, textarea, a' /* [tabindex]:not([tabindex="-1"]) */)
                 for (const el of focusables) {
-                    el.setAttribute('tabindex', value)       
+                    el.setAttribute('tabindex', value)
                 }
             }
         }
