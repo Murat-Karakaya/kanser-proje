@@ -29,7 +29,7 @@ export default ({buttonValues}) => { // buttonValues is an array, for example: [
                 {
                     buttonValues.map((value, i)=> <Navbutton key={value} id={i} >{value}</Navbutton>)
                 }
-                <ColorSchemeButton className="end"/>
+                <ColorSchemeButton className="end" />
             </nav>
         </>
     )
