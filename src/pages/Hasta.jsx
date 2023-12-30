@@ -1,6 +1,7 @@
 import Nav from "../components/nav/nav"
 import PageContainer from "../components/pageContainer/pageContainer"
 
+import Doktorlarim from "../components/pageContents/hastaContents/Doktorlarim"
 import Portal from "../components/pageContents/hastaContents/Portal"
 import Sonuclarim from "../components/pageContents/hastaContents/Sonuclarim"
 import Form from "../components/pageContents/hastaContents/Form"
@@ -20,9 +21,10 @@ export default () => {
     
     return (
         <>
-        <Nav buttonValues={["Portal", "Sonuçlarım", "Form Doldur"]}/>
+        <Nav buttonValues={["Portal", "Doktorlarım", "Sonuçlarım", "Form Doldur"]}/>
         <PageContainer>
             <Portal/>
+            <Doktorlarim />
             <Sonuclarim/>
             <Form />
         </PageContainer>

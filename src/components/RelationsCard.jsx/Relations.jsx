@@ -34,12 +34,13 @@ export default ({email, isAccepted, toggleRelation}) => {
         {
         isAccepted ?
             (<>
-            <p>{email}</p>
+            <p>Doktorunuzun bildikleri:</p>
+            <button onClick={() => toggleRelation(email, true)} className="relations-button">İlişkiyi Kes</button>
             </>)
-            : 
+            :
             (<>
             <p>Doktor {email}'un cevabı bekleniyor...</p>
-            <button className="relations-button">İsteğimi Kaldır</button>   
+            <button onClick={() => toggleRelation(email, true)} className="relations-button">İsteğimi Kaldır</button>   
             </>)
         }
     </div>

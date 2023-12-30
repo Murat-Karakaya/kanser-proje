@@ -15,8 +15,7 @@ export default ()=>{
             body: JSON.stringify({doctorid: userId, patientemail, isReject})
         })
         const data = await response.json()
-        console.log(data)
-        if (typeof(data)) setRelations(data)
+        if (typeof(data) === "object") setRelations(data)
     }
     return(
     <>
