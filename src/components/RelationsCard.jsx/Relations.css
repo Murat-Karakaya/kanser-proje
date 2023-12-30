@@ -1,0 +1,21 @@
+.relationsCard {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    display: grid;
+    justify-items: center;
+    background-color: var(--custom-blue);
+    width: clamp(150px, 50%, 400px);
+}
+
+.relations-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--default-block-background);
+	transition: color .2s, background-color .2s;
+}
+
+.relations-button:hover {
+    background-color: var(--default-color);
+    color: var(--default-block-background);
+}

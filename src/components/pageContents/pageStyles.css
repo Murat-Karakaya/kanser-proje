@@ -22,6 +22,12 @@ button:not([tabindex="-1"]):focus, input:not([tabindex="-1"]):focus, select:not(
 	padding: 1rem;
 }
 
+.justify-evenly {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
 h1, h1 > *{
 	font-family: 'Nunito', sans-serif;
 	font-size: 2.5rem;
@@ -211,3 +217,5 @@ label {
 	width: fit-content;
 	padding: 5px;
 }
+
+/* Hastalarim & Doktorlarim Styles */

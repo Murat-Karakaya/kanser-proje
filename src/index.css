@@ -7,7 +7,7 @@ body,html{
 	flex-direction: column;
 	height: 100vh;
 	--nav-backround: linear-gradient(to right,#58a0ff, #4952ff);
-	--card-backround: linear-gradient(120deg, #006effd1, #0091ffa7, #006effc7);
+	--card-backround: linear-gradient(120deg, #006effd1, #0040ff89, #006effc7);
 	--nav-button-color: linear-gradient(to right,#00ffc4, #03cefc);
 }
 
@@ -31,10 +31,24 @@ body,html{
 	margin: 0;
 }
 
+.no-background {
+	background: none;
+}
+
+.parent-width {
+	width: 100%;
+}
+
 :focus-visible{
 	outline: -webkit-focus-ring-color auto 1px;
 	outline: -moz-mac-focusring auto 1px;
 	outline: -ms-focusring auto 1px;
+}
+
+p {
+	overflow: hidden;
+ 	white-space: wrap;
+	text-overflow: wrap;
 }
 
 select {

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-import { useSetAtom } from "jotai"
+import { useSetAtom, useAtomValue } from "jotai"
 import { pageAtom, userNameAtom } from "../../../jotai/atoms";
 
 
 export default ()=>{
     const setPageId = useSetAtom(pageAtom)
-    const [name] = useSetAtom(userNameAtom)
+    const name = useAtomValue(userNameAtom)
 
     return(
         <>

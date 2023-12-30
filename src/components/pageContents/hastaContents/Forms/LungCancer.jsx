@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import BreastCancerInfo from "./BreastCancerInfo"
+import LungCancerInfo from "./LungCancerInfo"
 
 export default ()=>{
     const [copd, setCOPD] = useState("")
@@ -158,7 +158,7 @@ export default ()=>{
 
                 <button onClick={getResults} className="form-submit">Devam</button>
                 
-                <BreastCancerInfo message={message}/>
+                <LungCancerInfo message={message}/>
             </fieldset>
         </>
     )
