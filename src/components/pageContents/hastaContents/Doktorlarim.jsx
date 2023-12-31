@@ -1,17 +1,19 @@
 import { useAtom, useAtomValue } from "jotai"
-import { patientDoctorRelations, userIdAtom } from "../../../jotai/atoms"
+import { patentInfosAtom, patientDoctorRelations, userIdAtom } from "../../../jotai/atoms"
 import Relations from "../../RelationsCard.jsx/Relations"
 import { useState } from "react"
 
 export default ()=>{
     const [relations, setRelations] = useAtom(patientDoctorRelations)
     const userId = useAtomValue(userIdAtom)
-    const [message, setMessage] = useState("Hellooooo")
+    const patientInfos = useAtomValue(patentInfosAtom)
+    const [message, setMessage] = useState("")
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState("")
 
     const requestToDoctor = async (doctoremail) => {
         if (!doctoremail.includes("@")) return setMessage("Geçerli email doldurunuz")
+        setInputValue("")
 
         const response = await fetch("http://localhost:1234/requestToDoctor", {
             method: "post",
@@ -36,11 +38,27 @@ export default ()=>{
             body: JSON.stringify({patientid: userId, doctoremail, isReject})
         })
         const data = await response.json()
-        if (typeof(data) === "object") setRelations(data)
+        
+        if (typeof(data) === "object") {
+            const newRelations = relations.filter(el => el.doctoremail !== doctoremail)
+            setRelations(newRelations)
+            return;
+        }
     }
     return(
     <>
         <h1>Doktorlarım</h1>
+        {
+            patientInfos[0]?.info &&
+            <>
+                <p>Doktorların kaydedilmiş form sonuçlarına ulaşabilir. Aşağıda kaydedilmiş form sonuçları verilmiştir.</p>
+                <ul>{
+                    patientInfos[0].info?.map(el => <li key={el} >{el}</li>)
+                }</ul>
+            </>
+        }
+        
+        
         <div className="justify-evenly">
             {relations.map(
                 obj => <Relations

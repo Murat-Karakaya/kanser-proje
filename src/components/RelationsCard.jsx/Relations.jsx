@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai"
 import { isDoctorAtom } from "../../jotai/atoms"
 import "./Relations.css"
 
-export default ({email, isAccepted, toggleRelation}) => {
+export default ({email, info, isAccepted, toggleRelation}) => {
     const isDoctor = useAtomValue(isDoctorAtom)
 
     if (isDoctor) {
@@ -12,7 +12,9 @@ export default ({email, isAccepted, toggleRelation}) => {
             {
             isAccepted ?
              (<>
-             <p>Hasta hakkında ek bilgi yok</p>
+             {
+                info.map(el => <p key={el}>{el}</p>)
+             }
              <button onClick={() => toggleRelation(email, true)} className="relations-button">İlşkiyi Kes</button>
              </>)
                 : 
@@ -22,7 +24,6 @@ export default ({email, isAccepted, toggleRelation}) => {
                 <button onClick={() => toggleRelation(email, false)} className="relations-button">Kabul Et</button>
                 <button onClick={() => toggleRelation(email, true)} className="relations-button">Reddet</button>
              </div>
-             
              </>)
             }
         </div>
@@ -33,10 +34,7 @@ export default ({email, isAccepted, toggleRelation}) => {
         <p>{email}</p>
         {
         isAccepted ?
-            (<>
-            <p>Doktorunuzun bildikleri:</p>
             <button onClick={() => toggleRelation(email, true)} className="relations-button">İlişkiyi Kes</button>
-            </>)
             :
             (<>
             <p>Doktor {email}'un cevabı bekleniyor...</p>

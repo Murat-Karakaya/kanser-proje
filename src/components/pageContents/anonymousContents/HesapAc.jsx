@@ -27,13 +27,13 @@ export default () => {
 
     const setUser = async ({name, email, password, isdoctor}) => {
         if (!name || !email || !password || (isdoctor !== "false" && isdoctor !== "true")) {
-            setInformation("Kullanıcı adı, email, şifre ve kullanıcı tipi zorunludur. " + isdoctor)
-            return
+            return setInformation("Kullanıcı adı, email, şifre ve kullanıcı tipi zorunludur.")
         }
-        if (name.length > 30) {
-            setInformation("Kullanıcı adınızı 30 karakterden kısa tutunuz.")
-            return
-        }
+
+        if (!email.includes("@")) return setInformation("Geçerli email kullanınız.")
+
+        if (name.length > 30) return setInformation("Kullanıcı adınızı 30 karakterden kısa tutunuz.")
+
         setLoading(true)
         setInformation("Yükleniyor, lütfen bekleyiniz...")
 

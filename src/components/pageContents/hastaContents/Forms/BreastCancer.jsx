@@ -10,7 +10,7 @@ export default ()=>{
     const [relativesNumber, setRelativesNumber] = useState("")
     const [ethnicities, setEthnicities] = useState("")
     
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState(1.8)
 
     const isWholeNumberKey = (evt) => {
         const charCode = (evt.which) ? evt.which : evt.keyCode
@@ -31,23 +31,20 @@ export default ()=>{
             const headers = {
                 "Content-Type": "application/json"
             }
-            const body = {
+            const body = JSON.stringify({
                 numRelative: relativesNumber,
                 firstLiveBirth: firstBirthAge,
                 menarcheAge: ageMenarche,
                 numBiopsy: biopsyNumber,
                 age: age,
                 race: ethnicities,
-            }
+            })
 
             try { // fetch logic
                 const response = await fetch("http://localhost:80/", {method, headers, body})
                 const data = await response.json()
                 console.log(data)
-                if (Number(data.risk) > 1.7) {// Riskin "risk" kısmında yazacağını varsaydım
-                    return setMessage("malign")
-                }
-                return setMessage("benign")
+                return setMessage(data.risk) // Riskin "risk" kısmında yazacağını varsaydım
             } catch (error) {
                 console.error(error)
                 return setMessage("error")  

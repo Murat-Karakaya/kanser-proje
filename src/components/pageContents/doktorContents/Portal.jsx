@@ -20,7 +20,7 @@ export default ()=>{
                     <h3>Hastalarım</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>
-                <button onClick={() => setPageId(2)} style={{"--order":"3"}} className="card" >
+                <button onClick={() => setPageId(2)} style={{"--order":"1"}} className="card" >
                     <h3>Kanser Teşhis Uygulamaları</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
                 </button>

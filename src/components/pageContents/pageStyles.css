@@ -10,6 +10,10 @@ button:not([tabindex="-1"]):focus, input:not([tabindex="-1"]):focus, select:not(
 	outline: 3px solid var(--page-line);
 }
 
+[aria-hidden="true"] {
+	overflow: hidden;
+}
+
 /*Page Basic Styles*/
 .page{
 	background: none;

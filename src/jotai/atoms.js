@@ -7,6 +7,7 @@ const userIdAtom = atom("")
 const userEmailAtom = atom("")
 const isDoctorAtom = atom(null)
 const patientDoctorRelations = atom([])
+const patentInfosAtom = atom([])
 
 export {
     pageAtom,
@@ -16,4 +17,5 @@ export {
     userIdAtom, 
     isDoctorAtom,
     patientDoctorRelations,
+    patentInfosAtom,
 };
