@@ -4,7 +4,7 @@ import LungCancerInfo from "./LungCancerInfo"
 
 export default ()=>{
     const [copd, setCOPD] = useState("")
-    const [bmi, setBMI] = useState("")
+    const [bmi, setBMI] = useState("") 
     const [education, setEducation] = useState("")
     const [smoking_quit_time, set_smoking_quit_time] = useState("")
     const [smoking_status, set_smoking_status] = useState("")
@@ -12,11 +12,31 @@ export default ()=>{
     const [duration_smoking, set_duration_smoking] = useState("")
     const [family_hist_lung_cancer, set_family_hist_lung_cancer] = useState("")
     const [cancer_hist, set_cancer_hist] = useState("")
-    const [relativesNumber, setRelativesNumber] = useState("")
     const [race, setRace] = useState("")
     const [age, setAge] = useState("")
     
     const [message, setMessage] = useState("")
+
+    const isNumberKey = (evt) => {
+        const charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode < 31) return;
+
+        // Sorry! This part of the code is a mess :(
+        if (
+            (
+                (charCode < 48 || charCode > 57)
+                 &&
+                charCode !== 190
+            )
+             || 
+            (
+                charCode === 190
+                 && 
+                (evt.target.value.length === 0 || evt.target.value.includes('.'))
+            )
+        ) return evt.preventDefault();
+        return;
+    }
 
     const isWholeNumberKey = (evt) => {
         const charCode = (evt.which) ? evt.which : evt.keyCode
@@ -28,43 +48,54 @@ export default ()=>{
     }
 
     const getResults = async () => {
-        if (Number(age) < Number(ageMenarche)) return setMessage("age < ageMenarche")
-        if (Number(age) < Number(firstBirthAge)) return setMessage("age < firstBirthAge")
-
-        if (relativesNumber && biopsyNumber && firstBirthAge && ageMenarche && age) {
+        if (age < ageMenarche || age < duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
+        if (
+            !age || 
+            !race || 
+            !education || 
+            !bmi || 
+            !copd || 
+            !cancer_hist || 
+            !family_hist_lung_cancer || 
+            !smoking_status || 
+            !smoking_intensity ||
+            !duration_smoking ||
+            !smoking_quit_time
+        ) return setMessage("empty form")
             
-            const method = "POST"
-            const headers = {
-                "Content-Type": "application/json"
-            }
-            const body = {
-                age,
-                race,
-                education,
-                bmi,
-                copd,
-                cancer_hist,
-                family_hist_lung_cancer,
-                smoking_status,
-                smoking_intensity,
-                duration_smoking,
-                smoking_quit_time,
-            }
-
-            try { // fetch logic
-                const response = await fetch("http://localhost:80/", {method, headers, body})
-                const data = await response.json()
-                console.log(data)
-                if (Number(data.risk) > 1.7) {// Riskin "risk" kısmında yazacağını varsaydım
-                    return setMessage("malign")
-                }
-                return setMessage("benign")
-            } catch (error) {
-                console.error(error)
-                return setMessage("error")  
-            }
+        const method = "POST"
+        const headers = {
+            "Content-Type": "application/json"
         }
-        return setMessage("empty form")
+        const body = JSON.stringify({
+            age,
+            race,
+            education,
+            bmi,
+            copd,
+            cancer_hist,
+            family_hist_lung_cancer,
+            smoking_status,
+            smoking_intensity,
+            duration_smoking,
+            smoking_quit_time,
+        })
+
+        try { // fetch logic
+            const response = await fetch("http://localhost:80/", {method, headers, body})
+            const data = await response.json()
+            console.log(data)
+            
+            if (response.status >= 400) return setMessage("error")
+
+            if (Number(data.risk) > 1.7) {// Riskin "risk" kısmında yazacağını varsaydım
+                return setMessage("malign")
+            }
+            return setMessage("benign")
+        } catch (error) {
+            console.error(error)
+            return setMessage("error")  
+        }
     }
 
     return(
@@ -79,29 +110,30 @@ export default ()=>{
                  id="age-input2"
                  type="text" 
                  onKeyDown={isWholeNumberKey}
-                 onChange={evt => setAge(evt.target.value)} 
+                 onChange={evt => setAge(parseInt(evt.target.value))} 
                  value={age} 
                 />
 
                 <label htmlFor="family_hist_lung_cancer">Ailede akciğer kanseri geçmişi:</label>
-                <select className="form-input" id="family_hist_lung_cancer" onChange={event => set_family_hist_lung_cancer(event.target.value)}>
+                <select className="form-input" id="family_hist_lung_cancer" onChange={event => set_family_hist_lung_cancer(parseInt(event.target.value))}>
                     <option value={0}>Yok</option>
                     <option value={1}>Var</option>
                 </select>
 
                 <label htmlFor="cancer_hist">Kişide akciğer kanseri geçmişi:</label>
-                <select className="form-input" id="cancer_hist" onChange={event => set_cancer_hist(event.target.value)}>
+                <select className="form-input" id="cancer_hist" onChange={event => set_cancer_hist(parseInt(event.target.value))}>
                     <option value={0}>Yok</option>
                     <option value={1}>Var</option>
                 </select>
 
                 <label htmlFor="education-input">Eğitim durumu:</label>
-                <select className="form-input" id="education-input" onChange={event => setEducation(event.target.value)}>
-                    <option value={1}>Okuryazar değil</option>
-                    <option value={2}>Okuryazar/İlkokul</option>
-                    <option value={3}>Ortaokul/Lise</option>
-                    <option value={4}>Yüksekokul/Fakülte</option>
-                    <option value={5}>Lisansüstü</option>
+                <select className="form-input" id="education-input" onChange={event => setEducation(parseInt(event.target.value))}>
+                    <option value={1}>Lise mezunu değil</option>
+                    <option value={2}>Lise mezunu</option>
+                    <option value={3}>Lise sonrası biraz eğitim</option>
+                    <option value={4}>Biraz yüksekokul eğitim</option>
+                    <option value={5}>Yüksekokul mezunu</option>
+                    <option value={6}>Lisansüstü derece</option>
                 </select>
 
                 <label htmlFor="bmi-input">Vücut kitle indeksi:</label>
@@ -109,19 +141,19 @@ export default ()=>{
                  className="form-input"
                  id="bmi-input"
                  type="text"
-                 onKeyDown={isWholeNumberKey}
-                 onChange={evt => setBMI(evt.target.value)}
+                 onKeyDown={isNumberKey}
+                 onChange={evt => setBMI(Number(evt.target.value))}
                  value={bmi}
                 />
 
                 <label htmlFor="copd-input">Kronik obstrüktif akciğer hastalığı:</label>
-                <select className="form-input" id="copd-input" onChange={event => setCOPD(event.target.value)}>
+                <select className="form-input" id="copd-input" onChange={event => setCOPD(parseInt(event.target.value))}>
                     <option value={0}>Yok</option>
                     <option value={1}>Var</option>
                 </select>
 
-                <label htmlFor="copd-input">Sigara içme durumu:</label>
-                <select className="form-input" id="copd-input" onChange={event => setCOPD(event.target.value)}>
+                <label htmlFor="smoking_status_input">Sigara içme durumu:</label>
+                <select className="form-input" id="smoking_status_input" onChange={event => set_smoking_status(parseInt(event.target.value))}>
                     <option value={1}>Sigara içiliyor</option>
                     <option value={0}>Sigara içilmiyor</option>
                 </select>
@@ -132,7 +164,7 @@ export default ()=>{
                  id="smoking_intensity"
                  type="text"
                  onKeyDown={isWholeNumberKey}
-                 onChange={evt => set_smoking_intensity(evt.target.value)}
+                 onChange={evt => set_smoking_intensity(Number(evt.target.value))}
                  value={smoking_intensity}
                 />
 
@@ -155,6 +187,15 @@ export default ()=>{
                  onChange={evt => set_smoking_quit_time(evt.target.value)}
                  value={smoking_quit_time}
                 />
+
+                <label htmlFor="race-input">Etnik köken / Irk:</label>
+                <select className="form-input" id="race-input" onChange={event => setRace(event.target.value)} >
+                    <option value={"white"}>Beyaz</option>                
+                    <option value={"black"}>Siyahi</option>
+                    <option value={"chinese"}>İspanyol</option>
+                    <option value={"japanese"}>Asyalı</option>
+                    <option value={"hawaiian"}>Hawaiili</option>
+                </select>
 
                 <button onClick={getResults} className="form-submit">Devam</button>
                 
