@@ -6,7 +6,7 @@ import { useState } from "react"
 export default ()=>{
     const [relations, setRelations] = useAtom(patientDoctorRelations)
     const userId = useAtomValue(userIdAtom)
-    const patientInfos = useAtomValue(patentInfosAtom)
+    const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
     const [message, setMessage] = useState("")
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState("")
@@ -22,11 +22,26 @@ export default ()=>{
         })
         if (response.status < 400) {
             setShowInput(false)
-            setRelations([...relations, {doctoremail, isaccepted: false}])
+            setRelations(relations.concat({doctoremail, isaccepted: false}))
             return;
         }
         if (response.status < 500) return setMessage("Email bu siteyi kullanan hiçbir doktorla eşleşmedi")
         return setMessage("Bir hata oluştu")
+    }
+
+    const getRelationsAndInfos = async () => {
+        const response = await fetch("http://localhost:1234/getRelationsAndInfos", {
+            method: "post",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({patientid: userId})
+        })
+        if (response.status < 400) {
+            const {relations, patientinfos} = await response.json()
+            setPatientInfos(patientinfos)
+            setRelations(relations)
+            return;
+        }
+        return alert("Bir hata oluştu")
     }
 
     const toggleRelation = async (doctoremail, isReject) => {
@@ -37,28 +52,28 @@ export default ()=>{
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({patientid: userId, doctoremail, isReject})
         })
-        const data = await response.json()
-        
-        if (typeof(data) === "object") {
-            const newRelations = relations.filter(el => el.doctoremail !== doctoremail)
-            setRelations(newRelations)
-            return;
-        }
+
+        if(response.status >= 400) return;
+        const newRelations = relations.filter(el => el.doctoremail !== doctoremail)
+        setRelations(newRelations)
+        return;
     }
     return(
     <>
         <h1>Doktorlarım</h1>
         {
-            patientInfos[0]?.info &&
+            patientInfos[0] &&
             <>
                 <p>Doktorların kaydedilmiş form sonuçlarına ulaşabilir. Aşağıda kaydedilmiş form sonuçları verilmiştir.</p>
                 <ul>{
-                    patientInfos[0].info?.map(el => <li key={el} >{el}</li>)
+                    patientInfos.map(el => <li key={el} >{el}</li>)
                 }</ul>
             </>
         }
         
-        
+        <button onClick={getRelationsAndInfos} className="relations-button">
+            Sayfayı Yenile
+        </button>
         <div className="justify-evenly">
             {relations.map(
                 obj => <Relations

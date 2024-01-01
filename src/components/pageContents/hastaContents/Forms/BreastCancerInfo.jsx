@@ -15,7 +15,7 @@ export default ({message}) => {
             body: JSON.stringify({patientid, newInfo})
         })
         if (data.status < 400){
-            setPatientInfos([...patientInfos, {info: newInfo}])
+            setPatientInfos(patientInfos.concat(newInfo))
             setInfo("Bilgi başarıyla iletilmiştir.")
             return;
         }
@@ -35,7 +35,7 @@ export default ({message}) => {
             <button
              onClick={() => /* !info */true && addFormInfo(`Meme kanseri riski ${message} olarak tahmin edilmiştir.`)} 
              className="form-submit"
-            >Doktora Bildir</button>
+            >Sonuçları Kaydet</button>
             </div>
             {info && <p>{info}</p>}
         </div>
@@ -52,7 +52,7 @@ export default ({message}) => {
         <button
          onClick={() => /* !info */ true && addFormInfo(`Meme kanseri riski ${message} olarak tahmin edilmiştir.`)} 
          className="form-submit"
-        >Doktora Bildir</button>
+        >Sonuçları Kaydet</button>
         </div>
         {info && <p>{info}</p>}
         </div>

@@ -38,7 +38,6 @@ export default () => {
             const data = await response.json()
 
             if (data.id) {
-                data.patientinfos.forEach((el, i)=> data.patientinfos[i].info = JSON.parse(el.info))
                 setLoading(false)
                 setInformation("")
                 setUserId(data.id)

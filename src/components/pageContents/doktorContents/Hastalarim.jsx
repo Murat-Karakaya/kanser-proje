@@ -4,7 +4,7 @@ import Relations from "../../RelationsCard.jsx/Relations"
 
 export default ()=>{
     const [relations, setRelations] = useAtom(patientDoctorRelations)
-    const patientInfos = useAtomValue(patentInfosAtom)
+    const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
     const userId = useAtomValue(userIdAtom)
 
     const findPatientInfos = email => {
@@ -12,6 +12,7 @@ export default ()=>{
             if (obj.patientemail === email) return obj.info
         }
     }
+
     const toggleRelation = async (patientemail, isReject) => {
         if (!patientemail) return;
 
@@ -20,27 +21,41 @@ export default ()=>{
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({doctorid: userId, patientemail, isReject})
         })
-        const data = await response.json()
 
-        if (isReject && typeof(data) === "object") {
+        if(response.status >= 400) return;
+
+        if (isReject) {
             const newRelations = relations.filter(el => el.patientemail !== patientemail)
-            setRelations(newRelations)
-            return;
+            return setRelations(newRelations)
         }
-        if (!isReject && typeof(data) === "object") {
-            const newRelations = relations.map(el => {
-                if (el.patientemail === patientemail) {
-                    el.isaccepted = true
-                }
-                return el
-            })
-            setRelations(newRelations)
-            return;
-        }
+        const newRelations = relations.map(el => {
+            if (el.patientemail === patientemail) el.isaccepted = true
+            return el
+        })
+        return setRelations(newRelations)
     }
+
+    const getRelationsAndInfos = async () => {
+        const response = await fetch("http://localhost:1234/getRelationsAndInfos", {
+            method: "post",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({doctorid: userId})
+        })
+        if (response.status < 400) {
+            const {relations, patientinfos} = await response.json()
+            setPatientInfos(patientinfos)
+            setRelations(relations)
+            return;
+        }
+        return alert("Bir hata oluştu")
+    }
+
     return(
     <>
         <h1>Hastalarım</h1>
+        <button onClick={getRelationsAndInfos} className="relations-button">
+            Sayfayı Yenile
+        </button>
         <div className="justify-evenly">
             {relations.map(
                 obj => <Relations
