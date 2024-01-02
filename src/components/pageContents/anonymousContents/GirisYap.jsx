@@ -34,27 +34,41 @@ export default () => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({email, password})
             })
+            const {
+                patientinfos, 
+                isdoctor, 
+                relations, 
+                name, 
+                id,
+                // I don't destructure the email because it is allready provided by the user
+            } = await response.json()
 
-            const data = await response.json()
-
-            if (data.id) {
-                setLoading(false)
-                setInformation("")
-                setUserId(data.id)
-                setUserEmail(data.email)
-                setUserName(data.name)
-                setPatientDoctorRelations(data.relations)
-                setPatientInfos(data.patientinfos)
-                setIsDoctor(data.isdoctor)
-                setPage(0)
+            if (response.status >= 500) {
+                setLoading(false);
+                setInformation("Bir sorun oluştu.")
                 return;
             }
-            setLoading(false);
-            setInformation("Yanlış email veya şifre.")
+            if (response.status >= 400) {
+                setLoading(false);
+                setInformation("Yanlış email veya şifre.") 
+                return;
+            }
+
+            setLoading(false)
+            setInformation("")
+            setUserId(id)
+            setUserEmail(email)
+            setUserName(name)
+            setPatientDoctorRelations(relations)
+            setPatientInfos(patientinfos)
+            setIsDoctor(isdoctor)
+            setPage(0)
+            return
         } catch (error) {
             console.log(error)
             setLoading(false);
-            setInformation("Yanlış email veya şifre.")
+            setInformation("Bir sorun oluştu.")
+            return
         }
     }
 
@@ -84,7 +98,7 @@ export default () => {
              className="form-submit"
             >Giriş Yap</button>
 
-            <div style={{display: loading ? "flex" : "none"}} className="span-entire-row flex-centered">
+            <div style={{display: information ? "flex" : "none"}} className="span-entire-row flex-centered">
                 <div style={{display: loading ? "block" : "none"}} className="loading-blue"></div>
                 <p className="form-information">{information}</p>
             </div>

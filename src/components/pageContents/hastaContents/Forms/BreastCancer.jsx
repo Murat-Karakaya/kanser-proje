@@ -3,14 +3,14 @@ import { useState } from "react"
 import BreastCancerInfo from "./BreastCancerInfo"
 
 export default ()=>{
-    const [age, setAge] = useState("")
-    const [ageMenarche, setAgeMenarche] = useState("")
-    const [firstBirthAge, setFirtBirthAge] = useState("")
-    const [biopsyNumber, setBiopsyNumber] = useState("")
-    const [relativesNumber, setRelativesNumber] = useState("")
+    const [age, setAge] = useState(0)
+    const [ageMenarche, setAgeMenarche] = useState(0)
+    const [firstBirthAge, setFirtBirthAge] = useState(0)
+    const [biopsyNumber, setBiopsyNumber] = useState(0)
+    const [relativesNumber, setRelativesNumber] = useState(0)
     const [ethnicities, setEthnicities] = useState("")
     
-    const [message, setMessage] = useState(1.8)
+    const [message, setMessage] = useState("")
 
     const isWholeNumberKey = (evt) => {
         const charCode = (evt.which) ? evt.which : evt.keyCode
@@ -22,35 +22,33 @@ export default ()=>{
     }
 
     const getResults = async () => {
-        if (Number(age) < Number(ageMenarche)) return setMessage("age < ageMenarche")
-        if (Number(age) < Number(firstBirthAge)) return setMessage("age < firstBirthAge")
+        if (age < ageMenarche) return setMessage("age < ageMenarche")
+        if (age < firstBirthAge) return setMessage("age < firstBirthAge")
 
-        if (relativesNumber && biopsyNumber && firstBirthAge && ageMenarche && age) {
-            
-            const method = "POST"
-            const headers = {
-                "Content-Type": "application/json"
-            }
-            const body = JSON.stringify({
-                numRelative: relativesNumber,
-                firstLiveBirth: firstBirthAge,
-                menarcheAge: ageMenarche,
-                numBiopsy: biopsyNumber,
-                age: age,
-                race: ethnicities,
-            })
-
-            try { // fetch logic
-                const response = await fetch("http://localhost:80/", {method, headers, body})
-                const data = await response.json()
-                console.log(data)
-                return setMessage(data.risk) // Riskin "risk" kısmında yazacağını varsaydım
-            } catch (error) {
-                console.error(error)
-                return setMessage("error")  
-            }
+        if (!ageMenarche || !age || !ethnicities) return setMessage("empty form")
+        
+        /* const method = "POST"
+        const headers = {
+            "Content-Type": "application/json"
         }
-        return setMessage("empty form")
+        const body = JSON.stringify({
+            numRelative: relativesNumber,
+            firstLiveBirth: firstBirthAge,
+            menarcheAge: ageMenarche,
+            numBiopsy: biopsyNumber,
+            age: age,
+            race: ethnicities,
+        })
+
+        try { // fetch logic
+            const response = await fetch("http://localhost:80/", {method, headers, body})
+            const data = await response.json()
+            console.log(data)
+            return setMessage(data.risk) // Riskin "risk" kısmında yazacağını varsaydım
+        } catch (error) {
+            console.error(error)
+            return setMessage("error")  
+        } */
     }
 
     return(
@@ -64,7 +62,7 @@ export default ()=>{
                  id="age-input" 
                  type="text" 
                  onKeyDown={isWholeNumberKey}
-                 onChange={(evt) => setAge(evt.target.value)} 
+                 onChange={(evt) => setAge(+evt.target.value)} 
                  value={age} 
                 />
 
@@ -74,7 +72,7 @@ export default ()=>{
                  id="menarche-age" 
                  type="text" 
                  onKeyDown={isWholeNumberKey}
-                 onChange={(evt) => setAgeMenarche(evt.target.value)} 
+                 onChange={(evt) => setAgeMenarche(+evt.target.value)} 
                  value={ageMenarche} 
                 />
 
@@ -84,7 +82,7 @@ export default ()=>{
                  id="first-birth-age" 
                  type="text" 
                  onKeyDown={isWholeNumberKey}
-                 onChange={(evt) => setFirtBirthAge(evt.target.value)} 
+                 onChange={(evt) => setFirtBirthAge(+evt.target.value)} 
                  value={firstBirthAge} 
                 />
 
@@ -94,7 +92,7 @@ export default ()=>{
                  id="biopsy-input" 
                  type="text" 
                  onKeyDown={isWholeNumberKey}
-                 onChange={(evt) => setBiopsyNumber(evt.target.value)} 
+                 onChange={(evt) => setBiopsyNumber(+evt.target.value)} 
                  value={biopsyNumber} 
                 />
 
@@ -104,12 +102,13 @@ export default ()=>{
                  id="first-degree-relatives" 
                  type="text" 
                  onKeyDown={isWholeNumberKey}
-                 onChange={(evt) => setRelativesNumber(evt.target.value)} 
+                 onChange={(evt) => setRelativesNumber(+evt.target.value)} 
                  value={relativesNumber}
                 />
 
                 <label htmlFor="ethnicities-input">Etnik köken / Irk:</label>
                 <select className="form-input" id="ethnicities-input" onChange={event => setEthnicities(event.target.value)} >
+                    <option hidden defaultValue={null}></option>
                     <option value={"white"}>Beyaz</option>                    
                     <option value={"black"}>Siyahi</option>
                     <option value={"chinese"}>Çinli</option>

@@ -27,7 +27,6 @@ export default ()=>{
             <h1>Form Doldurma</h1>
             <button onClick={() => setForm("Breast")}>Göğüs Kanseri</button>
             <button onClick={() => setForm("Lung")}>Akciğer Kanseri</button>
-            <button onClick={() => setForm("Prostate")}>Prostat Kanseri</button>
             <Form />
         </>
     )

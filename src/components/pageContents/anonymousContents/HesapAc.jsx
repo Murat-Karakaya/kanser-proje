@@ -43,19 +43,27 @@ export default () => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({name, email, password, isdoctor: isdoctor === "true" ? true : false})
             })
-            const data = await response.json()
-            if (data.id) {
-                setLoading(false)
-                setInformation("")
-                setUserId(data.id)
-                setUserName(data.name)
-                setUserEmail(data.email)
-                setIsDoctor(data.isdoctor)
-                setPage(0)
-                return
+            const { id } = await response.json() // I only destructured the id because the rest is allready provided by the user
+
+            if (response.status >= 500) {
+                setLoading(false);
+                setInformation("Bir sorun oluştu.")
+                return;
             }
+            if (response.status >= 400) {
+                setLoading(false);
+                setInformation("Yanlış email veya şifre.") 
+                return;   
+            }
+
             setLoading(false)
-            setInformation("O email zaten kullanılıyor.")
+            setInformation("")
+            setUserId(id)
+            setUserEmail(email)
+            setUserName(name)
+            setIsDoctor(isdoctor)
+            setPage(0)
+            return;
         } catch (error) {
             console.error(error)
             setLoading(false)
