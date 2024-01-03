@@ -1,4 +1,5 @@
 import { useState } from "react"
+import breastRiskCalc from "./breastRiskCalc"
 
 import BreastCancerInfo from "./BreastCancerInfo"
 
@@ -27,28 +28,9 @@ export default ()=>{
 
         if (!ageMenarche || !age || !ethnicities) return setMessage("empty form")
         
-        /* const method = "POST"
-        const headers = {
-            "Content-Type": "application/json"
-        }
-        const body = JSON.stringify({
-            numRelative: relativesNumber,
-            firstLiveBirth: firstBirthAge,
-            menarcheAge: ageMenarche,
-            numBiopsy: biopsyNumber,
-            age: age,
-            race: ethnicities,
-        })
-
-        try { // fetch logic
-            const response = await fetch("http://localhost:80/", {method, headers, body})
-            const data = await response.json()
-            console.log(data)
-            return setMessage(data.risk) // Riskin "risk" kısmında yazacağını varsaydım
-        } catch (error) {
-            console.error(error)
-            return setMessage("error")  
-        } */
+        console.log(breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities))
+        console.log(breastRiskCalc(56,65,12,2,23,2,"black"))
+        setMessage(breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities))
     }
 
     return(
