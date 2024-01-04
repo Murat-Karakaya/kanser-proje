@@ -22,15 +22,13 @@ export default ()=>{
         return;
     }
 
-    const getResults = async () => {
+    const getResults = () => {
         if (age < ageMenarche) return setMessage("age < ageMenarche")
         if (age < firstBirthAge) return setMessage("age < firstBirthAge")
 
         if (!ageMenarche || !age || !ethnicities) return setMessage("empty form")
         
-        console.log(breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities))
-        console.log(breastRiskCalc(56,65,12,2,23,2,"black"))
-        setMessage(breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities))
+        return setMessage(breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities).toFixed(2))
     }
 
     return(

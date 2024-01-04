@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import LungCancerInfo from "./LungCancerInfo"
+import lungRiskCalc from "./lungRiskCalc"
 
 export default ()=>{
     const [copd, setCOPD] = useState(null)
@@ -47,7 +48,7 @@ export default ()=>{
         return;
     }
 
-    const getResults = async () => {
+    const getResults = () => {
         if (age < duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
         if (
             !age || 
@@ -59,41 +60,9 @@ export default ()=>{
             family_hist_lung_cancer === null || 
             smoking_status === null
         ) return setMessage("empty form")
-            
-        const method = "POST"
-        const headers = {
-            "Content-Type": "application/json"
-        }
-        
-        const body = JSON.stringify({
-            age,
-            race,
-            education,
-            bmi: +bmi,
-            copd,
-            cancer_hist,
-            family_hist_lung_cancer,
-            smoking_status,
-            smoking_intensity,
-            duration_smoking,
-            smoking_quit_time,
-        })
 
-        try { // fetch logic
-            const response = await fetch("http://localhost:80/", {method, headers, body})
-            const data = await response.json()
-            console.log(data)
-            
-            if (response.status >= 400) return setMessage("error")
-
-            if (Number(data.risk) > 1.7) {// Riskin "risk" kısmında yazacağını varsaydım
-                return setMessage("malign")
-            }
-            return setMessage("benign")
-        } catch (error) {
-            console.error(error)
-            return setMessage("error")  
-        }
+        const risk = lungRiskCalc(age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, smoking_status, smoking_intensity, duration_smoking, smoking_quit_time)
+        return setMessage(risk)
     }
 
     return(
@@ -196,8 +165,8 @@ export default ()=>{
                     <option hidden defaultValue={null}></option>
                     <option value={"white"}>Beyaz</option>                
                     <option value={"black"}>Siyahi</option>
-                    <option value={"chinese"}>İspanyol</option>
-                    <option value={"japanese"}>Asyalı</option>
+                    <option value={"hispanic"}>İspanyol</option>
+                    <option value={"asian"}>Asyalı</option>
                     <option value={"hawaiian"}>Hawaiili</option>
                 </select>
 
