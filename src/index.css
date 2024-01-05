@@ -55,6 +55,18 @@ select {
 	cursor: pointer;
 }
 
+dialog {
+    border-radius: .5rem;
+    border:none;
+    background-color: color-mix(in srgb, #0059ff 50%, var(--default-block-background));
+    width: 400px;
+}
+dialog::backdrop {
+    background:none;
+    backdrop-filter: blur(2.5px);
+    transition: backdrop-filter 1s;
+}
+
 button{
 	all: unset;
 	cursor: pointer;

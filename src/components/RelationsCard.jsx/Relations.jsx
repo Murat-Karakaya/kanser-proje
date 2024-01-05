@@ -1,12 +1,33 @@
 import { useAtomValue } from "jotai"
 import { isDoctorAtom } from "../../jotai/atoms"
+import { useRef, useState } from "react"
+
 import "./Relations.css"
 
 export default ({email, info, isAccepted, toggleRelation}) => {
     const isDoctor = useAtomValue(isDoctorAtom)
-
+    
     if (isDoctor) {
-        return (
+
+        const dialogRef1 = useRef()
+
+
+        return (<>
+        <dialog ref={dialogRef1} onCancel={()=> dialogRef1.current.close()}>
+            <p>{email} emailli hastayla ilişkiyi kesmek istediğinine emin misin? Bu işlem geri alınamaz.</p>
+
+            <div className="parent-width justify-evenly no-background">
+                <button
+                onClick={() => {
+                    toggleRelation(email, true)
+                    dialogRef1.current.close()
+                }}
+                className="relations-button">Evet</button>
+                <button
+                onClick={() => dialogRef1.current.close()}
+                className="relations-button">Hayır</button>    
+            </div>
+        </dialog>
         <div className="relationsCard">
             <p>{email}</p>
             {
@@ -15,7 +36,11 @@ export default ({email, info, isAccepted, toggleRelation}) => {
              {
                 info.map(el => <p key={el}>{el}</p>)
              }
-             <button onClick={() => toggleRelation(email, true)} className="relations-button">İlşkiyi Kes</button>
+             <button
+              onClick={() => dialogRef1.current.showModal()} 
+              className="relations-button"
+             >İlşkiyi Kes</button>
+
              </>)
                 : 
              (<>
@@ -27,20 +52,51 @@ export default ({email, info, isAccepted, toggleRelation}) => {
              </>)
             }
         </div>
-        )
+        </>)
     }
-    return (
+
+    const dialogRef2 = useRef()
+    const [dialogMessagePiece, setDialogMessagePiece] = useState("")
+
+    return (<>
+    <dialog ref={dialogRef2} onCancel={()=> dialogRef2.current.close()}>
+        <p>{email} emailli {dialogMessagePiece} kesmek istediğinine emin misin? Bu işlem geri alınamaz.</p>
+
+        <div className="parent-width justify-evenly no-background">
+            <button
+            onClick={() => {
+                toggleRelation(email, true)
+                dialogRef2.current.close()
+            }}
+            className="relations-button">Evet</button>
+            <button
+            onClick={() => dialogRef2.current.close()}
+            className="relations-button">Hayır</button>    
+        </div>
+    </dialog>
     <div className="relationsCard">
         <p>{email}</p>
         {
         isAccepted ?
-            <button onClick={() => toggleRelation(email, true)} className="relations-button">İlişkiyi Kes</button>
+            <button
+             onClick={() => {
+                setDialogMessagePiece("doktorla olan ilişkiyi")
+                dialogRef2.current.showModal()
+             }} 
+             className="relations-button"
+            >İlşkiyi Kes</button>
             :
             (<>
             <p>Doktor {email}'un cevabı bekleniyor...</p>
-            <button onClick={() => toggleRelation(email, true)} className="relations-button">İsteğimi Kaldır</button>   
+            <button
+             onClick={() => {
+                toggleRelation(email, true)
+                setDialogMessagePiece("doktora olan isteğini")
+            }} 
+             className="relations-button"
+            >İsteğimi Kaldır</button>   
             </>)
         }
     </div>
-    )
+    </>)
 }

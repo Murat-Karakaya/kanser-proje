@@ -1,11 +1,20 @@
 import "./navstyle.css";
 import Navbutton from "../nav/navbutton";
 import Hambutton from "../hambutton/hambutton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorSchemeButton from "../ColorSchemeButton/ColorSchemeButton";
 
 export default ({buttonValues}) => { // buttonValues is an array, for example: ["Portal", "Hastalarım", "Konsultasyon", "Dijitalleştirme", "Yapay Zeka"]
     const[smallNavVis,newsmalldis]=useState(false);
+
+    useEffect(()=>{
+        if (window.innerWidth < 800 && smallNavVis === false) {
+            setTimeout(()=>{
+                document.querySelector("nav").style.display="none"
+            },200)
+        } 
+    },[smallNavVis])
+    
 
     const hamClicked=()=>{
         document.querySelector("nav").style.display="block"
@@ -14,12 +23,7 @@ export default ({buttonValues}) => { // buttonValues is an array, for example: [
         },0)
     }
 
-    const hideNav=()=>{
-        newsmalldis(false)
-        setTimeout(()=>{
-            document.querySelector("nav").style.display="none"
-        },200)
-    }
+    const hideNav=()=>newsmalldis(false)
     
     return(
         <>
