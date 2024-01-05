@@ -129,15 +129,15 @@ function CalculateRelativeRisk(riskGroupInfo, raceIndex) {
 }
 
 function CalculateAbsoluteRisk(jStart, jEnd, relativeRisk, raceIndex) {
-    let h2 = h2_[raceIndex-1]; // competing hazards
-    let h1_star = h1_star_[raceIndex-1]; // breast cancer hazard
-    let PAF = PAF_[raceIndex-1]; // population attributable factor
+    let h2 = h2_[raceIndex-1];
+    let h1_star = h1_star_[raceIndex-1];
+    let PAF = PAF_[raceIndex-1];
     let h1 = h1_star.map((value, index) => value * PAF[Math.floor(index / 7)]);
 
     let prob = 0;
 
-    let s1T = Array(jEnd + 1).fill(1); // survival of competing hazards
-    let s2T = Array(jEnd + 1).fill(1); // survival of breast cancer hazard
+    let s1T = Array(jEnd + 1).fill(1);
+    let s2T = Array(jEnd + 1).fill(1);
     for (let i = 1; i <= jEnd; i++) {
         s1T[i] = s1T[i - 1] * Math.exp(-(h1[i - 1] * relativeRisk * 5));
         s2T[i] = s2T[i - 1] * Math.exp(-(h2[i - 1] * 5));
@@ -159,8 +159,8 @@ export default (age, laterAge, ageMen, nBiops, ageFLB, numRel, race) =>{
     riskGroupInfo[6] = riskGroupInfo[3] * riskGroupInfo[1];
     riskGroupInfo[7] = riskGroupInfo[4] * riskGroupInfo[5];
     let raceIndex = getRaceIndex(race);
-    let jStart = findInterval(age, ageIntervals);
-    let jEnd = findInterval(laterAge, ageIntervals);
+    //let jStart = findInterval(age, ageIntervals);
+    //let jEnd = findInterval(laterAge, ageIntervals);
     let RR = CalculateRelativeRisk(riskGroupInfo, raceIndex);
     //let P = CalculateAbsoluteRisk(jStart, jEnd, RR, raceIndex);
     return RR;

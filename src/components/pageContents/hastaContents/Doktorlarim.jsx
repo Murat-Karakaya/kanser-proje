@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from "jotai"
+import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { patentInfosAtom, patientDoctorRelations, userIdAtom } from "../../../jotai/atoms"
 import Relations from "../../RelationsCard.jsx/Relations"
 import { useState } from "react"
@@ -6,7 +6,7 @@ import { useState } from "react"
 export default ()=>{
     const [relations, setRelations] = useAtom(patientDoctorRelations)
     const userId = useAtomValue(userIdAtom)
-    const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
+    const setPatientInfos = useSetAtom(patentInfosAtom)
     const [message, setMessage] = useState("")
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState("")
@@ -60,17 +60,7 @@ export default ()=>{
     }
     return(
     <>
-        <h1>Doktorlarım</h1>
-        {
-            patientInfos[0] &&
-            <>
-                <p>Doktorların kaydedilmiş form sonuçlarına ulaşabilir. Aşağıda kaydedilmiş form sonuçları verilmiştir.</p>
-                <ul>{
-                    patientInfos.map(el => <li key={el} >{el}</li>)
-                }</ul>
-            </>
-        }
-        
+        <h1>Doktorlarım</h1>    
         <button onClick={getRelationsAndInfos} className="relations-button">
             Sayfayı Yenile
         </button>

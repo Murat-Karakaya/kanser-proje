@@ -33,7 +33,7 @@ export default ({message}) => {
             <p>Kanser riskiniz {message} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => /* !info */true && addFormInfo(`Akciğer kanseri riski ${message} olarak tahmin edilmiştir.`)} 
+             onClick={() => !info && addFormInfo(`Akciğer kanseri riski ${message} olarak tahmin edilmiştir.`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
@@ -50,7 +50,7 @@ export default ({message}) => {
         </ul>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => /* !info */ true && addFormInfo(`Meme kanseri riski ${message} olarak tahmin edilmiştir.`)} 
+         onClick={() => !info && addFormInfo(`Meme kanseri riski ${message} olarak tahmin edilmiştir.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>
