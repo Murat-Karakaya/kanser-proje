@@ -2,59 +2,60 @@ import { useState } from "react"
 import { patentInfosAtom, userIdAtom } from "../../../../jotai/atoms"
 import { useAtom, useAtomValue } from "jotai"
 
-export default ({message}) => {
+export default ({formResults}) => {
     const patientid = useAtomValue(userIdAtom)
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
-    const [info, setInfo] = useState(null)
+    const [message, setMessage] = useState(null)
 
     const addFormInfo = async (newInfo) => {
-        setInfo("Bilgi iletiliyor, lütfen bekleyiniz...")
+        setMessage("Bilgi iletiliyor, lütfen bekleyiniz...")
         const data = await fetch("http://localhost:1234/addFormInfo", {
             method: "post",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({patientid, newInfo})
         })
         if (data.status < 400){
-            setPatientInfos(patientInfos.concat(newInfo))
-            setInfo("Bilgi başarıyla iletilmiştir.")
+            const newPatientInfos = patientInfos.filter(el => el[0] !== newInfo[0]).concat(newInfo)
+            setPatientInfos(newPatientInfos)
+            setMessage("Bilgi başarıyla iletilmiştir.")
             return;
         }
-        setInfo("İleti başarısız olmuştur.")
+        setMessage("İleti başarısız olmuştur.")
     }
 
-    if (message === "age < somethingYear") return <p className="span-entire-row">Yaşınız, girilen başka bir değerle uyuşmamaktadır.</p>
-    if (message === "empty form") return <p className="span-entire-row">Formu tamamen doldurmanız lazım.</p>
-    if (message === "error") return <p className="span-entire-row">Doldurduğunuz formdan sonuç alınamamıştır.</p>
-    if (message === "") return <></>
+    if (formResults === "age < somethingYear") return <p className="span-entire-row">Yaşınız, girilen başka bir değerle uyuşmamaktadır.</p>
+    if (formResults === "empty form") return <p className="span-entire-row">Formu tamamen doldurmanız lazım.</p>
+    if (formResults === "error") return <p className="span-entire-row">Doldurduğunuz formdan sonuç alınamamıştır.</p>
+    if (formResults === "") return <></>
 
-    if (message <= 1.6) {
+    if (formResults <= 1.6) {
         return (
         <div className="span-entire-row">
-            <p>Kanser riskiniz {message} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
+            <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => !info && addFormInfo(`Akciğer kanseri riski ${message} olarak tahmin edilmiştir.`)} 
+             onClick={() => !message && addFormInfo(`Akciğer kanseri riski ${formResults} olarak tahmin edilmiştir.`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
-            {info && <p>{info}</p>}
+            {message && <p>{message}</p>}
         </div>
         )
     }
     return (
         <div className="span-entire-row">
-        <p>Kanser riskiniz {message} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
+        <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
         <ul>
             <li>Her 6-12 ayda bir Klinik muayeneye gidiniz.</li>
             <li>Tomosentez ile yıllık tarama mamografisi yaptırınız.</li>
         </ul>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => !info && addFormInfo(`Meme kanseri riski ${message} olarak tahmin edilmiştir.`)} 
+         onClick={() => !message && addFormInfo(`Meme kanseri riski ${formResults} olarak tahmin edilmiştir.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>
-        {info && <p>{info}</p>}
+        {message && <p>{message}</p>}
         </div>
     )
 }

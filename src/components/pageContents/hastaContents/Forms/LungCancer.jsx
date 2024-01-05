@@ -173,7 +173,7 @@ export default ()=>{
 
                 <button onClick={getResults} className="form-submit">Devam</button>
                 
-                <LungCancerInfo message={message}/>
+                <LungCancerInfo formResults={message}/>
             </fieldset>
         </>
     )

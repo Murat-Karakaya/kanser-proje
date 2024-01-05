@@ -100,7 +100,7 @@ export default ()=>{
                     <option value={"asian"}>Asyalı</option>
                 </select>
                 <button onClick={getResults} className="form-submit">Devam</button>
-                <BreastCancerInfo message={message}/>
+                <BreastCancerInfo formResults={message}/>
             </fieldset>
         </>
     )
