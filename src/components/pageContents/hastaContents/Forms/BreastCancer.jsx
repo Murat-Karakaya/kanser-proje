@@ -34,7 +34,7 @@ export default ()=>{
 
     return(
         <>
-            <p>Aşağıdaki formu doldurarak göğüs kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
+            <p>Aşağıdaki formu doldurarak meme kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="age-input">Yaşınız:</label>
@@ -77,7 +77,7 @@ export default ()=>{
                  value={biopsyNumber} 
                 />
 
-                <label htmlFor="first-degree-relatives">Göğüs kanseri görmüş 1. dereceden akraba sayısı:</label>
+                <label htmlFor="first-degree-relatives">Meme kanseri görmüş 1. dereceden akraba sayısı:</label>
                 <input
                  className="form-input"
                  id="first-degree-relatives" 

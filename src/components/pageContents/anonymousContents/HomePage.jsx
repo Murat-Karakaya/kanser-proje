@@ -24,7 +24,7 @@ export default () => {
     <div id="grid-centered">
         <div id="anonymous-page">
             <p className="span-entire-row">
-                Hoşgeldiniz!
+                Hoş geldiniz!
             </p>
             <div className="linkLineup">
                 <button onClick={() => setPageId(1)} style={{"--order":"0", "--tagColor":"var(--page-line)"}} className="gradient-button-component  coolUnderline" >

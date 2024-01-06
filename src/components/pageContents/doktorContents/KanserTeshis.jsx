@@ -43,7 +43,7 @@ export default ()=>{
                 <select className="form-input span-entire-row" onChange={event => setSelectedCategory(event.target.value)} >
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
-                    <option value="Meme Kanseri">Tür: Göğüs Kanseri</option>
+                    <option value="Meme Kanseri">Tür: Meme Kanseri</option>
                     <option value="Deri Kanseri">Tür: Deri Kanseri</option>
                     <option value="Lenf Nodu Kanseri">Tür: Lenf Nodu Kanseri</option>
                 </select>

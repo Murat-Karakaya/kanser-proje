@@ -15,6 +15,8 @@ export default ()=>{
     const [cancer_hist, set_cancer_hist] = useState(null)
     const [race, setRace] = useState(null)
     const [age, setAge] = useState(0)
+
+    const [didSmoke, setDidSmoke] = useState(null)
     
     const [message, setMessage] = useState("")
 
@@ -49,19 +51,28 @@ export default ()=>{
     }
 
     const getResults = () => {
-        if (age < duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
+        if (age <= duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
         if (
             !age || 
             !race || 
             education === null || 
             !+bmi || 
+            didSmoke === null ||
             copd === null || 
             cancer_hist === null || 
-            family_hist_lung_cancer === null || 
-            smoking_status === null
+            family_hist_lung_cancer === null
         ) return setMessage("empty form")
 
+        if (!didSmoke) {
+            set_smoking_status(false)
+            set_smoking_quit_time(age)
+        }
+        if (!smoking_status) set_smoking_quit_time(0)
+
+        if (smoking_status === null) return setMessage("empty form")
+        console.log({age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, smoking_status, smoking_intensity, duration_smoking, smoking_quit_time})
         const risk = lungRiskCalc(age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, smoking_status, smoking_intensity, duration_smoking, smoking_quit_time)
+
         if (isNaN(risk)) return setMessage("error")
         return setMessage(Number(risk.toFixed(2)))
     }
@@ -124,52 +135,66 @@ export default ()=>{
                     <option value={1}>Var</option>
                 </select>
 
-                <label htmlFor="smoking_status_input">Sigara içme durumu:</label>
-                <select className="form-input" id="smoking_status_input" onChange={event => set_smoking_status(+event.target.value)}>
+                <label htmlFor="did-smoke-input">Hiç sigara içildi mi?</label>
+                <select className="form-input" id="did-smoke-input" onChange={event => setDidSmoke(+event.target.value)}>
                     <option hidden defaultValue={null}></option>
-                    <option value={1}>Sigara içiliyor</option>
-                    <option value={0}>Sigara içilmiyor</option>
+                    <option value={1}>Sigara içildi</option>
+                    <option value={0}>Sigara içilmedi</option>
                 </select>
 
-                <label htmlFor="smoking_intensity">Günde içilen sigara sayısı:</label>
-                <input
-                 className="form-input"
-                 id="smoking_intensity"
-                 type="text"
-                 onKeyDown={isWholeNumberKey}
-                 onChange={evt => set_smoking_intensity(+evt.target.value)}
-                 value={smoking_intensity}
-                />
+                {didSmoke &&             
+                    (<>
+                    <label htmlFor="smoking_status_input">Şuan sigara içme durumu:</label>
+                    <select className="form-input" id="smoking_status_input" onChange={event => set_smoking_status(+event.target.value)}>
+                        <option hidden defaultValue={null}></option>
+                        <option value={1}>Sigara içiliyor</option>
+                        <option value={0}>Sigara içilmiyor</option>
+                    </select>
 
-                <label htmlFor="duration_smoking">Kaç yıl sigara içildi:</label>
-                <input
-                 className="form-input"
-                 id="duration_smoking"
-                 type="text"
-                 onKeyDown={isWholeNumberKey}
-                 onChange={evt => set_duration_smoking(+evt.target.value)}
-                 value={duration_smoking}
-                />
+                    <label htmlFor="smoking_intensity">Günde içilen sigara sayısı:</label>
+                    <input
+                    className="form-input"
+                    id="smoking_intensity"
+                    type="text"
+                    onKeyDown={isWholeNumberKey}
+                    onChange={evt => set_smoking_intensity(+evt.target.value)}
+                    value={smoking_intensity}
+                    />
 
-                <label htmlFor="smoking_quit_time">Sigarayı bıraktıktan sonra üzerinden geçen yıl sayısı:</label>
-                <input
-                 className="form-input"
-                 id="smoking_quit_time"
-                 type="text"
-                 onKeyDown={isNumberKey}
-                 onChange={evt => set_smoking_quit_time(+evt.target.value)}
-                 value={smoking_quit_time}
-                />
+                    <label htmlFor="duration_smoking">Kaç yıl sigara içildi:</label>
+                    <input
+                    className="form-input"
+                    id="duration_smoking"
+                    type="text"
+                    onKeyDown={isWholeNumberKey}
+                    onChange={evt => set_duration_smoking(+evt.target.value)}
+                    value={duration_smoking}
+                    />
 
-                <label htmlFor="race-input">Etnik köken / Irk:</label>
-                <select className="form-input" id="race-input" onChange={event => setRace(event.target.value)} >
-                    <option hidden defaultValue={null}></option>
-                    <option value={"white"}>Beyaz</option>                
-                    <option value={"black"}>Siyahi</option>
-                    <option value={"hispanic"}>İspanyol</option>
-                    <option value={"asian"}>Asyalı</option>
-                    <option value={"hawaiian"}>Hawaiili</option>
-                </select>
+                    {!smoking_status &&
+                    (<>
+                        <label htmlFor="smoking_quit_time">Sigarayı bıraktıktan sonra üzerinden geçen yıl sayısı:</label>
+                        <input
+                        className="form-input"
+                        id="smoking_quit_time"
+                        type="text"
+                        onKeyDown={isNumberKey}
+                        onChange={evt => set_smoking_quit_time(+evt.target.value)}
+                        value={smoking_quit_time}
+                        />    
+                    </>)}
+
+                    <label htmlFor="race-input">Etnik köken / Irk:</label>
+                    <select className="form-input" id="race-input" onChange={event => setRace(event.target.value)} >
+                        <option hidden defaultValue={null}></option>
+                        <option value={"white"}>Beyaz</option>                
+                        <option value={"black"}>Siyahi</option>
+                        <option value={"hispanic"}>İspanyol</option>
+                        <option value={"asian"}>Asyalı</option>
+                        <option value={"hawaiian"}>Hawaiili</option>
+                    </select>
+                    </>)
+                }
 
                 <button onClick={getResults} className="form-submit">Devam</button>
                 

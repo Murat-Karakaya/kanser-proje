@@ -25,7 +25,7 @@ export default ()=>{
     return(
         <>
             <h1>Form Doldurma</h1>
-            <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Breast")}>Göğüs Kanseri</button>
+            <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Breast")}>Meme Kanseri</button>
             <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Lung")}>Akciğer Kanseri</button>
             <Form />
         </>
