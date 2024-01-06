@@ -68,7 +68,7 @@ export default ()=>{
 
     return(
         <>
-            <p>Aşağıdaki formu doldurarak göğüs kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
+            <p>Aşağıdaki formu doldurarak akciğer kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
             <fieldset>
             <legend>Form</legend>
 

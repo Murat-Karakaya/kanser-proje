@@ -8,7 +8,7 @@ export default ({buttonValues}) => { // buttonValues is an array, for example: [
     const[smallNavVis,newsmalldis]=useState(false);
 
     useEffect(()=>{
-        if (window.innerWidth < 800 && smallNavVis === false) {
+        if (window.innerWidth < 800 && !smallNavVis) {
             setTimeout(()=>{
                 document.querySelector("nav").style.display="none"
             },200)

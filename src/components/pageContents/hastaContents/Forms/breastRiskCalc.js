@@ -26,18 +26,18 @@ const getNBiopsCategory = getNumBiopsRelCategory
 const getNumRelCategory = getNumBiopsRelCategory
 
 const getRaceIndex = race => {
-const raceIndices = {
-  "white": 1,
-  "black": 2,
-  "hispanic": 3,
-  "chinese": 7,
-  "japanese": 8,
-  "filipino": 9,
-  "hawaiian": 10,
-  "pacific islander": 11,
-  "asian": 12
-}
-return raceIndices[race] || 1; // Use object lookup for cleaner matching and default value
+    const raceIndices = {
+        "white": 1,
+        "black": 2,
+        "hispanic": 3,
+        "chinese": 7,
+        "japanese": 8,
+        "filipino": 9,
+        "hawaiian": 10,
+        "pacific islander": 11,
+        "asian": 12
+    }
+    return raceIndices[race] || 1; // Use object lookup for cleaner matching and default value
 }
 
 let h2_ = [
@@ -93,18 +93,18 @@ beta_ = transposeArray(beta_)
 h1_star_ = transposeArray(h1_star_)
 h2_ = transposeArray(h2_)
 
-for (let i = 7; i < 12; i++) {
+for (let i = 7; i < 13; i++) {
     beta_.push([0, 0, 0.07499257592975, 0.55263612260619, 0.27638268294593, 0.79185633720481, 0, 0]);
 }
 
 let PAF_ = [
-[0.5788413, 0.72949880, 0.5788413, 1, 1, 1],
-[0.5788413, 0.74397137, 0.5788413, 1, 1, 1]
+    [0.5788413, 0.72949880, 0.5788413, 1, 1, 1],
+    [0.5788413, 0.74397137, 0.5788413, 1, 1, 1]
 ]
 
 PAF_ = transposeArray(PAF_)
 
-for (let i = 7; i < 12; i++) {
+for (let i = 7; i < 13; i++) {
     PAF_.push([0.47519806426735, 0.50316401683903]);
 }
 PAF_.push([1, 1]);
@@ -159,10 +159,9 @@ export default (age, laterAge, ageMen, nBiops, ageFLB, numRel, race) =>{
     riskGroupInfo[6] = riskGroupInfo[3] * riskGroupInfo[1];
     riskGroupInfo[7] = riskGroupInfo[4] * riskGroupInfo[5];
     let raceIndex = getRaceIndex(race);
-    //let jStart = findInterval(age, ageIntervals);
-    //let jEnd = findInterval(laterAge, ageIntervals);
-    let RR = CalculateRelativeRisk(riskGroupInfo, raceIndex);
-    //let P = CalculateAbsoluteRisk(jStart, jEnd, RR, raceIndex);
-    return RR;
+    let jStart = findInterval(age, ageIntervals);
+    let jEnd = findInterval(laterAge, ageIntervals);
+    let RR = CalculateRelativeRisk(riskGroupInfo, raceIndex); 
+    const P = CalculateAbsoluteRisk(jStart, jEnd, RR, raceIndex);
+    return P;
 }
-//console.log(GetProbability(56,65,12,2,23,2,"black"))

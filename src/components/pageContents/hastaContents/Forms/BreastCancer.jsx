@@ -91,12 +91,13 @@ export default ()=>{
                 <select className="form-input" id="ethnicities-input" onChange={event => setEthnicities(event.target.value)} >
                     <option hidden defaultValue={null}></option>
                     <option value={"white"}>Beyaz</option>                    
+                    <option value={"hispanic"}>İspanyol</option>                    
                     <option value={"black"}>Siyahi</option>
                     <option value={"chinese"}>Çinli</option>
                     <option value={"japanese"}>Japon</option>
                     <option value={"filipino"}>Filipinli</option>
                     <option value={"hawaiian"}>Hawaiili</option>
-                    <option value={"pacific"}>Avrupalı</option>
+                    <option value={"pacific"}>Pasifik adalı</option>
                     <option value={"asian"}>Asyalı</option>
                 </select>
                 <button onClick={getResults} className="form-submit">Devam</button>
