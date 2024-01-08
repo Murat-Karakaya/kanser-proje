@@ -20,12 +20,14 @@ const App=()=> {
             setRootProperty('--page-line', 'white');
             setRootProperty('--default-block-background', 'rgb(19, 19, 19)');
             setRootProperty("--custom-blue", "rgb(0, 85, 255)")
+            setRootProperty("--card-backround", "rgb(8, 0, 255)")
             return;
         }
         setRootProperty('--default-color', 'rgb(19, 19, 19)');
         setRootProperty('--default-block-background', 'white');
         setRootProperty('--page-line', 'black');
         setRootProperty("--custom-blue", "rgb(29, 153, 255)")
+        setRootProperty("--card-backround", "rgb(0, 191, 255)")
         return;
     }, [isDarkMode])
 

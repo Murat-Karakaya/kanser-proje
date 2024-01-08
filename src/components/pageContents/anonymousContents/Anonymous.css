@@ -24,12 +24,12 @@
 
 .gradient-button-component {
 	transform: translateX(-5em);
-	background-image: var(--card-backround);
+	background-color: var(--card-backround);
 	opacity: 0;
     width: 161px;
     padding: 5px 10px;
     border-radius: 5px 5px 5px 0;
-    transition: width .5s calc(80ms*var(--order)), transform .3s;
+    transition: width .5s calc(80ms*var(--order)), transform .3s, color .2s, background-color .2s;
 	animation: fadeIn .5s ease-in-out calc(80ms*var(--order));
     /* fadeIn animation is in the PageStyles.css file */
 	

@@ -8,7 +8,7 @@ export default ({formResults}) => {
     const [message, setMessage] = useState(null)
 
     const addFormInfo = async (newInfo) => {
-        setMessage("Bilgi iletiliyor, lütfen bekleyiniz...")
+        setMessage("Bilgi kaydediliyor, lütfen bekleyiniz...")
         const data = await fetch("http://localhost:1234/addFormInfo", {
             method: "post",
             headers: {"Content-Type": "application/json"},
@@ -17,7 +17,7 @@ export default ({formResults}) => {
         if (data.status < 400){
             const newPatientInfos = patientInfos.filter(el => el[0] !== newInfo[0]).concat(newInfo)
             setPatientInfos(newPatientInfos)
-            setMessage("Bilgi başarıyla iletilmiştir.")
+            setMessage("Bilgi başarıyla kaydedilmiştir.")
             return;
         }
         setMessage("İleti başarısız olmuştur.")

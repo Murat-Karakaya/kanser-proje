@@ -95,7 +95,7 @@ h3 {
 .card{
 	opacity: 0;
 	transform: translateX(-5em);
-	background-image: var(--card-backround);
+	background-color: var(--card-backround);
 	width: 470px;
 	padding: 1em;
 	border-radius: 10px 10px 10px 0;

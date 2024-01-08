@@ -7,7 +7,7 @@ body,html{
 	flex-direction: column;
 	height: 100vh;
 	--nav-backround: linear-gradient(to right,#58a0ff, #4952ff);
-	--card-backround: linear-gradient(120deg, #006effd1, #0040ff89, #006effc7);
+	--card-backround: rgb(0, 191, 255);
 	--nav-button-color: linear-gradient(to right,#00ffc4, #03cefc);
 }
 
