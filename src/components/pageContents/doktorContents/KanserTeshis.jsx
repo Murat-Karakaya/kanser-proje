@@ -18,18 +18,19 @@ export default ()=>{
   
         const formData = new FormData()
         console.log(selectedCategory)
-        formData.append('file', file);
-        formData.append('category', selectedCategory);
+        formData.append('image', file);
+        formData.append('type', selectedCategory);
   
         try {
-            /* const response = await fetch("http://localhost:80/", {
+            const response = await fetch("http://localhost:80/process", {
                 method: 'POST',
-                headers,
+                mode: "no-cors",
                 body: formData,
             })
             const data = await response.json();
             console.log(data);
-            console.log('File uploaded successfully!'); */
+            if (response.status < 4000) return console.log("yippy!")
+            console.log("Bir sorun oluştu")
         } catch (error) {
             console.error(error);
         }

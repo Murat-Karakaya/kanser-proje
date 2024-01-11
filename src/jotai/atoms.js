@@ -2,10 +2,10 @@ import { atom } from "jotai";
 
 const pageAtom = atom(0);
 const darkModeAtom = atom(false)
-const userNameAtom = atom("")
-const userIdAtom = atom("")
-const userEmailAtom = atom("")
-const isDoctorAtom = atom(null)
+const userNameAtom = atom("h")
+const userIdAtom = atom("h")
+const userEmailAtom = atom("h@h")
+const isDoctorAtom = atom(true)
 const patientDoctorRelations = atom([])
 const patentInfosAtom = atom([])
 

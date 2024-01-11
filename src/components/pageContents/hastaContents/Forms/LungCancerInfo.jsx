@@ -2,7 +2,7 @@ import { useState } from "react"
 import { patentInfosAtom, userIdAtom } from "../../../../jotai/atoms"
 import { useAtom, useAtomValue } from "jotai"
 
-export default ({formResults}) => {
+export default ({formResults, smokingStatus}) => {
     const patientid = useAtomValue(userIdAtom)
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
     const [message, setMessage] = useState(null)
@@ -34,7 +34,7 @@ export default ({formResults}) => {
             <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => !message && addFormInfo(`Akciğer kanseri riski ${formResults} olarak tahmin edilmiştir.`)} 
+             onClick={() => !message && addFormInfo(`Akciğer kanseri riski ${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
@@ -51,7 +51,7 @@ export default ({formResults}) => {
         </ul>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => !message && addFormInfo(`Meme kanseri riski ${formResults} olarak tahmin edilmiştir.`)} 
+         onClick={() => !message && addFormInfo(`Akciğer kanseri riski ${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>

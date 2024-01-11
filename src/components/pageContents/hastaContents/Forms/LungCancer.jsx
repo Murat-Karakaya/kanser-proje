@@ -70,7 +70,7 @@ export default ()=>{
         if (!smoking_status) set_smoking_quit_time(0)
 
         if (smoking_status === null) return setMessage("empty form")
-        console.log({age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, smoking_status, smoking_intensity, duration_smoking, smoking_quit_time})
+        
         const risk = lungRiskCalc(age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, smoking_status, smoking_intensity, duration_smoking, smoking_quit_time)
 
         if (isNaN(risk)) return setMessage("error")
@@ -198,7 +198,7 @@ export default ()=>{
 
                 <button onClick={getResults} className="form-submit">Devam</button>
                 
-                <LungCancerInfo formResults={message}/>
+                <LungCancerInfo formResults={message} smokingStatus={Boolean(+smoking_status)}/>
             </fieldset>
         </>
     )
