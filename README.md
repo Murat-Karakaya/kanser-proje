@@ -4,6 +4,8 @@ Still in development
 
 ## Licensing
 
+The file `kanser-projesi/src/components/pageContents/hastaContents/Forms/breastRiskCalc.js` is a modified and translated version of `github.com/novasmedley/Gail-Breast-Risk-Calculator/Gail_RiskCalculator.R` which belongs to the user of the github account: **novasmedley**.
+
 This project is dual-licensed under the MIT License and GPL-2.0 License. See the [LICENSE](./LICENSE) file for more details.
 
 - Files in the `kanser-projesi/src/components/pageContents/hastaContents/Forms` directory:

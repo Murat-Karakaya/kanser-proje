@@ -79,7 +79,7 @@ export default ()=>{
 
     return(
         <>
-            <p>Aşağıdaki formu doldurarak akciğer kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
+            <p>Aşağıdaki formu doldurarak akciğer kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu altı yıl içerisinde akciğer kansrine yakalanma ihtimalinizi tahmin etmektedir.</p>
             <fieldset>
             <legend>Form</legend>
 

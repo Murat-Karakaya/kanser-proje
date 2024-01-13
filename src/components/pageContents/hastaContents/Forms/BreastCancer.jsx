@@ -34,7 +34,7 @@ export default ()=>{
 
     return(
         <>
-            <p>Aşağıdaki formu doldurarak meme kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz.</p>
+            <p>Aşağıdaki formu doldurarak meme kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu beş yıl içerisinde meme kansrine yakalanma ihtimalinizi tahmin etmektedir.</p>
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="age-input">Yaşınız:</label>

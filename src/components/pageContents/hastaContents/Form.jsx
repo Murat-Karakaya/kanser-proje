@@ -25,6 +25,7 @@ export default ()=>{
     return(
         <>
             <h1>Form Doldurma</h1>
+            <p>Not: Verilen formların sonuçları tahminidir ve gerçekleri yansıtmayabilir.</p>
             <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Breast")}>Meme Kanseri</button>
             <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Lung")}>Akciğer Kanseri</button>
             <Form />
