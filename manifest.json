@@ -1,14 +1,14 @@
 {
     "name": "PatAIoji",
-    "start_url": "./",
+    "start_url": "https://pataioji.onrender.com/",
     "icons": [
         {
-            "src": "./favicon-smaller.png",
+            "src": "https://pataioji.onrender.com/favicon-smaller.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "./favicon.png",
+            "src": "https://pataioji.onrender.com/favicon.png",
             "type": "image/png",
             "sizes": "512x512" 
         }
