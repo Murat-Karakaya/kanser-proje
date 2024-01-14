@@ -1,6 +1,5 @@
 import { useState } from "react"
 import BreastCancer from "./Forms/BreastCancer"
-import ProstateCancer from "./Forms/ProstateCancer"
 import LungCancer from "./Forms/LungCancer"
 
 export default ()=>{
@@ -10,9 +9,6 @@ export default ()=>{
     switch (form) {
         case "Breast":
             Form = BreastCancer
-            break;
-        case "Prostate":
-            Form = ProstateCancer
             break;
         case "Lung":
             Form = LungCancer

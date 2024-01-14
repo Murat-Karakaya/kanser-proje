@@ -57,7 +57,7 @@ export default ()=>{
                  value={ageMenarche} 
                 />
 
-                <label htmlFor="first-birth-age">İlk doğum gerçekleştirme yaşı:</label>
+                <label htmlFor="first-birth-age">İlk canlı doğum gerçekleştirme yaşı:</label>
                 <input
                  className="form-input"
                  id="first-birth-age" 
