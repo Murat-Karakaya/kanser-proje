@@ -1,14 +1,14 @@
 {
     "name": "PatAIoji",
-    "start_url": "/",
+    "start_url": "./",
     "icons": [
         {
-            "src": "/favicon-smaller.png",
+            "src": "./favicon-smaller.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/favicon.png",
+            "src": "./favicon.png",
             "type": "image/png",
             "sizes": "512x512" 
         }
