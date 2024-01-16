@@ -46,6 +46,7 @@ export default ({formResults, smokingStatus}) => {
         <div className="span-entire-row">
         <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
         <ul>
+            {smokingStatus && <li>Sigara içmeyi bırakmanız gerekmektedir.</li>}
             <li>Her 6-12 ayda bir Klinik muayeneye gidiniz.</li>
             <li>Tomosentez ile yıllık tarama mamografisi yaptırınız.</li>
         </ul>

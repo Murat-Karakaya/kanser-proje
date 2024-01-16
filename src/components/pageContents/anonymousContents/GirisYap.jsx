@@ -40,7 +40,6 @@ export default () => {
                 relations, 
                 name, 
                 id,
-                // I don't destructure the email because it is allready provided by the user
             } = await response.json()
 
             if (response.status >= 500) {

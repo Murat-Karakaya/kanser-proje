@@ -1,9 +1,44 @@
+import { useAtom } from "jotai";
 import { useState } from "react"
+import { patentInfosAtom } from "../../../jotai/atoms";
+
+const HandleMessage = ({message}) => {
+    const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
+
+    const [selectedPatient, setSelectedPatient] = useState(null)
+
+    const handlePatientInfos = async () => {
+        /* patentInfosAtom.map(obj => obj.patientemail === selectedPatient ? obj.info.filter((el) => el[0])) */
+    }
+
+    if (!message) return <></>
+    if (message === "Bir sorun oluştu." || message === "Yetersiz bilgi") return <p>{message}</p>
+
+    return(<>
+        <p>{message}</p>
+        <p>Eğer görsel hastalarınızdan birisine aitse o hasta için kaydedebilirsiniz.</p>
+
+        <select className="form-input span-entire-row" onChange={event => setSelectedPatient(event.target.value)} >
+            <option hidden defaultValue="">Hasta Seçiniz</option>
+            {patientInfos.map(({patientemail}) =>(
+                <option value={patientemail}>{patientemail}</option>
+            ))}
+        </select>
+
+        <button
+         className="form-submit span-entire-row" 
+         onClick={(e)=> selectedPatient && handlePatientInfos()}
+        >
+            Kaydet
+        </button>
+    </>)
+}
 
 export default ()=>{
     const [preview, setPreview] = useState("")
     const [selectedCategory, setSelectedCategory] = useState('');
     const [file, setFile] = useState(null);
+    const [message, setMessage] = useState("")
 
     const createImageUrl = file => {
         const reader = new FileReader();
@@ -14,25 +49,41 @@ export default ()=>{
     }
 
     const handleUpload = async () => {
-        if (!file) return console.log("Dosya yüklenemedi");
+        if (!file || !selectedCategory) return setMessage("Yetersiz bilgi")
   
         const formData = new FormData()
-        console.log(selectedCategory)
         formData.append('image', file);
         formData.append('type', selectedCategory);
   
         try {
-            const response = await fetch("http://localhost:80/process", {
+            /* const response = await fetch("http://localhost:80/process", {
                 method: 'POST',
                 mode: "no-cors",
+                body: formData,
+            }) */
+            const response = await fetch("http://localhost:1234/process", {
+                method: 'POST',
                 body: formData,
             })
             const data = await response.json();
             console.log(data);
-            if (response.status < 4000) return console.log("yippy!")
-            console.log("Bir sorun oluştu")
+
+            if (response.status >= 4000) return setMessage("Bir sorun oluştu")
+
+            const cancers = {
+
+            }
+
+            const result = {
+                "benign": "Tomografi görüntüsüne göre kanser iyi huylu olarak tahmin edilmiştir.",
+                "malign": "Tomografi görüntüsüne göre kanser kötü huylu olarak tahmin edilmiştir.",
+                "error": "Bir sorun oluştu.",
+            }
+            return setMessage(result[data.result] || "Bir sorun oluştu.")
+
         } catch (error) {
             console.error(error);
+            return setMessage("Bir sorun oluştu.")
         }
     }
 
@@ -73,7 +124,7 @@ export default ()=>{
 
                 <button
                  className="form-submit span-entire-row" 
-                 onClick={handleUpload}
+                 onClick={(e)=> !message && handleUpload()}
                 >
                     Devam
                 </button>
@@ -86,6 +137,9 @@ export default ()=>{
                      alt="yüklenen görüntü" 
                     /> 
                 }
+
+                <HandleMessage selectedCategory={selectedCategory} message={message}/>
+
             </fieldset>
         </>
     )
