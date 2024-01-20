@@ -1,6 +1,7 @@
 # A Project Against Cancer 
 
 Still in development
+This website uses couple of components from esat-karakaya.github.io created by [Esat-Karakaya](https://github.com/Esat-Karakaya)
 
 ## Licensing
 
