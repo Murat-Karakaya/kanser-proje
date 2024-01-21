@@ -1,14 +1,34 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useState } from "react"
-import { patentInfosAtom } from "../../../jotai/atoms";
+import { patentInfosAtom, userIdAtom } from "../../../jotai/atoms";
 
 const HandleMessage = ({message}) => {
+    const userId = useAtomValue(userIdAtom)
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
-
     const [selectedPatient, setSelectedPatient] = useState(null)
 
+    const [infoAboutUpdate, setInfoAboutUpdate] = useState("")
+
     const handlePatientInfos = async () => {
-        /* patentInfosAtom.map(obj => obj.patientemail === selectedPatient ? obj.info.filter((el) => el[0])) */
+        const updateInfo = obj => {
+            obj.info = obj.info.filter((el) => el.substring(0, 30) !== message.substring(0, 30)).concat(message)
+            return obj
+        }
+
+        const method = "post"
+        const body = JSON.stringify({
+            doctorid: userId, 
+            newInfo: message, 
+            patientemail: selectedPatient
+        })
+        const headers = {"Content-Type": "application/json"}
+        const response = await fetch("http://localhost:1234/addImageInfo", {method, headers, body})
+
+        if (response.status >= 400) return setInfoAboutUpdate("Başarıyla kaydedilmiştir.")
+
+        const newInfos = patientInfos.map(obj => obj.patientemail === selectedPatient ? updateInfo(obj) : obj)
+        setPatientInfos(newInfos)
+        setInfoAboutUpdate("Başarıyla kaydedilmiştir.")
     }
 
     if (!message) return <></>
@@ -21,7 +41,7 @@ const HandleMessage = ({message}) => {
         <select className="form-input span-entire-row" onChange={event => setSelectedPatient(event.target.value)} >
             <option hidden defaultValue="">Hasta Seçiniz</option>
             {patientInfos.map(({patientemail}) =>(
-                <option value={patientemail}>{patientemail}</option>
+                <option value={patientemail} key={patientemail}>{patientemail}</option>
             ))}
         </select>
 
@@ -31,6 +51,7 @@ const HandleMessage = ({message}) => {
         >
             Kaydet
         </button>
+        {infoAboutUpdate && <p>{infoAboutUpdate}</p>}
     </>)
 }
 
@@ -49,6 +70,7 @@ export default ()=>{
     }
 
     const handleUpload = async () => {
+
         if (!file || !selectedCategory) return setMessage("Yetersiz bilgi")
   
         const formData = new FormData()
@@ -66,17 +88,12 @@ export default ()=>{
                 body: formData,
             })
             const data = await response.json();
-            console.log(data);
 
             if (response.status >= 4000) return setMessage("Bir sorun oluştu")
 
-            const cancers = {
-
-            }
-
             const result = {
-                "benign": "Tomografi görüntüsüne göre kanser iyi huylu olarak tahmin edilmiştir.",
-                "malign": "Tomografi görüntüsüne göre kanser kötü huylu olarak tahmin edilmiştir.",
+                "benign": `Tomografi görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`,
+                "malign": `Tomografi görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`,
                 "error": "Bir sorun oluştu.",
             }
             return setMessage(result[data.result] || "Bir sorun oluştu.")
@@ -92,7 +109,12 @@ export default ()=>{
             <h1>Kanser Teşhisi</h1>
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
-                <select className="form-input span-entire-row" onChange={event => setSelectedCategory(event.target.value)} >
+                <select
+                 className="form-input span-entire-row" 
+                 onChange={event => {
+                    setSelectedCategory(event.target.value)
+                    setMessage("")
+                 }} >
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
                     <option value="Meme Kanseri">Tür: Meme Kanseri</option>
@@ -116,15 +138,19 @@ export default ()=>{
                     id="image-file-input" 
                     accept="image/jpeg" 
                     style={{display: "none"}}
-                    onChange={event => {
-                        setFile(event.target.files[0])
-                        createImageUrl(event.target.files[0])
+                    onChange={({target: {files: [file]}}) => {
+                        setFile(file)
+                        createImageUrl(file)
+                        setMessage("")
                     }}
                 />
 
                 <button
                  className="form-submit span-entire-row" 
-                 onClick={(e)=> !message && handleUpload()}
+                 onClick={ e => {
+                    if (message !== "Yetersiz bilgi" && message) return;
+                    return handleUpload()
+                }}
                 >
                     Devam
                 </button>
