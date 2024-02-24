@@ -49,7 +49,7 @@ export default () => {
             }
             if (response.status >= 400) {
                 setLoading(false);
-                setInformation("Yanlış email veya şifre.") 
+                setInformation("Yanlış email veya şifre.")
                 return;
             }
 

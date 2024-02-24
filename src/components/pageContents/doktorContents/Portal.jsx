@@ -18,11 +18,11 @@ export default ()=>{
             <div className="linkLineup">
                 <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="card" >
                     <h3>Hastalarım</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
+                    <p>Bu sayfada doktor olarak sizi seçen hastaların aldığı form veya tomografi görüntülerinin sonuçları hakkında bilgi sahibi olabilirsiniz.</p>
                 </button>
                 <button onClick={() => setPageId(2)} style={{"--order":"1"}} className="card" >
                     <h3>Kanser Teşhis Uygulamaları</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
+                    <p>Bu sayfada kanser tomografi görüntülerini yükleyerek iligili kanserin iyi veya kötü huylu olup olmadığını öğrenebilirsiniz.</p>
                 </button>
             </div>
             <br />

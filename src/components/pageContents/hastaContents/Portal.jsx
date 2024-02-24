@@ -18,15 +18,15 @@ export default ()=>{
             <div className="linkLineup">
                 <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="ordered card" >
                     <h3>Doktorlarım</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
+                    <p>Bu sayfada sizin form veya kanser tomografi görüntüleri sonuçlarına ulaşabilecek doktorların listesi yer almaktadır.</p>
                 </button>
                 <button onClick={() => setPageId(2)} style={{"--order":"1"}} className="ordered card" >
                     <h3>Sonuçlarım</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
+                    <p>Bu sayfada "Doktorlarım" sayfasındaki doktorların ulaşabileceği form veya görüntü sonuçları yer almaktadır.</p>
                 </button>
                 <button onClick={() => setPageId(3)} style={{"--order":"2"}} className="ordered card" >
                     <h3>Form Doldurma</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum dolor, ea obcaecati quaerat vel tempora aperiam adipisci nihil fugiat sequi? Similique itaque.</p>
+                    <p>Bu sayfadaki formları doldurarak ilgili kansere belirli bir süre zarfı içerisinde yakalanma ihtimalinizin tahminini görebilirsiniz.</p>
                 </button>
             </div>
             <br />
