@@ -113,7 +113,7 @@ export default () => {
             <button
              onClick={() => setUser(credentials)}
              className="form-submit"
-            >Register</button>
+            >Hesap Aç</button>
             <div style={{display: information ? "flex" : "none"}} className="span-entire-row flex-centered">
                 <div style={{display: loading ? "block" : "none"}} className="loading-blue"></div>
                 <p className="form-information">{information}</p>
