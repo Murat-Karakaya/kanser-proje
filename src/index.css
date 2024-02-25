@@ -12,6 +12,7 @@ body,html{
 }
 
 *{
+	/* font-weight: bold; */
 	color: var(--default-color);
 	font-family: 'Montserrat', sans-serif;
 	box-sizing: border-box;

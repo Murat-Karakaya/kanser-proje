@@ -41,7 +41,7 @@ export default () => {
             const response = await fetch("http://localhost:1234/register", {
                 method: "post",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({name, email, password, isdoctor: isdoctor === "true" ? true : false})
+                body: JSON.stringify({name, email, password, isdoctor: isdoctor === "true"})
             })
             const { id } = await response.json() // I only destructured the id because the rest is allready provided by the user
 
@@ -61,7 +61,7 @@ export default () => {
             setUserId(id)
             setUserEmail(email)
             setUserName(name)
-            setIsDoctor(isdoctor)
+            setIsDoctor(isdoctor === "true")
             setPage(0)
             return;
         } catch (error) {
