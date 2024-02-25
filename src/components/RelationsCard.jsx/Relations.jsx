@@ -45,7 +45,7 @@ export default ({email, info, isAccepted, toggleRelation}) => {
                 : 
              (<>
              <p>{email} kullanıcısı doktor olarak sizi seçmek istiyor. Kabul ediyor musunuz?</p>
-             <div className="parent-width justify-evenly no-background">
+             <div className="parent-width justify-evenly self-align-center no-background">
                 <button onClick={() => toggleRelation(email, false)} className="relations-button">Kabul Et</button>
                 <button onClick={() => toggleRelation(email, true)} className="relations-button">Reddet</button>
              </div>

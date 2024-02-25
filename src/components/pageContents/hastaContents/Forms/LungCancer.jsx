@@ -62,16 +62,14 @@ export default ()=>{
             cancer_hist === null || 
             family_hist_lung_cancer === null
         ) return setMessage("empty form")
-
         if (!didSmoke) {
             set_smoking_status(false)
             set_smoking_quit_time(age)
         }
-        if (!smoking_status) set_smoking_quit_time(0)
+        if (smoking_status) set_smoking_quit_time(0)
+        if (didSmoke && smoking_status === null) return setMessage("empty form")
 
-        if (smoking_status === null) return setMessage("empty form")
-        
-        const risk = lungRiskCalc(age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, smoking_status, smoking_intensity, duration_smoking, smoking_quit_time)
+        const risk = lungRiskCalc(age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, Boolean(smoking_status), smoking_intensity, duration_smoking, smoking_quit_time)
 
         if (isNaN(risk)) return setMessage("error")
         return setMessage(Number(risk.toFixed(2)))
@@ -142,7 +140,7 @@ export default ()=>{
                     <option value={0}>Sigara içilmedi</option>
                 </select>
 
-                {didSmoke &&             
+                {didSmoke ?             
                     (<>
                     <label htmlFor="smoking_status_input">Şuan sigara içme durumu:</label>
                     <select className="form-input" id="smoking_status_input" onChange={event => set_smoking_status(+event.target.value)}>
@@ -183,18 +181,17 @@ export default ()=>{
                         value={smoking_quit_time}
                         />    
                     </>)}
-
-                    <label htmlFor="race-input">Etnik köken / Irk:</label>
-                    <select className="form-input" id="race-input" onChange={event => setRace(event.target.value)} >
-                        <option hidden defaultValue={null}></option>
-                        <option value={"white"}>Beyaz</option>                
-                        <option value={"black"}>Siyahi</option>
-                        <option value={"hispanic"}>İspanyol</option>
-                        <option value={"asian"}>Asyalı</option>
-                        <option value={"hawaiian"}>Hawaiili</option>
-                    </select>
-                    </>)
-                }
+                </>): ""}
+                
+                <label htmlFor="race-input">Etnik köken / Irk:</label>
+                <select className="form-input" id="race-input" onChange={event => setRace(event.target.value)} >
+                    <option hidden defaultValue={null}></option>
+                    <option value={"white"}>Beyaz</option>                
+                    <option value={"black"}>Siyahi</option>
+                    <option value={"hispanic"}>İspanyol</option>
+                    <option value={"asian"}>Asyalı</option>
+                    <option value={"hawaiian"}>Hawaiili</option>
+                </select>
 
                 <button onClick={getResults} className="form-submit">Devam</button>
                 

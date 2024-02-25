@@ -34,6 +34,9 @@ button:not([tabindex="-1"]):focus, input:not([tabindex="-1"]):focus, select:not(
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 }
+.self-align-center {
+	align-self: center;
+}
 
 h1, h1 > *{
 	font-family: 'Nunito', sans-serif;
