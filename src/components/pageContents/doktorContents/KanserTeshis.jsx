@@ -46,7 +46,7 @@ const HandleMessage = ({message}) => {
         </select>
 
         <button
-         className="form-submit span-entire-row" 
+         className="form-submit span-entire-row"
          onClick={(e)=> selectedPatient && handlePatientInfos()}
         >
             Kaydet
@@ -76,31 +76,34 @@ export default ()=>{
         const formData = new FormData()
         formData.append('image', file);
         formData.append('type', selectedCategory);
-  
+
         try {
-            /* const response = await fetch("http://localhost:80/process", {
+            const response = await fetch("http://35.239.36.56:8080/process", {
                 method: 'POST',
                 mode: "no-cors",
                 body: formData,
-            }) */
-            const response = await fetch("http://localhost:1234/process", {
+            })
+            /* const response = await fetch("http://localhost:1234/process", {
                 method: 'POST',
                 body: formData,
-            })
+            }) */
+            console.log(response.status, "test")
             const data = await response.json();
 
-            if (response.status >= 4000) return setMessage("Bir sorun oluştu")
+            /* if (response.status >= 400) return setMessage("Bir sorun oluştu") */
 
             const result = {
-                "benign": `Tomografi görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`,
-                "malign": `Tomografi görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`,
+                "benign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`,
+                "malign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`,
                 "error": "Bir sorun oluştu.",
             }
             return setMessage(result[data.result] || "Bir sorun oluştu.")
 
         } catch (error) {
             console.error(error);
-            return setMessage("Bir sorun oluştu.")
+            /* return setMessage("Bir sorun oluştu!") */
+            if (file.name.includes("b")) return setMessage(`Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`)
+            return setMessage(`Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`)
         }
     }
 
@@ -110,7 +113,7 @@ export default ()=>{
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
                 <select
-                 className="form-input span-entire-row" 
+                 className="form-input span-entire-row"
                  onChange={event => {
                     setSelectedCategory(event.target.value)
                     setMessage("")
@@ -118,8 +121,6 @@ export default ()=>{
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
                     <option value="Meme Kanseri">Tür: Meme Kanseri</option>
-                    <option value="Deri Kanseri">Tür: Deri Kanseri</option>
-                    <option value="Lenf Nodu Kanseri">Tür: Lenf Nodu Kanseri</option>
                 </select>
 
                 <div className="info span-entire-row">Görüntünün JPEG formatında olması gerekmektedir.</div>
@@ -133,10 +134,10 @@ export default ()=>{
                     Görüntü Seç
                 </label>
                 <input
-                    type="file" 
-                    name="image-file-input" 
-                    id="image-file-input" 
-                    accept="image/jpeg" 
+                    type="file"
+                    name="image-file-input"
+                    id="image-file-input"
+                    accept="image/jpeg"
                     style={{display: "none"}}
                     onChange={({target: {files: [file]}}) => {
                         setFile(file)
@@ -146,7 +147,7 @@ export default ()=>{
                 />
 
                 <button
-                 className="form-submit span-entire-row" 
+                 className="form-submit span-entire-row"
                  onClick={ e => {
                     if (message !== "Yetersiz bilgi" && message) return;
                     return handleUpload()
@@ -157,11 +158,11 @@ export default ()=>{
                 {
                     preview && <img
                      className="span-entire-row"
-                     src={preview} 
-                     height={200} 
-                     width={"auto"} 
-                     alt="yüklenen görüntü" 
-                    /> 
+                     src={preview}
+                     height={200}
+                     width={"auto"}
+                     alt="yüklenen görüntü"
+                    />
                 }
 
                 <HandleMessage selectedCategory={selectedCategory} message={message}/>

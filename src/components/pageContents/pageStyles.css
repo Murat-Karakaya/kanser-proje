@@ -6,7 +6,7 @@
 	height: 100%;
 }
 
-button:not([tabindex="-1"]):focus, input:not([tabindex="-1"]):focus, select:not([tabindex="-1"]):focus, textarea:not([tabindex="-1"]):focus, a:not([tabindex="-1"]):focus {
+button:not([tabindex="-1"]):focus-visible, input:not([tabindex="-1"]):focus-visible, select:not([tabindex="-1"]):focus-visible, textarea:not([tabindex="-1"]):focus-visible, a:not([tabindex="-1"]):focus-visible {
 	outline: 3px solid var(--page-line);
 }
 

@@ -52,7 +52,7 @@ export default () => {
             }
             if (response.status >= 400) {
                 setLoading(false);
-                setInformation("Yanlış email veya şifre.") 
+                setInformation("İlgili kullanıcı mevcuttur.")
                 return;   
             }
 

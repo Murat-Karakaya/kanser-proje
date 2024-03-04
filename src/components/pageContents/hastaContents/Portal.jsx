@@ -11,10 +11,10 @@ export default ()=>{
     return(
         <>
             <div className="headFlex">
-                <h1 className="inlineBlock noMargin">Hoşgeldin, <div className="gradient-text">{name}!</div></h1>
+                <h1 className="inlineBlock noMargin">Hoş geldin, <div className="gradient-text">{name}!</div></h1>
                 <Link to="/" className="logoutBtn">Çıkış Yap</Link>
             </div>
-            
+
             <div className="linkLineup">
                 <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="ordered card" >
                     <h3>Doktorlarım</h3>
