@@ -31,10 +31,10 @@ export default ({formResults}) => {
     if (formResults <= 1.7) {
         return (
         <div className="span-entire-row">
-            <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
+            <p>Kanser riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => !message && addFormInfo(`Meme kanseri riski ${formResults} olarak tahmin edilmiştir.`)} 
+             onClick={() => !message && addFormInfo(`Meme kanseri riski %${formResults} olarak tahmin edilmiştir.`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
@@ -44,14 +44,14 @@ export default ({formResults}) => {
     }
     return (
         <div className="span-entire-row">
-        <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
+        <p>Kanser riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
         <ul>
             <li>Her 6-12 ayda bir Klinik muayeneye gidiniz.</li>
             <li>Tomosentez ile yıllık tarama mamografisi yaptırınız.</li>
         </ul>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => !message && addFormInfo(`Meme kanseri riski ${formResults} olarak tahmin edilmiştir.`)} 
+         onClick={() => !message && addFormInfo(`Meme kanseri riski %${formResults} olarak tahmin edilmiştir.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>

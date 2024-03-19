@@ -108,12 +108,12 @@ export default ()=>{
                 <label htmlFor="education-input">Eğitim durumu:</label>
                 <select className="form-input" id="education-input" onChange={event => setEducation(parseInt(event.target.value))}>
                     <option hidden defaultValue={null}></option>
-                    <option value={1}>Lise mezunu değil</option>
-                    <option value={2}>Lise mezunu</option>
-                    <option value={3}>Lise sonrası biraz eğitim</option>
-                    <option value={4}>Biraz yüksekokul eğitim</option>
-                    <option value={5}>Yüksekokul mezunu</option>
-                    <option value={6}>Lisansüstü derece</option>
+                    <option value={1}>Lise ve altı</option>
+                    <option value={2}>Lise</option>
+                    <option value={3}>Lise+</option>
+                    <option value={4}>Yüksekokul</option>
+                    <option value={5}>Lisans</option>
+                    <option value={6}>Lisansüstü</option>
                 </select>
 
                 <label htmlFor="bmi-input">Vücut kitle indeksi:</label>

@@ -4,6 +4,8 @@ import breastRiskCalc from "./breastRiskCalc"
 import BreastCancerInfo from "./BreastCancerInfo"
 
 export default ()=>{
+    const [shouldShowInput, setShouldShowInput] = useState(false)
+
     const [age, setAge] = useState(0)
     const [ageMenarche, setAgeMenarche] = useState(0)
     const [firstBirthAge, setFirtBirthAge] = useState(0)
@@ -57,15 +59,34 @@ export default ()=>{
                  value={ageMenarche} 
                 />
 
-                <label htmlFor="first-birth-age">İlk canlı doğum gerçekleştirme yaşı:</label>
-                <input
-                 className="form-input"
-                 id="first-birth-age" 
-                 type="text" 
-                 onKeyDown={isWholeNumberKey}
-                 onChange={(evt) => setFirtBirthAge(+evt.target.value)} 
-                 value={firstBirthAge} 
-                />
+                <label htmlFor="did-have-first-birth">Canlı doğum gerçekleşmiş midir?:</label>
+                <select className="form-input" id="did-have-first-birth" onChange={evt => {
+                    if (evt.target.value === "no") {
+                        setShouldShowInput(false)
+                        setFirtBirthAge(0)
+                        return;
+                    }
+                    if (evt.target.value === "yes") return setShouldShowInput(true)
+                    
+                    }} >
+                    <option hidden defaultValue={null}></option>
+                    <option value={"yes"}>Evet</option>
+                    <option value={"no"}>Hayır</option>
+                </select>
+
+                {shouldShowInput ? (<>
+                    <label htmlFor="first-birth-age">İlk canlı doğum gerçekleştirme yaşı:</label>
+                    <input
+                    className="form-input"
+                    id="first-birth-age" 
+                    type="text" 
+                    onKeyDown={isWholeNumberKey}
+                    onChange={(evt) => setFirtBirthAge(+evt.target.value)} 
+                    value={firstBirthAge} 
+                    />
+                </>):(<></>) }
+
+                
 
                 <label htmlFor="biopsy-input">Toplam biyopsi sayısı:</label>
                 <input

@@ -31,10 +31,10 @@ export default ({formResults, smokingStatus}) => {
     if (formResults <= 1.6) {
         return (
         <div className="span-entire-row">
-            <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
+            <p>Kanser riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => !message && addFormInfo(`Akciğer kanseri riski ${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
+             onClick={() => !message && addFormInfo(`Akciğer kanseri riski %${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
@@ -44,7 +44,7 @@ export default ({formResults, smokingStatus}) => {
     }
     return (
         <div className="span-entire-row">
-        <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
+        <p>Kanser riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
         <ul>
             {smokingStatus && <li>Sigara içmeyi bırakmanız gerekmektedir.</li>}
             <li>Her 6-12 ayda bir Klinik muayeneye gidiniz.</li>
@@ -52,7 +52,7 @@ export default ({formResults, smokingStatus}) => {
         </ul>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => !message && addFormInfo(`Akciğer kanseri riski ${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
+         onClick={() => !message && addFormInfo(`Akciğer kanseri riski %${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>
