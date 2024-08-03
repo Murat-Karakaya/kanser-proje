@@ -102,36 +102,36 @@ export default ()=>{
         } catch (error) {
             console.error(error);
             /* return setMessage("Bir sorun oluştu!") */
-            /* if (file.name.includes("b")) return setMessage(`Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`)
-            return setMessage(`Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`) */
             
             try {
-                const response = await fetch("http://localhost:1234/process", {
-                    method: 'POST',
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({test:"test"}),
-                })
-                /* const response = await fetch("http://localhost:1234/process", {
-                    method: 'POST',
-                    body: formData,
-                }) */
-                console.log(response, response.status, response.body)
-                const data = await response.json();
+                setTimeout(async()=>{
+                    const response = await fetch("http://localhost:1234/process", {
+                        method: 'POST',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({test:"test"}),
+                    })
+                    /* 
+                    const response = await fetch("http://localhost:1234/process", {
+                        method: 'POST',
+                        body: formData,
+                    }) */
+                    console.log(response, response.status, response.body)
+                    const data = await response.json();
 
-                /* if (response.status >= 400) return setMessage("Bir sorun oluştu") */
+                    /* if (response.status >= 400) return setMessage("Bir sorun oluştu") */
 
-                const result = {
-                    "benign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`,
-                    "malign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`,
-                    "error": "Bir sorun oluştu.",
-                }
-                return setMessage(result[data.result] || "Bir sorun oluştu.")
+                    const result = {
+                        "benign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`,
+                        "malign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`,
+                        "error": "Bir sorun oluştu.",
+                    }
+                    return setMessage(result[data.result] || "Bir sorun oluştu.")    
+                }, 1000)
+                
 
             } catch (error) {
                 console.error(error);
-                /* return setMessage("Bir sorun oluştu!") */
-                if (file.name.includes("b")) return setMessage(`Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`)
-                return setMessage(`Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`)
+                return setMessage("Bir sorun oluştu!")
             }
         }
     }
@@ -177,7 +177,7 @@ export default ()=>{
 
                 <button
                  className="form-submit span-entire-row"
-                 onClick={ e => {
+                 onClick={ () => {
                     if (message !== "Yetersiz bilgi" && message) return;
                     return handleUpload()
                 }}
