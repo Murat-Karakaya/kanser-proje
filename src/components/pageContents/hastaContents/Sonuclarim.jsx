@@ -24,10 +24,10 @@ export default ()=>{
                 {
                     patientInfos[0] &&
                     <>
-                        <p>Doktorların kaydedilmiş form sonuçlarına ulaşabilir. Aşağıda kaydedilmiş form sonuçları verilmiştir.</p>
-                        <ul>{
-                            patientInfos.map(el => <li key={el} >{el}</li>)
-                        }</ul>
+                        <p>Doktorların kaydedilmiş form ve görsel sonuçlarına ulaşabilir. Aşağıda kaydedilmiş sonuçlar verilmiştir. En son kaydedilen bilgiler en altta verilmiştir.</p>
+                        <div className="list-bg">{
+                            patientInfos.map((el, i) => <p key={i} >{el}</p>)
+                        }</div>
                     </>
                 }
             </>

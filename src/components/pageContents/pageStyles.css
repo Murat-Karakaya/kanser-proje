@@ -256,3 +256,12 @@ label {
 	height: 100%;
 	background: none;
 }
+
+/* Sonuclarim Styles */
+
+.list-bg {
+	background-color: var(--card-backround);
+	width: fit-content;
+	padding: 1px 20px;
+	border-radius: 7px;
+}

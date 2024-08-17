@@ -16,11 +16,11 @@ const App=()=> {
         const setRootProperty = (property, value) => rootElement.style.setProperty(property, value);
         
         if (isDarkMode) {
-            setRootProperty('--default-color', 'white');
-            setRootProperty('--page-line', 'white');
-            setRootProperty('--default-block-background', 'rgb(19, 19, 19)');
+            setRootProperty('--default-color', '#f2f2f2');
+            setRootProperty('--page-line', '#f2f2f2');
+            setRootProperty('--default-block-background', '#191919');
             setRootProperty("--custom-blue", "rgb(0, 85, 255)")
-            setRootProperty("--card-backround", "rgb(8, 0, 255)")
+            setRootProperty("--card-backround", "#251eeb")
             return;
         }
         setRootProperty('--default-color', 'rgb(19, 19, 19)');

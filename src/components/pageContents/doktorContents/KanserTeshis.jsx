@@ -10,6 +10,7 @@ const HandleMessage = ({message}) => {
     const [infoAboutUpdate, setInfoAboutUpdate] = useState("")
 
     const handlePatientInfos = async () => {
+        // Server and the website updates patient infos seperately
         const updateInfo = obj => {
             obj.info = obj.info.filter((el) => el.substring(0, 30) !== message.substring(0, 30)).concat(message)
             return obj
@@ -24,7 +25,7 @@ const HandleMessage = ({message}) => {
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/addImageInfo", {method, headers, body})
 
-        if (response.status >= 400) return setInfoAboutUpdate("Başarıyla kaydedilmiştir.")
+        if (response.status >= 400) return setInfoAboutUpdate("Bir sorun oluştu.")
 
         const newInfos = patientInfos.map(obj => obj.patientemail === selectedPatient ? updateInfo(obj) : obj)
         setPatientInfos(newInfos)
@@ -33,6 +34,12 @@ const HandleMessage = ({message}) => {
 
     if (!message) return <></>
     if (message === "Bir sorun oluştu." || message === "Yetersiz bilgi") return <p>{message}</p>
+    if (message === "Yükleniyor, lütfen bekleyiniz...") return (
+        <div style={{display: "flex"}} className="span-entire-row flex-centered">
+            <div style={{display: "block"}} className="loading-blue"></div>
+            <p className="form-information">{message}</p>
+        </div>
+    )
 
     return(<>
         <p>{message}</p>
@@ -78,9 +85,10 @@ export default ()=>{
         formData.append('type', selectedCategory);
 
         try {
-            const response = fetch("http://localhost:8080/process", {
+            setMessage("Yükleniyor, lütfen bekleyiniz...")
+
+            const response = await fetch("http://localhost:8080/process", {
                 method: 'POST',
-                mode: "no-cors",
                 body: formData,
             })
             /* const response = await fetch("http://localhost:1234/process", {
@@ -89,6 +97,7 @@ export default ()=>{
             }) */
             console.log(response, response.status, response.body)
             const data = await response.json();
+            
 
             /* if (response.status >= 400) return setMessage("Bir sorun oluştu") */
 
@@ -101,39 +110,9 @@ export default ()=>{
 
         } catch (error) {
             console.error(error);
-            /* return setMessage("Bir sorun oluştu!") */
-            
-            try {
-                setTimeout(async()=>{
-                    const response = await fetch("http://localhost:1234/process", {
-                        method: 'POST',
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify({test:"test"}),
-                    })
-                    /* 
-                    const response = await fetch("http://localhost:1234/process", {
-                        method: 'POST',
-                        body: formData,
-                    }) */
-                    console.log(response, response.status, response.body)
-                    const data = await response.json();
-
-                    /* if (response.status >= 400) return setMessage("Bir sorun oluştu") */
-
-                    const result = {
-                        "benign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} iyi huylu olarak tahmin edilmiştir.`,
-                        "malign": `Verilen kanser görüntüsüne göre ${selectedCategory.toLocaleLowerCase()} kötü huylu olarak tahmin edilmiştir.`,
-                        "error": "Bir sorun oluştu.",
-                    }
-                    return setMessage(result[data.result] || "Bir sorun oluştu.")    
-                }, 1000)
-                
-
-            } catch (error) {
-                console.error(error);
-                return setMessage("Bir sorun oluştu!")
-            }
+            return setMessage("Bir sorun oluştu.")
         }
+        
     }
 
     return(
@@ -194,7 +173,7 @@ export default ()=>{
                     />
                 }
 
-                <HandleMessage selectedCategory={selectedCategory} message={message}/>
+                <HandleMessage message={message}/>
 
             </fieldset>
         </>

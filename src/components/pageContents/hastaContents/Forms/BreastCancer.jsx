@@ -6,29 +6,20 @@ import BreastCancerInfo from "./BreastCancerInfo"
 export default ()=>{
     const [shouldShowInput, setShouldShowInput] = useState(false)
 
-    const [age, setAge] = useState(0)
-    const [ageMenarche, setAgeMenarche] = useState(0)
-    const [firstBirthAge, setFirtBirthAge] = useState(0)
-    const [biopsyNumber, setBiopsyNumber] = useState(0)
-    const [relativesNumber, setRelativesNumber] = useState(0)
+    const [age, setAge] = useState(null)
+    const [ageMenarche, setAgeMenarche] = useState(null)
+    const [firstBirthAge, setFirtBirthAge] = useState(null)
+    const [biopsyNumber, setBiopsyNumber] = useState(null)
+    const [relativesNumber, setRelativesNumber] = useState(null)
     const [ethnicities, setEthnicities] = useState("")
     
     const [message, setMessage] = useState("")
-
-    const isWholeNumberKey = (evt) => {
-        const charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-            evt.preventDefault();
-            return false;
-        }
-        return;
-    }
 
     const getResults = () => {
         if (age < ageMenarche) return setMessage("age < ageMenarche")
         if (age < firstBirthAge) return setMessage("age < firstBirthAge")
 
-        if (!ageMenarche || !age || !ethnicities) return setMessage("empty form")
+        if (!ageMenarche || !age || !ethnicities || firstBirthAge === null || biopsyNumber === null || relativesNumber === null) return setMessage("empty form")
         const risk = breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities)
         if (isNaN(risk)) return setMessage("error")
         return setMessage(Number(risk.toFixed(2)))
@@ -126,4 +117,21 @@ export default ()=>{
             </fieldset>
         </>
     )
+}
+
+function isWholeNumberKey(evt) {
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
+    
+    // Allow left and right arrow keys (37 and 39 respectively)
+    if (charCode === 37 || charCode === 39 || charCode === 46) {
+        return true;
+    }
+    
+    // Check if the key is not a number
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        evt.preventDefault();
+        return false;
+    }
+    
+    return true;
 }

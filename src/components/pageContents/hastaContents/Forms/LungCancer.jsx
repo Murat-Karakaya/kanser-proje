@@ -5,50 +5,20 @@ import lungRiskCalc from "./lungRiskCalc"
 
 export default ()=>{
     const [copd, setCOPD] = useState(null)
-    const [bmi, setBMI] = useState(0.0)
+    const [bmi, setBMI] = useState(null)
     const [education, setEducation] = useState(null)
-    const [smoking_quit_time, set_smoking_quit_time] = useState(0)
+    const [smoking_quit_time, set_smoking_quit_time] = useState(null)
     const [smoking_status, set_smoking_status] = useState(null)
-    const [smoking_intensity, set_smoking_intensity] = useState(0)
-    const [duration_smoking, set_duration_smoking] = useState(0)
+    const [smoking_intensity, set_smoking_intensity] = useState(null)
+    const [duration_smoking, set_duration_smoking] = useState(null)
     const [family_hist_lung_cancer, set_family_hist_lung_cancer] = useState(null)
     const [cancer_hist, set_cancer_hist] = useState(null)
     const [race, setRace] = useState(null)
-    const [age, setAge] = useState(0)
+    const [age, setAge] = useState(null)
 
     const [didSmoke, setDidSmoke] = useState(null)
     
     const [message, setMessage] = useState("")
-
-    const isNumberKey = (evt) => {
-        const charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode < 31) return;
-
-        // Sorry! This part of the code is a mess :(
-        if (
-            (
-                (charCode < 48 || charCode > 57)
-                 &&
-                charCode !== 190
-            )
-             || 
-            (
-                charCode === 190
-                 && 
-                evt.target.value.split(".").length > 1
-            )
-        ) return evt.preventDefault()
-        return;
-    }
-
-    const isWholeNumberKey = (evt) => {
-        const charCode = (evt.which) ? evt.which : evt.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-            evt.preventDefault();
-            return false;
-        }
-        return;
-    }
 
     const getResults = () => {
         if (age <= duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
@@ -60,7 +30,10 @@ export default ()=>{
             didSmoke === null ||
             copd === null || 
             cancer_hist === null || 
-            family_hist_lung_cancer === null
+            family_hist_lung_cancer === null ||
+            smoking_quit_time === null ||
+            smoking_intensity === null ||
+            duration_smoking === null
         ) return setMessage("empty form")
         if (!didSmoke) {
             set_smoking_status(false)
@@ -199,4 +172,45 @@ export default ()=>{
             </fieldset>
         </>
     )
+}
+
+function isNumberKey (evt) {
+    const charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode === 37 || charCode === 39 || charCode === 46) {
+        return true;
+    }
+    if (charCode < 31) return;
+
+    // Sorry! This part of the code is a mess :(
+    if (
+        (
+            (charCode < 48 || charCode > 57)
+             &&
+            charCode !== 190
+        )
+         || 
+        (
+            charCode === 190
+             && 
+            evt.target.value.split(".").length > 1
+        )
+    ) return evt.preventDefault()
+    return;
+}
+
+function isWholeNumberKey(evt) {
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
+    
+    // Allow left and right arrow keys (37 and 39 respectively)
+    if (charCode === 37 || charCode === 39 || charCode === 46) {
+        return true;
+    }
+    
+    // Check if the key is not a number
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        evt.preventDefault();
+        return false;
+    }
+    
+    return true;
 }

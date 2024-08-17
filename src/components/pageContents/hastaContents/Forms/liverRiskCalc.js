@@ -1,0 +1,1 @@
+export default ({paramGender, age, paramALT, paramHBeAg, paramHBVDNAlevel}) => parseFloat((1 - Math.pow( 0.99853, Math.exp(0.78798 * paramGender + age * 0.09859 +  paramALT + paramHBeAg * paramHBeAg +  paramHBVDNAlevel - 6.12796) )) * 100 );
