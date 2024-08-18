@@ -5,23 +5,23 @@ import lungRiskCalc from "./lungRiskCalc"
 
 export default ()=>{
     const [copd, setCOPD] = useState(null)
-    const [bmi, setBMI] = useState(null)
+    const [bmi, setBMI] = useState("")
     const [education, setEducation] = useState(null)
-    const [smoking_quit_time, set_smoking_quit_time] = useState(null)
+    const [smoking_quit_time, set_smoking_quit_time] = useState(0)
     const [smoking_status, set_smoking_status] = useState(null)
-    const [smoking_intensity, set_smoking_intensity] = useState(null)
-    const [duration_smoking, set_duration_smoking] = useState(null)
+    const [smoking_intensity, set_smoking_intensity] = useState(0)
+    const [duration_smoking, set_duration_smoking] = useState(0)
     const [family_hist_lung_cancer, set_family_hist_lung_cancer] = useState(null)
     const [cancer_hist, set_cancer_hist] = useState(null)
     const [race, setRace] = useState(null)
-    const [age, setAge] = useState(null)
+    const [age, setAge] = useState("")
 
     const [didSmoke, setDidSmoke] = useState(null)
     
     const [message, setMessage] = useState("")
 
     const getResults = () => {
-        if (age <= duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
+        if (age < duration_smoking || age < smoking_quit_time) return setMessage("age < somethingYear")
         if (
             !age || 
             !race || 
@@ -30,10 +30,7 @@ export default ()=>{
             didSmoke === null ||
             copd === null || 
             cancer_hist === null || 
-            family_hist_lung_cancer === null ||
-            smoking_quit_time === null ||
-            smoking_intensity === null ||
-            duration_smoking === null
+            family_hist_lung_cancer === null
         ) return setMessage("empty form")
         if (!didSmoke) {
             set_smoking_status(false)
@@ -42,7 +39,7 @@ export default ()=>{
         if (smoking_status) set_smoking_quit_time(0)
         if (didSmoke && smoking_status === null) return setMessage("empty form")
 
-        const risk = lungRiskCalc(age, race, education, bmi, copd, cancer_hist, family_hist_lung_cancer, Boolean(smoking_status), smoking_intensity, duration_smoking, smoking_quit_time)
+        const risk = lungRiskCalc(age, race, education, +bmi, copd, cancer_hist, family_hist_lung_cancer, Boolean(smoking_status), smoking_intensity, duration_smoking, smoking_quit_time)
 
         if (isNaN(risk)) return setMessage("error")
         return setMessage(Number(risk.toFixed(2)))
@@ -124,34 +121,34 @@ export default ()=>{
 
                     <label htmlFor="smoking_intensity">Günde içilen sigara sayısı:</label>
                     <input
-                    className="form-input"
-                    id="smoking_intensity"
-                    type="text"
-                    onKeyDown={isWholeNumberKey}
-                    onChange={evt => set_smoking_intensity(+evt.target.value)}
-                    value={smoking_intensity}
+                     className="form-input"
+                     id="smoking_intensity"
+                     type="text"
+                     onKeyDown={isWholeNumberKey}
+                     onChange={evt => set_smoking_intensity(+evt.target.value)}
+                     value={smoking_intensity}
                     />
 
                     <label htmlFor="duration_smoking">Kaç yıl sigara içildi:</label>
                     <input
-                    className="form-input"
-                    id="duration_smoking"
-                    type="text"
-                    onKeyDown={isWholeNumberKey}
-                    onChange={evt => set_duration_smoking(+evt.target.value)}
-                    value={duration_smoking}
+                     className="form-input"
+                     id="duration_smoking"
+                     type="text"
+                     onKeyDown={isWholeNumberKey}
+                     onChange={evt => set_duration_smoking(+evt.target.value)}
+                     value={duration_smoking}
                     />
 
                     {!smoking_status &&
                     (<>
                         <label htmlFor="smoking_quit_time">Sigarayı bıraktıktan sonra üzerinden geçen yıl sayısı:</label>
                         <input
-                        className="form-input"
-                        id="smoking_quit_time"
-                        type="text"
-                        onKeyDown={isNumberKey}
-                        onChange={evt => set_smoking_quit_time(+evt.target.value)}
-                        value={smoking_quit_time}
+                         className="form-input"
+                         id="smoking_quit_time"
+                         type="text"
+                         onKeyDown={isNumberKey}
+                         onChange={evt => set_smoking_quit_time(+evt.target.value)}
+                         value={smoking_quit_time}
                         />    
                     </>)}
                 </>): ""}

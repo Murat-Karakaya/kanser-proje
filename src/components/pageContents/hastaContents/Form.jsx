@@ -1,7 +1,8 @@
 import { useState } from "react"
-import BreastCancer from "./Forms/BreastCancer"
-import LungCancer from "./Forms/LungCancer"
-import LiverCancer from "./Forms/LiverCancer"
+import BreastCancer from "./Forms/Breast/BreastCancer"
+import LungCancer from "./Forms/Lung/LungCancer"
+import LiverCancer from "./Forms/Liver/LiverCancer"
+import ProstateCancer from "./Forms/Prostate/ProstateCancer"
 
 export default ()=>{
     const [form, setForm] = useState("")
@@ -17,6 +18,9 @@ export default ()=>{
         case "Liver":
             Form = LiverCancer
             break;
+        case "Prostate":
+            Form = ProstateCancer
+            break;
     
         default:
             Form  = () => <p>Hakkında form doldurmak istediğiniz kanser türü seçiniz...</p>
@@ -29,6 +33,7 @@ export default ()=>{
             <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Breast")}>Meme Kanseri</button>
             <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Lung")}>Akciğer Kanseri</button>
             <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Liver")}>Karaciğer Kanseri</button>
+            <button style={{display: "inline-block"}} className="form-submit" onClick={() => setForm("Prostate")}>Prostat Kanseri</button>
             <Form />
         </>
     )

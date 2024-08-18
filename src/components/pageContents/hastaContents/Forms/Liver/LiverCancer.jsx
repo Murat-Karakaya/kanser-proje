@@ -84,7 +84,7 @@ export default ()=>{
                     <option value={"no"}>Hayır</option>
                 </select>
 
-                <label htmlFor="liver-HBVDNA-input">Mililitre başında hepatit B virüsü DNA'sı kopya sayısı:</label>
+                <label htmlFor="liver-HBVDNA-input">Mililitre başına hepatit B virüsü DNA'sı kopya sayısı:</label>
                 <select
                  className="form-input" 
                  id="liver-HBVDNA-input" 

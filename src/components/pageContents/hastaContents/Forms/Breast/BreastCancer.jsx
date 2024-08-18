@@ -6,11 +6,11 @@ import BreastCancerInfo from "./BreastCancerInfo"
 export default ()=>{
     const [shouldShowInput, setShouldShowInput] = useState(false)
 
-    const [age, setAge] = useState(null)
-    const [ageMenarche, setAgeMenarche] = useState(null)
-    const [firstBirthAge, setFirtBirthAge] = useState(null)
-    const [biopsyNumber, setBiopsyNumber] = useState(null)
-    const [relativesNumber, setRelativesNumber] = useState(null)
+    const [age, setAge] = useState("")
+    const [ageMenarche, setAgeMenarche] = useState("")
+    const [firstBirthAge, setFirtBirthAge] = useState(0) // zero if no live birth
+    const [biopsyNumber, setBiopsyNumber] = useState("")
+    const [relativesNumber, setRelativesNumber] = useState("")
     const [ethnicities, setEthnicities] = useState("")
     
     const [message, setMessage] = useState("")
@@ -19,7 +19,7 @@ export default ()=>{
         if (age < ageMenarche) return setMessage("age < ageMenarche")
         if (age < firstBirthAge) return setMessage("age < firstBirthAge")
 
-        if (!ageMenarche || !age || !ethnicities || firstBirthAge === null || biopsyNumber === null || relativesNumber === null) return setMessage("empty form")
+        if (!ageMenarche || !age || !ethnicities || biopsyNumber === "" || relativesNumber === "") return setMessage("empty form")
         const risk = breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities)
         if (isNaN(risk)) return setMessage("error")
         return setMessage(Number(risk.toFixed(2)))

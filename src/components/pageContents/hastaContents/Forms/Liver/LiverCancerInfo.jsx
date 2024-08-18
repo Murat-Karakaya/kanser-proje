@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { patentInfosAtom, userIdAtom } from "../../../../jotai/atoms"
+import { patentInfosAtom, userIdAtom } from "../../../../../jotai/atoms"
 import { useAtom, useAtomValue } from "jotai"
 
 export default ({formResults}) => {

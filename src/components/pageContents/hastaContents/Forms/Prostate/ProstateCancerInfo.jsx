@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { patentInfosAtom, userIdAtom } from "../../../../jotai/atoms"
+import { patentInfosAtom, userIdAtom } from "../../../../../jotai/atoms"
 import { useAtom, useAtomValue } from "jotai"
 
-export default ({formResults, smokingStatus}) => {
+export default ({formResults}) => {
     const patientid = useAtomValue(userIdAtom)
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
     const [message, setMessage] = useState(null)
@@ -23,18 +23,17 @@ export default ({formResults, smokingStatus}) => {
         setMessage("İleti başarısız olmuştur.")
     }
 
-    if (formResults === "age < somethingYear") return <p className="span-entire-row">Yaşınız, girilen başka bir değerle uyuşmamaktadır.</p>
     if (formResults === "empty form") return <p className="span-entire-row">Formu tamamen doldurmanız lazım.</p>
     if (formResults === "error") return <p className="span-entire-row">Doldurduğunuz formdan sonuç alınamamıştır.</p>
     if (formResults === "") return <></>
 
-    if (formResults <= 1.6) {
+    if (formResults < 3) {
         return (
         <div className="span-entire-row">
-            <p>Kanser riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
+            <p>Kanser riskiniz {formResults} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => !message && addFormInfo(`Akciğer kanseri riski %${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
+             onClick={() => !message && addFormInfo(`Prostat kanseri riski %${formResults} olarak tahmin edilmiştir.`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
@@ -46,13 +45,11 @@ export default ({formResults, smokingStatus}) => {
         <div className="span-entire-row">
         <p>Kanser riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
         <ul>
-            {smokingStatus && <li>Sigara içmeyi bırakmanız gerekmektedir.</li>}
-            <li>Her 6-12 ayda bir Klinik muayeneye gidiniz.</li>
-            <li>Tomosentez ile yıllık tarama mamografisi yaptırınız.</li>
+            <li>Prostat biyopsisi yapmayı doktorunuzla danışbilirsiniz.</li>
         </ul>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => !message && addFormInfo(`Akciğer kanseri riski %${formResults} olarak tahmin edilmiştir. ${smokingStatus ? "Sigara içmektedir" : "Sigara içmemektedir"}.`)} 
+         onClick={() => !message && addFormInfo(`Prostat kanseri riski %${formResults} olarak tahmin edilmiştir.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>
