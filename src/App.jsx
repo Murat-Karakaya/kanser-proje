@@ -18,9 +18,9 @@ const App=()=> {
         if (isDarkMode) {
             setRootProperty('--default-color', '#f2f2f2');
             setRootProperty('--page-line', '#f2f2f2');
-            setRootProperty('--default-block-background', '#191919');
-            setRootProperty("--custom-blue", "rgb(0, 85, 255)")
-            setRootProperty("--card-backround", "#251eeb")
+            setRootProperty('--default-block-background', '#242424');
+            setRootProperty("--custom-blue", "rgb(32, 89, 202)")
+            setRootProperty("--card-backround", "#2722bd")
             return;
         }
         setRootProperty('--default-color', 'rgb(19, 19, 19)');

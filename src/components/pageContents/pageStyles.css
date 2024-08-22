@@ -19,13 +19,33 @@ button:not([tabindex="-1"]):focus-visible, input:not([tabindex="-1"]):focus-visi
 }
 
 /*Page Basic Styles*/
+.custom-scrollbar::-webkit-scrollbar-track {
+	border-radius: 10px;
+	background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar {
+	width: 12px;
+	background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: color-mix(in srgb, #f5f5f56b 70%, var(--default-color) 30%);
+	/* background-color: #3a3a3a; */
+}
+
 .page{
 	background: none;
     box-sizing: border-box;
 	width: 100vw;
 	height: 100%;
 	flex-shrink: 0;
-	perspective: 25px;
+	padding: 0;
+}
+
+.page-child {
+	background-color: transparent;
+	overflow-y: auto;
+	height: 100%;
 	padding: 1rem;
 }
 
@@ -193,23 +213,27 @@ label {
 }
 
 .file-upload, .form-input {
+	width: clamp(200px, 50%, 300px);
 	transition: filter .3s, background-color .2s, color .2s;
 }
 .file-upload:hover, .form-input:hover, .form-submit:hover {
 	filter: brightness(.8);
 }
 
-.file-upload, .form-submit {
+.file-upload, .form-submit, .form-select {
 	border-radius: 5px;
     padding: 6px 12px;
     text-align: center;
-	display: block;
     margin: 4px 2px;
 	background-color: var(--custom-blue);
 }
 
-.file-upload, .form-input {
-	width: clamp(200px, 50%, 300px);
+.file-upload, .form-submit {
+	display: block;
+}
+
+.form-submit, .form-select {
+	transition: filter .3s, background-color .2s, color .05s;
 }
 
 .form-submit {
@@ -217,7 +241,11 @@ label {
 	align-self: center;
 	justify-self: center;
 	width: clamp(175px, calc(50% - 25px), 275px);
-	transition: filter .3s, background-color .2s, color .05s;
+}
+
+.form-select {
+	width: clamp(175px, calc(50% - 25px), 210px);
+	display: inline-block;
 }
 
 .info {
