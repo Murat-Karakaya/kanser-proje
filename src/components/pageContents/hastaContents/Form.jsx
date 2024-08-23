@@ -3,6 +3,7 @@ import BreastCancer from "./Forms/Breast/BreastCancer"
 import LungCancer from "./Forms/Lung/LungCancer"
 import LiverCancer from "./Forms/Liver/LiverCancer"
 import ProstateCancer from "./Forms/Prostate/ProstateCancer"
+import Cardiovaskular from "./Forms/Cardiovaskular/Cardiovaskular"
 
 const defaultComponent = ({setForm}) => (
     <>
@@ -12,6 +13,8 @@ const defaultComponent = ({setForm}) => (
         <button className="form-select" onClick={() => setForm("Liver")}>Karaciğer Kanseri</button>
         <button className="form-select" onClick={() => setForm("Prostate")}>Prostat Kanseri</button>
         <br/>
+        <p>Kardiyovasküler risk tahmin formları:</p>
+        <button className="form-select" onClick={() => setForm("Cardiovaskular")}>Aterosklerotik</button>
     </>
 )
 
@@ -31,6 +34,9 @@ export default ()=>{
             break;
         case "Prostate":
             Form = ProstateCancer
+            break;
+        case "Cardiovaskular":
+            Form = Cardiovaskular
             break;
     
         default:

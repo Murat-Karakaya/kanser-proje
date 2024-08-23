@@ -15,7 +15,7 @@ export default ({formResults, smokingStatus}) => {
             body: JSON.stringify({patientid, newInfo})
         })
         if (data.status < 400){
-            const newPatientInfos = patientInfos.filter(el => el[0] !== newInfo[0]).concat(newInfo)
+            const newPatientInfos = patientInfos.filter(el => el.substring(0, 10) !== newInfo.substring(0, 10)).concat(newInfo)
             setPatientInfos(newPatientInfos)
             setMessage("Bilgi başarıyla kaydedilmiştir.")
             return;

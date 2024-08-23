@@ -2,7 +2,7 @@ import { useState } from "react"
 import { patentInfosAtom, userIdAtom } from "../../../../../jotai/atoms"
 import { useAtom, useAtomValue } from "jotai"
 
-export default ({formResults}) => {
+export default ({formResults, isSmoking}) => {
     const patientid = useAtomValue(userIdAtom)
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
     const [message, setMessage] = useState(null)
@@ -27,13 +27,13 @@ export default ({formResults}) => {
     if (formResults === "error") return <p className="span-entire-row">Doldurduğunuz formdan sonuç alınamamıştır.</p>
     if (formResults === "") return <></>
 
-    if (formResults.highRisk < 3) {
+    if (formResults < 7.5) {
         return (
         <div className="span-entire-row">
-            <p>Yüksek dereceli kanser riskiniz %{formResults.highRisk}, düşük dereceli kanser riskiniz %{formResults.lowRisk} olarak tespit edilmiştir. Bu, düşük bir risk olarak kabul edilmektedir.</p>
+            <p>Aterosklerotik kardiyovasküler hastalığa yakalanma ihtimaliniz {formResults} olarak tespit edilmiştir. Risk düşükten yükseğe doğru %5 altı, %5-%7.4 arası, %7.5-%19.9 arası ve %20 ve yükseği olarak sıralanmaktadır.</p>
             <div className="parent-width justify-evenly">
             <button
-             onClick={() => !message && addFormInfo(`Prostat kanseri yüksek riski %${formResults.highRisk}, düşük riski %${formResults.lowRisk} olarak tahmin edilmiştir.`)} 
+             onClick={() => !message && addFormInfo(`Aterosklerotik kardiyovasküler riski %${formResults} olarak tahmin edilmiştir. Sigara ${isSmoking ? "içmektedir" : "içmemektedir."}`)} 
              className="form-submit"
             >Sonuçları Kaydet</button>
             </div>
@@ -43,13 +43,10 @@ export default ({formResults}) => {
     }
     return (
         <div className="span-entire-row">
-        <p>Yüksek dereceli kanser riskiniz %{formResults.highRisk}, düşük dereceli kanser riskiniz %{formResults.lowRisk} olarak tespit edilmiştir. Riskiniz yüksek olduğu için size aşağıdaki tavsiyelere uymanızı öneriyoruz:</p>
-        <ul>
-            <li>Prostat biyopsisi yapmayı doktorunuzla danışbilirsiniz.</li>
-        </ul>
+        <p>Aterosklerotik kardiyovasküler riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için doktorunuzla bu durumu danışmanızı {isSmoking && "ve sigarayı bırakmanızı"} tavsiye ediyoruz:</p>
         <div className="parent-width justify-evenly">
         <button
-         onClick={() => !message && addFormInfo(`Prostat kanseri yüksek riski %${formResults.highRisk}, düşük riski %${formResults.lowRisk} olarak tahmin edilmiştir.`)} 
+         onClick={() => !message && addFormInfo(`Aterosklerotik kardiyovasküler riski %${formResults} olarak tahmin edilmiştir.`)} 
          className="form-submit"
         >Sonuçları Kaydet</button>
         </div>

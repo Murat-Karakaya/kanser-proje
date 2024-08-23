@@ -12,7 +12,7 @@ const HandleMessage = ({message}) => {
     const handlePatientInfos = async () => {
         // Server and the website updates patient infos seperately
         const updateInfo = obj => {
-            obj.info = obj.info.filter((el) => el.substring(0, 30) !== message.substring(0, 30)).concat(message)
+            obj.info = obj.info.filter(el => el.substring(0, 30) !== message.substring(0, 30)).concat(message)
             return obj
         }
 

@@ -19,13 +19,15 @@ export default ()=>{
         console.table({PSA: +PSA, age, FamHist, DRE, PriorBiop, AA})
         
         const risk = prostateRiskCalc({PSA: +PSA, age, FamHist, DRE, PriorBiop, AA})
-        if (isNaN(risk.highRisk)) return setMessage("error")
-        return setMessage(Number(risk.highRisk.toFixed(2)))
+        if (isNaN(risk.highRisk || risk.lowRisk)) return setMessage("error")
+        risk.highRisk = risk.highRisk.toFixed(2)
+        risk.lowRisk = risk.lowRisk.toFixed(2)
+        return setMessage(risk)
     }
 
     return(
         <>
-            <p>Aşağıdaki formu doldurarak prostat kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu ömür boyu prostat kansrine yakalanma ihtimalinizi tahmin etmektedir.</p>
+            <p>Aşağıdaki formu doldurarak prostat kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Bu form biyopsi yapıldığında biyopsi sonucunun yüksek dereceli kanser gösterme ihtimalini tahmin etmektedir.</p>
 
             <fieldset>
                 <legend>Form</legend>
@@ -39,7 +41,7 @@ export default ()=>{
                  value={age} 
                 />
 
-                <label htmlFor="prostate-PSA-input">Prostat spesifik antijen sayısı (ng/mL):</label>
+                <label htmlFor="prostate-PSA-input">Prostat spesifik antijen sayısı (ng/mL) (0.1-50):</label>
                 <input
                  className="form-input"
                  id="prostate-PSA-input" 
