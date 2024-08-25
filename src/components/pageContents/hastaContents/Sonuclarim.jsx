@@ -11,9 +11,36 @@ export default ()=>{
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/getRelationsAndInfos", {method, headers, body})
         const data = await response.json()
-        console.log(data)
+        console.log(data, "update")
         setPatientInfos(data.patientinfos)
     }
+    console.log(patientInfos)
+    if(patientInfos.length === 0) {
+        console.log("patient infos length zero")
+        return (
+        <>
+            <h1>Sonuçlarım</h1>
+            <button onClick={updateResults} className="relations-button">
+                Sayfayı Yenile
+            </button>
+            <p>Doktorların kaydedilmiş sonuçlara ulaşabilir. Şuan kaydedilmiş bilgi bulunmamaktadır.</p>
+        </>
+        )
+    }
+
+    if(typeof(patientInfos[0]) !== "string") {
+        console.log("Weird behavior detected. patient infos:", patientInfos);
+        return (
+        <>
+            <h1>Sonuçlarım</h1>
+            <button onClick={updateResults} className="relations-button">
+                Sayfayı Yenile
+            </button>
+            <p>Doktorların kaydedilmiş sonuçlara ulaşabilir. Şuan kaydedilmiş bilgi görüntülenememektedir.</p>
+        </>
+        )
+    }
+
     try {
         return(
             <>
@@ -36,7 +63,10 @@ export default ()=>{
         console.log(error)
         return (<>
             <h1>Sonuçlarım</h1>
-            <p>Doktorların kaydedilmiş form sonuçlarına ulaşabilir. Şuan kaydedilmiş bilgi bulunmamaktadır.</p>
+            <button onClick={updateResults} className="relations-button">
+                Sayfayı Yenile
+            </button>
+            <p>Doktorların kaydedilmiş sonuçlara ulaşabilir. Şuan kaydedilmiş bilgi bulunmamaktadır.</p>
         </>)
     }
     

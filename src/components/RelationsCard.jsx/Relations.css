@@ -4,6 +4,7 @@
     border-radius: 5px;
     display: grid;
     justify-items: center;
+    align-self: self-start;
     background-color: var(--custom-blue);
     width: clamp(150px, 50%, 400px);
 }

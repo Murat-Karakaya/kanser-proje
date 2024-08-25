@@ -17,7 +17,9 @@ export default () => {
     const navigate = useNavigate()
     const [isDoctor] = useAtom(isDoctorAtom)
 
-    useEffect(() => {if (isDoctor !== false) return navigate("/")}, [isDoctor])
+    useEffect(() => {
+        if (isDoctor !== false) return navigate("/")
+    }, [isDoctor])
     
     return (
         <>

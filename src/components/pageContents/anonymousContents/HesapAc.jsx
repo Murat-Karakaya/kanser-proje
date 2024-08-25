@@ -55,6 +55,7 @@ export default () => {
                 setInformation("İlgili kullanıcı mevcuttur.")
                 return;   
             }
+            console.table({isdoctor, info: "register"})
 
             setLoading(false)
             setInformation("")

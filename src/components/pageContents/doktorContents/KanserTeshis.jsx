@@ -12,7 +12,7 @@ const HandleMessage = ({message}) => {
     const handlePatientInfos = async () => {
         // Server and the website updates patient infos seperately
         const updateInfo = obj => {
-            obj.info = obj.info.filter(el => el.substring(0, 30) !== message.substring(0, 30)).concat(message)
+            obj.info = obj.info.filter(el => el.substring(0, 40) !== message.substring(0, 40)).concat(message)
             return obj
         }
 
@@ -119,7 +119,7 @@ export default ()=>{
         <>
             <h1>Kanser Teşhisi</h1>
             <p>Not: Bu sayfadan elde edilen sonuçlar tahminidir ve gerçekleri yansıtmayabilir.</p>
-            <fieldset>
+            <fieldset style={{gridGap: 10}}>
                 <legend>Fotoğraf Seç</legend>
                 <select
                  className="form-input span-entire-row"
