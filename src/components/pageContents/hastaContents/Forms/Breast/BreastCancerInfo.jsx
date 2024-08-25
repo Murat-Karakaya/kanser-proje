@@ -24,6 +24,8 @@ export default ({formResults}) => {
     }
 
     if (formResults === "age < ageMenarche") return <p className="span-entire-row">Yaşınız ilk adet yaşınızdan küçük olamaz.</p>
+    if (formResults === "age < firstBirthAge") return <p className="span-entire-row">Yaşınız ilk canlı doğum gerçekleştirme yaşınızdan küçük olamaz.</p>
+    if (formResults === "age < 20") return <p className="span-entire-row">Yaşınız yirmiden küçük olduğu için meme kanserine yakalanma ihtimaliniz bu model üzerinden hesaplanamaz. Eğer yine de tahmin etmek istiyorsanız yaşınıza "20" yazabilirsiniz. Kansere yakalanma ihtimaliniz muhtemelen elde edilen sonuçtan daha düşük olacaktır.</p>
     if (formResults === "empty form") return <p className="span-entire-row">Formu tamamen doldurmanız lazım.</p>
     if (formResults === "error") return <p className="span-entire-row">Doldurduğunuz formdan sonuç alınamamıştır.</p>
     if (formResults === "") return <></>

@@ -161,7 +161,7 @@ export default (age, laterAge, ageMen, nBiops, ageFLB, numRel, race) =>{
     let raceIndex = getRaceIndex(race);
     let jStart = findInterval(age, ageIntervals);
     let jEnd = findInterval(laterAge, ageIntervals);
-    let RR = CalculateRelativeRisk(riskGroupInfo, raceIndex); 
+    let RR = CalculateRelativeRisk(riskGroupInfo, raceIndex);
     const P = CalculateAbsoluteRisk(jStart, jEnd, RR, raceIndex);
     return P;
 }

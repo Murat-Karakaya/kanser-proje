@@ -13,7 +13,7 @@ const defaultComponent = ({setForm}) => (
         <button className="form-select" onClick={() => setForm("Liver")}>Karaciğer Kanseri</button>
         <button className="form-select" onClick={() => setForm("Prostate")}>Prostat Kanseri</button>
         <br/>
-        <p>Kardiyovasküler risk tahmin formları:</p>
+        <p>Kardiyovasküler risk tahmin formu:</p>
         <button className="form-select" onClick={() => setForm("Cardiovaskular")}>Aterosklerotik</button>
     </>
 )

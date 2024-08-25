@@ -18,8 +18,9 @@ export default ()=>{
     const getResults = () => {
         if (age < ageMenarche) return setMessage("age < ageMenarche")
         if (age < firstBirthAge) return setMessage("age < firstBirthAge")
-
+        if (age < 20) return setMessage("age < 20")
         if (!ageMenarche || !age || !ethnicities || biopsyNumber === "" || relativesNumber === "") return setMessage("empty form")
+        console.log(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities)
         const risk = breastRiskCalc(age, age+5, ageMenarche, biopsyNumber, firstBirthAge, relativesNumber, ethnicities)
         if (isNaN(risk)) return setMessage("error")
         return setMessage(Number(risk.toFixed(2)))

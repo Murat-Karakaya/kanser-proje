@@ -118,6 +118,7 @@ export default ()=>{
     return(
         <>
             <h1>Kanser Teşhisi</h1>
+            <p>Not: Bu sayfadan elde edilen sonuçlar tahminidir ve gerçekleri yansıtmayabilir.</p>
             <fieldset>
                 <legend>Fotoğraf Seç</legend>
                 <select
