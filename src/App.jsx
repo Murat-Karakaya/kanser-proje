@@ -1,15 +1,15 @@
-import Doktor from "./pages/Doktor";
-import Hasta from "./pages/Hasta";
+import { lazy, Suspense, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import { darkModeAtom } from "./jotai/atoms";
 import Anonymous from "./pages/Anonymous";
 
-import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+// Dynamically import components
+const Doktor = lazy(() => import("./pages/Doktor"));
+const Hasta = lazy(() => import("./pages/Hasta"));
 
-import { useAtom } from "jotai";
-import { darkModeAtom} from "./jotai/atoms";
-
-const App=()=> {
-    const [isDarkMode] = useAtom(darkModeAtom)
+const App = () => {
+    const isDarkMode = useAtomValue(darkModeAtom)
 
     useEffect(() => {
         const rootElement = document.getElementById('root')
@@ -28,14 +28,21 @@ const App=()=> {
         setRootProperty('--page-line', 'black');
         setRootProperty("--custom-blue", "rgb(29, 153, 255)")
         setRootProperty("--card-backround", "rgb(0, 191, 255)")
-        return;
     }, [isDarkMode])
 
     return(
         <Routes>
             <Route path="/" element={<Anonymous/>}/>
-            <Route path="/doktor" element={<Doktor/>}/>
-            <Route path="/hasta" element={<Hasta/>}/>
+            <Route path="/doktor" element={
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Doktor/>
+                </Suspense>
+            }/>
+            <Route path="/hasta" element={
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Hasta/>
+                </Suspense>
+            }/>
         </Routes>
     )
 }

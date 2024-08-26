@@ -6,6 +6,10 @@
 	height: 100%;
 }
 
+* {
+	font-weight: bolder;
+}
+
 button:not([tabindex="-1"]):focus-visible, input:not([tabindex="-1"]):focus-visible, select:not([tabindex="-1"]):focus-visible, textarea:not([tabindex="-1"]):focus-visible, a:not([tabindex="-1"]):focus-visible {
 	outline: 3px solid var(--page-line);
 }
@@ -46,7 +50,7 @@ button:not([tabindex="-1"]):focus-visible, input:not([tabindex="-1"]):focus-visi
 	background-color: transparent;
 	overflow-y: auto;
 	height: 100%;
-	padding: 1rem;
+	padding: 1rem 2rem;
 }
 
 .justify-evenly {

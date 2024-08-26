@@ -1,7 +1,7 @@
 import Nav from "../components/nav/nav"
 import PageContainer from "../components/pageContainer/pageContainer"
 
-import { useAtom, useSetAtom } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import { darkModeAtom, pageAtom } from "../jotai/atoms"
 
 import HomePage from "../components/pageContents/anonymousContents/HomePage"
@@ -11,7 +11,7 @@ import { useEffect } from "react"
 
 export default () => {
     const setPage = useSetAtom(pageAtom)
-    const [isDarkMode] = useAtom(darkModeAtom)
+    const isDarkMode = useAtomValue(darkModeAtom)
 
     useEffect(() => setPage(0), [])
 

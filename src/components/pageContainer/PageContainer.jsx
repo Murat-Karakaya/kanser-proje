@@ -2,14 +2,14 @@ import "../pageContents/pageStyles.css";
 
 import { useEffect } from "react";
 
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { pageAtom } from "../../jotai/atoms";
 
 import Page from "./Page";
 
 
 const PageContainer=({children})=>{
-    const [pageId] = useAtom(pageAtom)
+    const pageId = useAtomValue(pageAtom)
 
     useEffect(()=>{
         /* aria-hidden = true elements should not have focusable descendents */

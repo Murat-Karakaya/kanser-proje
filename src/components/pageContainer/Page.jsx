@@ -1,8 +1,8 @@
-import { useAtom } from "jotai"
+import { useAtomValue } from "jotai"
 import { pageAtom } from "../../jotai/atoms"
 
 const Page=({children, id})=>{
-    const [currentPage]=useAtom(pageAtom)
+    const currentPage = useAtomValue(pageAtom)
     return(
         <div aria-hidden={String(currentPage!=id)}
          id={"page"+id}
