@@ -1,6 +1,6 @@
 import "./Anonymous.css"
 import { useSetAtom } from "jotai"
-import { isDoctorAtom, userEmailAtom, pageAtom, userIdAtom, userNameAtom, patientDoctorRelations } from "../../../jotai/atoms"
+import { isDoctorAtom, userEmailAtom, pageAtom, userIdAtom, userNameAtom, patientDoctorRelations, patentInfosAtom } from "../../../jotai/atoms"
 import { useEffect } from "react"
 
 export default () => {
@@ -10,6 +10,7 @@ export default () => {
     const setPatientDoctorRelations = useSetAtom(patientDoctorRelations)
     const setUserEmail = useSetAtom(userEmailAtom)
     const setIsDoctor = useSetAtom(isDoctorAtom)
+    const setPatientInfos = useSetAtom(patentInfosAtom)
 
     useEffect(() => {
         setIsDoctor(null)
@@ -18,6 +19,7 @@ export default () => {
         setPatientDoctorRelations([])
         setUserEmail("")
         setUserName("")
+        setPatientInfos([])
     },[])
     
     return (
