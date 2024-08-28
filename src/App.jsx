@@ -8,6 +8,8 @@ import Anonymous from "./pages/Anonymous";
 const Doktor = lazy(() => import("./pages/Doktor"));
 const Hasta = lazy(() => import("./pages/Hasta"));
 
+const Loading = () => <div className="all-center window-height"><div className="loading-blue"></div><p>Yükleniyor...</p></div>
+
 const App = () => {
     const isDarkMode = useAtomValue(darkModeAtom)
 
@@ -34,12 +36,12 @@ const App = () => {
         <Routes>
             <Route path="/" element={<Anonymous/>}/>
             <Route path="/doktor" element={
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                     <Doktor/>
                 </Suspense>
             }/>
             <Route path="/hasta" element={
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                     <Hasta/>
                 </Suspense>
             }/>

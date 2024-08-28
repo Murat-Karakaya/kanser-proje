@@ -14,7 +14,7 @@ export default ({email, info, isAccepted, toggleRelation}) => {
 
         return (<>
         <dialog ref={dialogRef1} onCancel={()=> dialogRef1.current.close()}>
-            <p>{email} emailli hastayla ilişkiyi kesmek istediğinine emin misin? Bu işlem geri alınamaz.</p>
+            <p>{email} emailli hastayla ilişkiyi kesmek istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
 
             <div className="parent-width justify-evenly no-background">
                 <button
@@ -60,7 +60,7 @@ export default ({email, info, isAccepted, toggleRelation}) => {
 
     return (<>
     <dialog ref={dialogRef2} onCancel={()=> dialogRef2.current.close()}>
-        <p>{email} emailli {dialogMessagePiece} kesmek istediğinine emin misin? Bu işlem geri alınamaz.</p>
+        <p>{email} emailli {dialogMessagePiece} kaldırmak istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
 
         <div className="parent-width justify-evenly no-background">
             <button
@@ -94,7 +94,7 @@ export default ({email, info, isAccepted, toggleRelation}) => {
                 setDialogMessagePiece("doktora olan isteğini")
             }} 
              className="relations-button"
-            >İsteğimi Kaldır</button>   
+            >İsteğimi Kaldır</button> 
             </>)
         }
     </div>

@@ -6,7 +6,7 @@
     justify-items: center;
     align-self: self-start;
     background-color: var(--custom-blue);
-    width: clamp(150px, 50%, 400px);
+    width: clamp(250px, 50%, 400px);
 }
 
 .relations-button {

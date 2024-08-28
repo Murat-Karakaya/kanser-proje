@@ -28,6 +28,24 @@ body,html{
 	display: inline-block;
 }
 
+.flex-centered {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.all-center {
+    display: flex;
+    align-items: center;
+	justify-content: center;
+}
+
+.flex-ended {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
 .noMargin {
 	margin: 0;
 }
@@ -38,6 +56,10 @@ body,html{
 
 .parent-width {
 	width: 100%;
+}
+
+.window-height {
+	height: 100vh;
 }
 
 :focus-visible{
@@ -121,4 +143,19 @@ a{
 	width: 25px;
 	border-radius: 2px;
 	transform: rotate(45deg);
+}
+
+.loading-blue {
+    width: 25px;
+    height: 25px;
+    border: 4px solid var(--custom-blue);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: processing-blue 1.3s infinite linear;
+}
+
+@keyframes processing-blue {
+    100% {
+        transform: rotate(360deg);
+    }
 }

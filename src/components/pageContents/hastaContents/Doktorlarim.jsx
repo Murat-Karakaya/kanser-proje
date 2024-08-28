@@ -79,6 +79,13 @@ export default ()=>{
                 {
                     showInput ?
                     <div id="add-form">
+                        <div className="parent-width flex-ended" id="cancel-container">
+                            <button
+                            onClick={() => setShowInput(false)}
+                            id="cancel-button"
+                            className="button-x"
+                            />     
+                        </div>
                         <input
                         onChange={e => setInputValue(e.target.value)}
                         value={inputValue}
