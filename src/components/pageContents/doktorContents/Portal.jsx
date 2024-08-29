@@ -1,16 +1,38 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import { useSetAtom, useAtomValue } from "jotai"
-import { pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms";
+import { darkModeAtom, pageAtom, userIdAtom, userNameAtom } from "../../../jotai/atoms";
 import { useRef } from "react";
 
+
 export default ()=>{
+    const isDarkMode = useAtomValue(darkModeAtom)
     const userId = useAtomValue(userIdAtom)
-    const setPageId = useSetAtom(pageAtom)
     const name = useAtomValue(userNameAtom)
+    const setPageId = useSetAtom(pageAtom)
+
+    const rootElement = document.getElementById('root')
+    const setRootProperty = (property, value) => rootElement.style.setProperty(property, value);
 
     const navigate = useNavigate()
     const dialogRef = useRef()
+
+    const warn = () => {        
+        if (isDarkMode) {
+            setRootProperty('--default-block-background', '#4b0e0e');
+            return;
+        }
+        setRootProperty('--default-block-background', '#fc8888');
+    }
+
+    const coolDown = () => {
+        if (isDarkMode) {
+            setRootProperty('--default-block-background', '#242424');
+            return;
+        }
+        setRootProperty('--default-block-background', 'white');
+    }
+
 
     const deleteUser = async () => {
         const method = "delete"
@@ -31,7 +53,7 @@ export default ()=>{
     return(
         <>
             <dialog ref={dialogRef} onCancel={()=> dialogRef.current.close()}>
-                <p>Hesabınıza dair her şeyi silmek istediğinize emin misiniz? Bu işlem geri alınamaz.</p>
+                <p>Hesabınıza dair her şeyi silmek istediğinize emin misiniz? Bu işlem geri alınamaz!</p>
 
                 <div className="parent-width justify-evenly no-background">
                     <button
@@ -48,9 +70,8 @@ export default ()=>{
             <div className="headFlex">
                 <h1 className="inlineBlock noMargin">Hoş geldin, <div className="gradient-text">{name}</div>!</h1>
                 <Link to="/" className="sign-out">Çıkış Yap</Link>
-                <button onClick={() => dialogRef.current.showModal()} className="delete-accout">Hesabımı Sil</button>
             </div>
-            
+
             <div className="linkLineup">
                 <button onClick={() => setPageId(1)} style={{"--order":"0"}} className="card" >
                     <h3>Hastalarım</h3>
@@ -60,6 +81,10 @@ export default ()=>{
                     <h3>Kanser Teşhis Uygulamaları</h3>
                     <p>Bu sayfada kanser tomografi görüntülerini yükleyerek iligili kanserin iyi veya kötü huylu olup olmadığını öğrenebilirsiniz.</p>
                 </button>
+            </div>
+                
+            <div style={{paddingTop: 30}} className="all-center parent-width">
+                <button onMouseOver={warn} onMouseLeave={coolDown} onClick={() => dialogRef.current.showModal()} className="delete-accout">Hesabımı Sil</button>    
             </div>
             <br />
         </>
