@@ -44,7 +44,7 @@ export default () => {
 
     const deleteSelectedFromPatientInfos = async() => {
         unSelectedArr = unSelectedArr.filter(el => el !== null)
-        const method = "post"
+        const method = "delete"
         const body = JSON.stringify({patientid: userId, newInfos: unSelectedArr})
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/setInfos", {method, headers, body})
@@ -101,7 +101,14 @@ export default () => {
         <p>{note}</p>
         <div className="list-bg">{
             patientInfos.map((el, i) => (<>
-                <p key={el} ><input type="checkbox" key={el+"checkbox"} onChange={(e) => setUnSelectedArr(e, i)} />{el}</p>
+                <p key={el} >
+                    <input
+                     type="checkbox" 
+                     key={el+"checkbox"} 
+                     onChange={(e) => setUnSelectedArr(e, i)} 
+                    />
+                    {el}
+                </p>
             </>))
         }</div>
 
