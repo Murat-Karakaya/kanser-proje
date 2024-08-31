@@ -42,7 +42,7 @@ export default ()=>{
         const risk = lungRiskCalc(age, race, education, +bmi, copd, cancer_hist, family_hist_lung_cancer, Boolean(smoking_status), smoking_intensity, duration_smoking, smoking_quit_time)
 
         if (isNaN(risk)) return setMessage("error")
-        return setMessage(Number(risk.toFixed(2)))
+        setMessage(Number(risk.toFixed(2)))
     }
 
     return(

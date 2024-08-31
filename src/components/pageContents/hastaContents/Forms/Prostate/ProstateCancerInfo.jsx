@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { patentInfosAtom, userIdAtom } from "../../../../../jotai/atoms"
 import { useAtom, useAtomValue } from "jotai"
 
@@ -6,6 +6,10 @@ export default ({formResults}) => {
     const patientid = useAtomValue(userIdAtom)
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
     const [message, setMessage] = useState(null)
+
+    useEffect(() => {
+        setMessage(null)
+    }, [formResults])
 
     const addFormInfo = async (newInfo) => {
         setMessage("Bilgi kaydediliyor, lütfen bekleyiniz...")
