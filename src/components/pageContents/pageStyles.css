@@ -34,7 +34,6 @@ button:not([tabindex="-1"]):focus-visible, input:not([tabindex="-1"]):focus-visi
 .custom-scrollbar::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-color: color-mix(in srgb, #f5f5f56b 70%, var(--default-color) 30%);
-	/* background-color: #3a3a3a; */
 }
 
 .page{

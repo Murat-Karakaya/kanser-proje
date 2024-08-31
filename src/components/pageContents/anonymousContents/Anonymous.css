@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100%;
+    height: calc(100% - 1em - 37px);
     width: 100%;
 }
 #grid-centered {

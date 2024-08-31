@@ -1,26 +1,103 @@
-nav{
+#main-nav {
 	padding: 0 10px;
 	background-image: var(--nav-backround);
-	box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
 
-#nav-x{display: none;}
+#nav-x {
+	display: none;
+}
 
-.end{
-	padding: 0 10px;
-	display: grid;
-	place-items: center;
+#nav-end {
+	display: flex;
+	align-items: center;
 	float: right;
-	height: 100%;
+}
+
+#ham-end {
+	display: none;
+}
+
+#hambutton {
+	display: none;
+	background-image: var(--nav-backround);
+	padding: 0;
+}
+
+@media screen and (max-width: 770px) {
+	#hambutton {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+    #menu {
+		display: flex;
+		margin-left: 40px;
+		padding: 4px;
+		height: 20px;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	#line {
+		background-color: black;
+		height: 3px;
+		width: 25px;
+		border-radius: 2px;
+	}
+	#menu::before, #menu::after {
+		content: "";
+		background-color: black;
+		height: 3px;
+		width: 25px;
+		border-radius: 2px;
+	}
+	
+	/*NAVBUTTON*/
+	#nav-end {
+        display: none;
+    }
+
+	#ham-end {
+		display: flex;
+		align-items: center;
+		margin-right: 10px;
+	}
+
+	.link {
+		box-sizing: border-box;
+		width: calc(100% - 4px);
+		border-radius: 0;
+		position: relative;
+	}
+
+	/*NAV TOGGLE ANIMATION*/
+	#main-nav {
+		position: fixed;
+		/* left property is being set in the nav.jsx file */
+		top: 0;
+		bottom: 0;
+		width: 200px;
+		padding: 0;
+		z-index: 1;
+		transition: left 0.2s ease;
+	}
+
+	#nav-x {
+		background-color: #e8e8e8;
+		margin-right: 4px;
+		display: flex;
+	}
+}
+
+@media screen and (min-width: 770px) {
+	#main-nav {
+		display: block !important;
+	}
 }
 
 #place{
 	cursor: context-menu;
-}
-#place::before{transform: scaleX(1);}
-
-.link {
-	padding: 15px 10px 15px 10px;	
 }
 .link::before{
 	position: absolute;
@@ -33,64 +110,35 @@ nav{
 	transform: scaleX(0);
 	transition: all 0.3s;
 }
+#place::before{transform: scaleX(1);}
 
-.link, .end{
+.link, #nav-end {
+	margin: 0 2px;
+}
+
+.link, #nav-end, #ham-end{
 	user-select: none;
+	padding: 0 10px 0 10px;
+	height: calc(1em + 35px); /*max-height is set according these navbutton height */
 	font-family: 'Nunito', sans-serif;
 	font-weight: 500;
 	color: black;
 	font-size: 20px;
 	background-image: var(--nav-button-color);
 	position: relative;
-	margin: 0 2px;
 	border-radius: 10px 10px 0 0;
-	transition: filter .4s;
+	transition: color .2s, background-color .2s;
 }
 
-.link:not(#place):hover, .end:hover {
-	filter: brightness(0.8);
-}
-
-@media screen and (max-width: 800px){
-	/*NAVBUTTON*/
-	nav > .end{ display: none; }
-
+@media screen and (max-width: 770px) {
 	.link {
-		margin: 0;
-	}
-
-	.link{
-		border-radius: 0;
-		box-sizing: border-box;
 		margin-left: 0;
-		width: 100%;
 		border-radius: 0;
-		position: relative;
 	}
-
-	/*NAV TOGGLE ANIMATION*/
-	nav{
-		position: fixed;
-		left: -200px;
-		top: 0;
-		bottom: 0;
-		width: 200px;
-		padding: 0;
-		z-index: 1;
-		transition: left 0.2s ease;
-	}
-
-	.navVis{left:0;}
-
-	#nav-x{display: flex;}
-
+	
     .link::before{
 		width: 0;
 		transform: none;
 	}
-	#place::before{width: 100%;}	
-}
-
-@media screen and (min-width: 800px){
-	nav{display: block !important;}
+	#place::before{width: 100%;}
 }
