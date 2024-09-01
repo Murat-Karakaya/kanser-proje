@@ -8,7 +8,7 @@ const Nav=({buttonValues})=> {
     const navElement = useRef(null)
     const [ smallNavVis, setSmallNavVis ] = useState(false)
 
-    useEffect(()=>{
+    useEffect(()=>{ // This is here so that the nav buttons are unfocusable when the nav is not oppened
         if(window.innerWidth >= 770 || smallNavVis) return
 
         setTimeout(() => {
