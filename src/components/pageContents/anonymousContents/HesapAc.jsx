@@ -73,7 +73,7 @@ export default () => {
     }
 
     return(
-        <div id="grid-centered">
+        <div className="grid-centered parent-height parent-width no-background">
         <fieldset className="dynamic-form-width">
             <legend>Hesap Aç</legend>
             <label htmlFor="name-input">Kullanıcı adınız: </label>

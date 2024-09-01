@@ -10,6 +10,7 @@ export default ()=>{
     const [message, setMessage] = useState("")
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     const requestToDoctor = async (doctoremail) => {
         if (!doctoremail.includes("@")) return setMessage("Geçerli email doldurunuz")
@@ -30,11 +31,13 @@ export default ()=>{
     }
 
     const getRelationsAndInfos = async () => {
+        setIsLoading(true)
         const response = await fetch("http://localhost:1234/getRelationsAndInfos", {
             method: "post",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({patientid: userId})
         })
+        setIsLoading(false)
         if (response.status < 400) {
             const {relations, patientinfos} = await response.json()
             setPatientInfos(patientinfos)
@@ -58,9 +61,24 @@ export default ()=>{
         setRelations(newRelations)
         return;
     }
+
+    if (isLoading) {
+        return (<>
+            <h1>Doktorlarım</h1>
+            <button onClick={getRelationsAndInfos} className="relations-button">
+                Sayfayı Yenile
+            </button>
+            <br />
+            <div className="parent-width flex-centered">
+                <div className="loading-blue"></div>
+                <p className="form-information">Sayfa yenileniyor...</p>
+            </div>
+        </>)
+    }
+
     return(
     <>
-        <h1>Doktorlarım</h1>    
+        <h1>Doktorlarım</h1>
         <button onClick={getRelationsAndInfos} className="relations-button">
             Sayfayı Yenile
         </button>

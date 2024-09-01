@@ -8,8 +8,6 @@ import Anonymous from "./pages/Anonymous";
 const Doktor = lazy(() => import("./pages/Doktor"));
 const Hasta = lazy(() => import("./pages/Hasta"));
 
-const Loading = () => <div className="all-center window-height"><div className="loading-blue"></div><p>Yükleniyor...</p></div>
-
 const App = () => {
     const isDarkMode = useAtomValue(darkModeAtom)
 
@@ -34,7 +32,7 @@ const App = () => {
 
     return(
         <Routes>
-            <Route path="/" element={<Anonymous/>}/>
+            <Route path="/" element={<Anonymous />}/>
             <Route path="/doktor" element={
                 <Suspense fallback={<Loading />}>
                     <Doktor/>
@@ -46,6 +44,18 @@ const App = () => {
                 </Suspense>
             }/>
         </Routes>
+    )
+}
+
+function Loading() {
+    return (
+        <div style={{gap: 20}} className="grid-centered window-height">
+            <img src="/favicon.png" height={100} width={100} alt="logo" />
+            <div className="parent-width flex-centered">
+                <div className="loading-blue"></div>
+                <p className="form-information">Sayfa yenileniyor...</p>
+            </div>
+        </div>
     )
 }
 

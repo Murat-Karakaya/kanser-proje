@@ -87,7 +87,7 @@ export default ()=>{
                 </button>
                 
             </div>
-            <div style={{paddingTop: 30}} className="all-center parent-width">
+            <div style={{paddingTop: 30}} className="flex-centered parent-width">
                 <button onMouseOver={warn} onMouseLeave={coolDown} onClick={() => dialogRef.current.showModal()} className="delete-accout">Hesabımı Sil</button>    
             </div>
             <br />

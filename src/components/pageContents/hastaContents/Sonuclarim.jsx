@@ -9,7 +9,7 @@ export default () => {
     const userId = useAtomValue(userIdAtom)
 
     const [isEdit, setIsEdit] = useState()
-    const [message, setMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const dialogRef = useRef()
 
     let unSelectedArr = [...patientInfos]
@@ -23,21 +23,21 @@ export default () => {
     }
 
     const updateResults = async() => {
-        setMessage("Yenileniyor...")
+        setIsLoading(true)
         const method = "post"
         const body = JSON.stringify({patientid: userId})
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/getRelationsAndInfos", {method, headers, body})
         const data = await response.json()
+        setIsLoading(false)
         if (response.status >= 500) {
-            setMessage("Sayfayı yenilerken bir sorun oluştu")
+            alert("Sayfayı yeniliyorken bir hata oluştu")
             return;
         }
         if (response.status >= 400) {
-            setMessage("Sayfayı yenilerken bir sorun oluştu")
+            alert("Sayfayı yeniliyorken bir hata oluştu")
             return;
         }
-        setMessage("")
         setPatientInfos(data.patientinfos)
         setIsEdit(false)
     }
@@ -48,26 +48,34 @@ export default () => {
         const body = JSON.stringify({patientid: userId, newInfos: unSelectedArr})
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/setInfos", {method, headers, body})
-        if (response.status >= 500) {
-            setMessage("Sonuçları düzenlerken bir sorun oluştu")
-            return;
-        }
         if (response.status >= 400) {
-            setMessage("Sonuçları düzenlerken bir sorun oluştu")
+            alert("Sonuçları düzenlerken bir sorun oluştu")
             return;   
         }
         setPatientInfos(unSelectedArr)
         setIsEdit(false)
     }
 
-    if(patientInfos.length === 0) {
-        console.log("patient infos length zero")
+    if(isLoading) {
         return (<>
             <h1>Sonuçlarım</h1>
             <button onClick={updateResults} className="relations-button">
                 Sayfayı Yenile
             </button>
-            {message ? <p>{message}</p> : null}
+            <br />
+            <div className="parent-width flex-centered">
+                <div className="loading-blue"></div>
+                <p className="form-information">Sayfa yenileniyor...</p>
+            </div>
+        </>)
+    }
+
+    if(patientInfos.length === 0) {
+        return (<>
+            <h1>Sonuçlarım</h1>
+            <button onClick={updateResults} className="relations-button">
+                Sayfayı Yenile
+            </button>
 
             <p>{note}</p>
         </>)
@@ -96,7 +104,6 @@ export default () => {
             Sayfayı Yenile
         </button>
 
-        {message ? <p>{message}</p> : null}
 
         <p>{note}</p>
         <div className="list-bg">{
@@ -128,8 +135,6 @@ export default () => {
         <button onClick={updateResults} className="relations-button">
             Sayfayı Yenile
         </button>
-
-        {message ? <p>{message}</p> : null}
 
         <p>{note}</p>
         <div className="list-bg">{

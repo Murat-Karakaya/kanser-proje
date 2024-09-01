@@ -72,7 +72,7 @@ export default () => {
     }
 
     return(
-        <div id="grid-centered">
+        <div className="grid-centered parent-height parent-width no-background">
         <fieldset className="dynamic-form-width">
             <legend>Giriş Yap</legend>
 

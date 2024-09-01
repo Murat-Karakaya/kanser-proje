@@ -23,7 +23,7 @@ export default () => {
     },[])
     
     return (
-    <div id="grid-centered">
+    <div className="grid-centered parent-height parent-width no-background">
         <div id="anonymous-page">
             <p className="span-entire-row">
                 Hoş geldiniz!
