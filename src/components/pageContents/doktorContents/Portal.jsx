@@ -40,11 +40,15 @@ export default ()=>{
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/deleteUser", {method, headers, body})
         if (response.status >= 500) {
-            alert("Kullanıcı silinirken bir hata oluştu")
+            alert("Kullanıcı silinirken bir hata oluştu.")
             return;
         }
+        if (response.status === 404) {
+            alert("Hesabınıza aynı anda birden fazla giriş yapılmış olması olabilir. En son yapılan giriş kabul edilir.")
+            return;   
+        }
         if (response.status >= 400) {
-            alert("Kullanıcı silinirken bir hata oluştu")
+            alert("İşleminiz reddedilmiştir. Bunun sebebi hesabınıza aynı anda iki tane giriş yapılmış olması olabilir. En son yapılan giriş kabul edilir.")
             return;   
         }
         navigate("/")

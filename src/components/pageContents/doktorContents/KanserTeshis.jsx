@@ -25,6 +25,7 @@ const HandleMessage = ({message}) => {
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/addImageInfo", {method, headers, body})
 
+        if (response.status === 404) return setInfoAboutUpdate("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir.")
         if (response.status >= 400) return setInfoAboutUpdate("Bir sorun oluştu.")
 
         const newInfos = patientInfos.map(obj => obj.patientemail === selectedPatient ? updateInfo(obj) : obj)
@@ -33,7 +34,7 @@ const HandleMessage = ({message}) => {
     }
 
     if (!message) return <></>
-    if (message === "Bir sorun oluştu." || message === "Yetersiz bilgi") return <p>{message}</p>
+    if (message === "Bir sorun oluştu." || message === "Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir." || message === "Yetersiz bilgi") return <p>{message}</p>
     if (message === "Yükleniyor, lütfen bekleyiniz...") return (
         <div style={{display: "flex"}} className="span-entire-row flex-centered">
             <div style={{display: "block"}} className="loading-blue"></div>

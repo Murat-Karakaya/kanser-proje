@@ -24,7 +24,17 @@ export default ()=>{
             body: JSON.stringify({doctorid: userId, patientemail, isReject})
         })
 
-        if(response.status >= 400) return;
+        if (response.status >= 500) {
+            return alert("Bir sorun oluştu.")
+        }
+
+        if(response.status === 404) {
+            return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir.")
+        }
+
+        if(response.status >= 400) {
+            return alert("İşleminiz reddedilmiştir.")
+        }
 
         if (isReject) {
             const newRelations = relations.filter(el => el.patientemail !== patientemail)
@@ -50,6 +60,9 @@ export default ()=>{
             setPatientInfos(patientinfos)
             setRelations(relations)
             return;
+        }
+        if(response.status === 404) {
+            return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir.")
         }
         return alert("Bir hata oluştu")
     }

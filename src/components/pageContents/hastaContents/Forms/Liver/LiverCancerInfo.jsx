@@ -24,6 +24,7 @@ export default ({formResults}) => {
             setMessage("Bilgi başarıyla kaydedilmiştir.")
             return;
         }
+        if(data.status === 404) return setMessage("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
         setMessage("İleti başarısız olmuştur.")
     }
 

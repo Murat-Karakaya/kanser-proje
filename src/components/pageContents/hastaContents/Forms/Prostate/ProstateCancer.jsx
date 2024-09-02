@@ -58,8 +58,9 @@ export default ()=>{
                  onChange={evt => setDRE(evt.target.value === "1"? 1 : 0)} 
                 >
                     <option hidden defaultValue={null}></option>
-                    <option value={"1"}>Olumsuz</option>
-                    <option value={"0"}>Olumlu</option>
+                    <option value={"1"}>Abnormal</option>
+                    <option value={"0"}>Normal</option>
+                    <option value={"0"}>Bilmiyorum</option>
                 </select>
 
                 <label htmlFor="prostate-Biopsy-input">Biyopsi yapılmış olup olumlu sonuçlanmış mıdır?:</label>

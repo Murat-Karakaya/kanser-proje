@@ -43,6 +43,10 @@ export default ()=>{
             alert("Kullanıcı silinirken bir hata oluştu")
             return;
         }
+        if(response.status === 404) {
+            alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
+            return;
+        }
         if (response.status >= 400) {
             alert("Kullanıcı silinirken bir hata oluştu")
             return;   

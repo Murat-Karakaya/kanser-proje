@@ -29,11 +29,12 @@ export default () => {
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/getRelationsAndInfos", {method, headers, body})
         const data = await response.json()
-        setIsLoading(false)
+        isLoading(false)
         if (response.status >= 500) {
             alert("Sayfayı yeniliyorken bir hata oluştu")
             return;
         }
+        if(response.status === 404) return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
         if (response.status >= 400) {
             alert("Sayfayı yeniliyorken bir hata oluştu")
             return;
@@ -48,6 +49,8 @@ export default () => {
         const body = JSON.stringify({patientid: userId, newInfos: unSelectedArr})
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/setInfos", {method, headers, body})
+
+        if(response.status === 404) return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
         if (response.status >= 400) {
             alert("Sonuçları düzenlerken bir sorun oluştu")
             return;   

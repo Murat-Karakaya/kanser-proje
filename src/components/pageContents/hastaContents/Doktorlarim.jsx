@@ -26,6 +26,7 @@ export default ()=>{
             setRelations(relations.concat({doctoremail, isaccepted: false}))
             return;
         }
+        if (response.status == 404) return setMessage("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
         if (response.status < 500) return setMessage("Email bu siteyi kullanan hiçbir doktorla eşleşmedi")
         return setMessage("Bir hata oluştu")
     }
@@ -44,6 +45,7 @@ export default ()=>{
             setRelations(relations)
             return;
         }
+        if(response.status === 404) return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
         return alert("Bir hata oluştu")
     }
 
@@ -56,7 +58,8 @@ export default ()=>{
             body: JSON.stringify({patientid: userId, doctoremail, isReject})
         })
 
-        if(response.status >= 400) return;
+        if(response.status === 404) return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
+        if(response.status >= 400) return alert("Bir sorun oluştu.");
         const newRelations = relations.filter(el => el.doctoremail !== doctoremail)
         setRelations(newRelations)
         return;
