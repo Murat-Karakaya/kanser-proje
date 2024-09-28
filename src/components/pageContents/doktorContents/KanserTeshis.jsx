@@ -131,6 +131,7 @@ export default ()=>{
                     <option hidden defaultValue="">Kanser Türü Seçiniz</option>
                     <option value="Akciğer Kanseri">Tür: Akciğer Kanseri</option>
                     <option value="Meme Kanseri">Tür: Meme Kanseri</option>
+                    <option value="Deri Kanseri">Tür: Deri Kanseri</option>
                 </select>
 
                 <div className="info span-entire-row">Görüntünün JPEG formatında olması gerekmektedir.</div>
@@ -165,7 +166,7 @@ export default ()=>{
                 >
                     Devam
                 </button>
-                {
+                {/* {
                     preview && <img
                      className="span-entire-row"
                      src={preview}
@@ -173,7 +174,7 @@ export default ()=>{
                      width={"auto"}
                      alt="yüklenen görüntü"
                     />
-                }
+                } */}
 
                 <HandleMessage message={message}/>
 

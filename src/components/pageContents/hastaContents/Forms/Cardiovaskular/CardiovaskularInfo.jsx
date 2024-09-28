@@ -35,7 +35,7 @@ export default ({formResults, isSmoking}) => {
     if (formResults < 7.5) {
         return (
         <div className="span-entire-row">
-            <p>Aterosklerotik kardiyovasküler hastalığa yakalanma ihtimaliniz {formResults} olarak tespit edilmiştir. Risk düşükten yükseğe doğru %5 altı, %5-%7.4 arası, %7.5-%19.9 arası ve %20 ve yükseği olarak sıralanmaktadır.</p>
+            <p>Aterosklerotik kardiyovasküler hastalığa yakalanma ihtimaliniz {formResults} olarak tespit edilmiştir. </p>
             <div className="parent-width justify-evenly">
             <button
              onClick={() => !message && addFormInfo(`Aterosklerotik kardiyovasküler riski %${formResults} olarak tahmin edilmiştir. Sigara ${isSmoking ? "içmektedir" : "içmemektedir."}`)} 
@@ -48,7 +48,7 @@ export default ({formResults, isSmoking}) => {
     }
     return (
         <div className="span-entire-row">
-        <p>Aterosklerotik kardiyovasküler riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için doktorunuzla bu durumu danışmanızı {isSmoking && "ve sigarayı bırakmanızı"} tavsiye ediyoruz:</p>
+        <p>Aterosklerotik kardiyovasküler riskiniz yüzde {formResults} olarak tespit edilmiştir. Bu, yüksek bir risk olarak kabul edilmektedir. Riskiniz yüksek olduğu için doktorunuzla bu durumu danışmanızı {isSmoking && "ve sigarayı bırakmanızı"} tavsiye ediyoruz.</p>
         <div className="parent-width justify-evenly">
         <button
          onClick={() => !message && addFormInfo(`Aterosklerotik kardiyovasküler riski %${formResults} olarak tahmin edilmiştir.`)} 

@@ -45,8 +45,8 @@ export default ()=>{
             setRelations(relations)
             return;
         }
-        if(response.status === 404) return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
-        return alert("Bir hata oluştu")
+        if(response.status === 404) return setTimeout(() => alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir"), 100)
+        return setTimeout(() => alert("Bir hata oluştu"), 100)
     }
 
     const toggleRelation = async (doctoremail, isReject) => {
@@ -99,14 +99,15 @@ export default ()=>{
             <div id="add-doctor">
                 {
                     showInput ?
+                    <>
+                    <div className="parent-width flex-ended noMargin" id="cancel-container">
+                        <button
+                        onClick={() => setShowInput(false)}
+                        id="cancel-button"
+                        className="button-x"
+                        />     
+                    </div>
                     <div id="add-form">
-                        <div className="parent-width flex-ended" id="cancel-container">
-                            <button
-                            onClick={() => setShowInput(false)}
-                            id="cancel-button"
-                            className="button-x"
-                            />     
-                        </div>
                         <input
                         onChange={e => setInputValue(e.target.value)}
                         value={inputValue}
@@ -115,11 +116,12 @@ export default ()=>{
                         className="form-input"
                         placeholder="doktor emaili"
                         />
-                        {message && <p>{message}</p>}
+                        {message && <p style={{marginLeft: 5}}>{message}</p>}
                         <button onClick={() => requestToDoctor(inputValue)} className="relations-button">
                             İstek Gönder
                         </button>
                     </div>
+                    </>
                      :
                     <button
                     onClick={() => setShowInput(true)}

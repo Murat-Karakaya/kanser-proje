@@ -29,16 +29,11 @@ export default () => {
         const headers = {"Content-Type": "application/json"}
         const response = await fetch("http://localhost:1234/getRelationsAndInfos", {method, headers, body})
         const data = await response.json()
-        isLoading(false)
-        if (response.status >= 500) {
-            alert("Sayfayı yeniliyorken bir hata oluştu")
-            return;
-        }
-        if(response.status === 404) return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir")
-        if (response.status >= 400) {
-            alert("Sayfayı yeniliyorken bir hata oluştu")
-            return;
-        }
+        setIsLoading(false)
+        if (response.status >= 500) return setTimeout(() => alert("Sayfayı yeniliyorken bir hata oluştu"), 100)
+        if (response.status === 404) return setTimeout(() => alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir"), 100)
+        if (response.status >= 400) return setTimeout(() => alert("Sayfayı yeniliyorken bir hata oluştu"), 100)
+
         setPatientInfos(data.patientinfos)
         setIsEdit(false)
     }

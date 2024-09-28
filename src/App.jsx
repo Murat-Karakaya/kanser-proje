@@ -53,7 +53,7 @@ function Loading() {
             <img src="/favicon.png" height={100} width={100} alt="logo" />
             <div className="parent-width flex-centered">
                 <div className="loading-blue"></div>
-                <p className="form-information">Sayfa yenileniyor...</p>
+                <p className="form-information">Sayfa yükleniyor...</p>
             </div>
         </div>
     )

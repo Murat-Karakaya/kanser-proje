@@ -62,9 +62,9 @@ export default ()=>{
             return;
         }
         if(response.status === 404) {
-            return alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir.")
+            return setTimeout(() => alert("Hesabınıza aynı anda birden fazla giriş yapılmış gibi. En son yapılan giriş kabul edilir"), 100)
         }
-        return alert("Bir hata oluştu")
+        return setTimeout(() => alert("Bir hata oluştu"), 100)
     }
 
     if (isLoading) {

@@ -33,6 +33,7 @@ export default ()=>{
     return(
         <>
             <p>Aşağıdaki formu doldurarak karaciğer kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu üç yıl içerisinde karaciğer kansrine yakalanma ihtimalinizi tahmin etmektedir.</p>
+            <p>Risk %2'den az veya %2'ye eşit olursa düşük olarak kabul edilecektir.</p>
             <p>Uyarı: Karaciğer kanseri risk ölçümünde sizde hepatit B olduğu varsayılmaktadır. Eğer sizde hepatit B yoksa bu sonuç sizin için geçersizdir.</p>
 
             <fieldset>

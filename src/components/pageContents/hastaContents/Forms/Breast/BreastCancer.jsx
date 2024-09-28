@@ -29,6 +29,7 @@ export default ()=>{
     return(
         <>
             <p>Aşağıdaki formu doldurarak meme kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu beş yıl içerisinde meme kansrine yakalanma ihtimalinizi tahmin etmektedir.</p>
+            <p>Risk %1.7'den az veya %1.7'ye eşit olursa düşük olarak kabul edilecektir.</p>
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="age-input">Yaşınız:</label>
@@ -103,7 +104,7 @@ export default ()=>{
                 <label htmlFor="ethnicities-input">Etnik köken / Irk:</label>
                 <select className="form-input" id="ethnicities-input" onChange={event => setEthnicities(event.target.value)} >
                     <option hidden defaultValue={null}></option>
-                    <option value={"white"}>Beyaz</option>                    
+                    <option value={"white"}>Beyaz</option>
                     <option value={"hispanic"}>İspanyol</option>                    
                     <option value={"black"}>Siyahi</option>
                     <option value={"chinese"}>Çinli</option>

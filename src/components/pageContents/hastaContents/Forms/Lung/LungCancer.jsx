@@ -48,6 +48,7 @@ export default ()=>{
     return(
         <>
             <p>Aşağıdaki formu doldurarak akciğer kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu altı yıl içerisinde akciğer kansrine yakalanma ihtimalinizi tahmin etmektedir.</p>
+            <p>Risk %1.6'dan az veya %1.6'ya eşit olursa düşük olarak kabul edilecektir.</p>
             <fieldset>
             <legend>Form</legend>
 

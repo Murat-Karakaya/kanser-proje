@@ -28,6 +28,7 @@ export default ()=>{
     return(
         <>
             <p>Aşağıdaki formu doldurarak aterosklerotik (kısaca damar tıkanıklığına dair) kardiyovasküler hastalığa karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Form sonucu on yıl içerisinde aterosklerotik kardiyovasküler hastalığa yakalanma ihtimalinizi tahmin etmektedir.</p>
+            <p>Risk %7.5'ten az olursa düşük olarak kabul edilecektir.</p>
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="cardo-age-input">Yaşınız:</label>

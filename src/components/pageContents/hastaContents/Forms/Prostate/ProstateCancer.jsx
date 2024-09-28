@@ -28,7 +28,7 @@ export default ()=>{
     return(
         <>
             <p>Aşağıdaki formu doldurarak prostat kanserine karşı risk ölçümü ve tavsiyeler sunmamıza yardımcı olabilirsiniz. Bu form biyopsi yapıldığında biyopsi sonucunun yüksek dereceli kanser gösterme ihtimalini tahmin etmektedir.</p>
-
+            <p>Eğer yüksek dereceli prostat kanseri riski %3'ten az ise düşük olarak kabul edilecektir.</p>
             <fieldset>
                 <legend>Form</legend>
                 <label htmlFor="prostate-age-input">Yaşınız:</label>
