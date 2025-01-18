@@ -1,5 +1,5 @@
 import Nav from "../components/nav/nav"
-import PageContainer from "../components/pageContainer/pageContainer"
+import PageContainer from "../components/pageContainer/PageContainer"
 
 import { useAtomValue, useSetAtom } from "jotai"
 import { darkModeAtom, pageAtom } from "../jotai/atoms"
