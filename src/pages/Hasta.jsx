@@ -1,5 +1,5 @@
 import Nav from "../components/nav/nav"
-import PageContainer from "../components/pageContainer/pageContainer"
+import PageContainer from "../components/pageContainer/PageContainer"
 
 import Doktorlarim from "../components/pageContents/hastaContents/Doktorlarim"
 import Portal from "../components/pageContents/hastaContents/Portal"
