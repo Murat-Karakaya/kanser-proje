@@ -2,7 +2,7 @@ import { useAtomValue, useAtom } from "jotai"
 import { patentInfosAtom, userIdAtom } from "../../../jotai/atoms"
 import { useState, useRef } from "react"
 
-const note = 'Doktorların kaydedilmiş sonuçlara ulaşabilir. Şuan kaydedilmiş bilgi bulunmamaktadır.'
+const note = 'Doktorların kaydedilmiş sonuçlara ulaşabilir.'
 
 export default () => {
     const [patientInfos, setPatientInfos] = useAtom(patentInfosAtom)
